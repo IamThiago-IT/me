@@ -12,5 +12,7 @@ export default function Layout({
 }: {
   children: React.ReactNode
 }) {
-  return <RootLayout children={children} />
+  return (
+    <RootLayout>{children}</RootLayout>
+  )
 }
