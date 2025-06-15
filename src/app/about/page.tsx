@@ -57,7 +57,7 @@ export default function Sobre() {
           Minha Trajetória
         </h2>
         <p className="text-lg mb-4">Conheça mais sobre minha jornada profissional e acadêmica em detalhes.</p>
-        <Link href="/sobre/timeline" className="inline-flex items-center text-indigo-600 hover:underline">
+        <Link href="/about/timeline" className="inline-flex items-center text-indigo-600 hover:underline">
           Ver Linha do Tempo
           <ArrowRight className="ml-1 w-4 h-4" />
         </Link>

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 
 const menuItems = [
   { label: "Início", href: "/" },
-  { label: "Sobre", href: "/sobre" },
+  { label: "Sobre", href: "/about" },
   { label: "Projetos", href: "/projetos" },
   { label: "Blog", href: "/blog" },
   { label: "Agendar", href: "/agendar" },
