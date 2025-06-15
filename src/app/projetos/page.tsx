@@ -28,7 +28,7 @@ export default function Projetos() {
       setProjects((prevProjects) => [...prevProjects, ...newProjects])
       setPage((prevPage) => prevPage + 1)
       setError(null)
-    } catch (e) {
+    } catch {
       setError("Não foi possível carregar os projetos. Por favor, tente novamente mais tarde.")
     }
     setLoading(false)
@@ -38,6 +38,7 @@ export default function Projetos() {
     if (page === 1) {
       loadProjects()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>

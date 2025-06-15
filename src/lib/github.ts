@@ -12,9 +12,19 @@ export async function getGithubProjects(page = 1, perPage = 10) {
 
   const repos = await response.json();
   
-  return repos
-    .filter((repo: any) => !repo.fork)
-    .map((repo: any) => ({
+  type Repo = {
+    id: number;
+    name: string;
+    description: string | null;
+    html_url: string;
+    stargazers_count: number;
+    language: string | null;
+    fork: boolean;
+  };
+
+  return (repos as Repo[])
+    .filter((repo) => !repo.fork)
+    .map((repo) => ({
       id: repo.id,
       name: repo.name,
       description: repo.description,
@@ -22,5 +32,5 @@ export async function getGithubProjects(page = 1, perPage = 10) {
       stars: repo.stargazers_count,
       language: repo.language,
     }))
-    .sort((a: any, b: any) => b.stars - a.stars); 
+    .sort((a, b) => b.stars - a.stars);
 }
