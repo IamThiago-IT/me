@@ -2,10 +2,10 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
 export default function Contato() {
   const contactLinks = [
-    { icon: Mail, label: "Email", href: "mailto:seu.email@exemplo.com" },
+    { icon: Mail, label: "Email", href: "mailto:seu.thiagodossantos315@gmail.com" },
     { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/seu-perfil" },
     { icon: Github, label: "GitHub", href: "https://github.com/IamThiago-IT" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com/seu_usuario" },
+    { icon: Twitter, label: "Twitter", href: "https://twitter.com/IamThiago-IT" },
   ]
 
   return (
