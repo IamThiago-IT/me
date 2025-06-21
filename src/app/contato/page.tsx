@@ -15,19 +15,51 @@ export default function Contato() {
         Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato comigo
         através dos seguintes meios:
       </p>
-      <div className="grid gap-4 md:grid-cols-2">
-        {contactLinks.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-3 p-4 border rounded-md hover:bg-gray-100 transition-colors"
-          >
-            <link.icon className="w-6 h-6" />
-            <span>{link.label}</span>
-          </a>
-        ))}
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+        {contactLinks.map((link) => {
+          // Define brand color classes
+          let hoverText = "";
+          let hoverIcon = "";
+          let hoverBorder = "";
+          switch (link.label) {
+            case "GitHub":
+              hoverText = "hover:text-[#181717]"; // GitHub black
+              hoverIcon = "group-hover:text-[#181717]";
+              hoverBorder = "hover:border-[#181717]";
+              break;
+            case "Twitter":
+              hoverText = "hover:text-[#1DA1F2]"; // Twitter blue
+              hoverIcon = "group-hover:text-[#1DA1F2]";
+              hoverBorder = "hover:border-[#1DA1F2]";
+              break;
+            case "LinkedIn":
+              hoverText = "hover:text-[#0077B5]"; // LinkedIn blue
+              hoverIcon = "group-hover:text-[#0077B5]";
+              hoverBorder = "hover:border-[#0077B5]";
+              break;
+            case "Email":
+              hoverText = "hover:text-[#EA4335]"; // Gmail red
+              hoverIcon = "group-hover:text-[#EA4335]";
+              hoverBorder = "hover:border-[#EA4335]";
+              break;
+            default:
+              hoverText = "hover:text-blue-700";
+              hoverIcon = "group-hover:text-blue-700";
+              hoverBorder = "hover:border-blue-700";
+          }
+          return (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group flex flex-col items-center justify-center aspect-square min-h-[120px] border-2 rounded-xl shadow-md bg-white dark:bg-neutral-900 hover:bg-blue-100/60 dark:hover:bg-blue-900/40 transition-all duration-200 ${hoverText} ${hoverBorder}`}
+            >
+              <link.icon className={`w-10 h-10 mb-2 transition-colors ${hoverIcon}`} />
+              <span className="font-semibold text-lg">{link.label}</span>
+            </a>
+          );
+        })}
       </div>
     </div>
   )
