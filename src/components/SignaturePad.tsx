@@ -3,12 +3,8 @@
 import { useRef, useState } from 'react'
 import SignatureCanvas from 'react-signature-canvas'
 import { Button } from '@/components/ui/button'
-<<<<<<< HEAD
 import Image from 'next/image'
 
-=======
-import  Image  from 'next/image'
->>>>>>> 6a22e776bc29901e2093cbff8ae2d960df946004
 
 export function SignaturePad() {
   const sigCanvas = useRef<SignatureCanvas>(null)
