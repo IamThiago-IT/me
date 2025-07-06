@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import SignatureCanvas from 'react-signature-canvas'
 import { Button } from '@/components/ui/button'
+import  Image  from 'next/image'
 
 export function SignaturePad() {
   const sigCanvas = useRef<SignatureCanvas>(null)
@@ -40,7 +41,7 @@ export function SignaturePad() {
       {signature && (
         <div className="mt-4">
           <p className="text-sm text-gray-500 mb-2">Assinatura salva:</p>
-          <img src={signature || "/placeholder.svg"} alt="Assinatura" className="border rounded-md" />
+          <Image src={signature || "/placeholder.svg"} alt="Assinatura" className="border rounded-md" />
         </div>
       )}
     </div>

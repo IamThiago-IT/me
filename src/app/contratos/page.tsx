@@ -16,7 +16,6 @@ import { SignaturePad } from '@/components/SignaturePad'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Contratos() {
-  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     clientName: '',
     projectName: '',
