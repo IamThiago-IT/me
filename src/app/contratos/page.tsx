@@ -123,7 +123,7 @@ export default function Contratos() {
                         <CardTitle className="text-lg">{modelo}</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" disabled={true} className="w-full">
                           Usar Modelo
                         </Button>
                       </CardContent>
