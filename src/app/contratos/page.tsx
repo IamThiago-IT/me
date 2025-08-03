@@ -23,7 +23,7 @@ export default function Contratos() {
     description: '',
   })
 
-  const [signedContracts, setSignedContracts] = useState([
+  const [signedContracts] = useState([
     {
       id: 1,
       clientName: 'TechCorp Solutions',
