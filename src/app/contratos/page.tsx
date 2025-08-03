@@ -117,7 +117,7 @@ export default function Contratos() {
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-3 gap-4">
-                  {['Desenvolvimento Web', 'Consultoria', 'Manutenção'].map((modelo) => (
+                  {['Desenvolvimento Web', 'Consultoria', 'Manutenção', 'Desenvolvimento de Software', 'Desenvolvimento Mobile'].map((modelo) => (
                     <Card key={modelo}>
                       <CardHeader>
                         <CardTitle className="text-lg">{modelo}</CardTitle>
