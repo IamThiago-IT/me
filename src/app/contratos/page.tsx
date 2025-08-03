@@ -23,6 +23,39 @@ export default function Contratos() {
     description: '',
   })
 
+  const [signedContracts, setSignedContracts] = useState([
+    {
+      id: 1,
+      clientName: 'TechCorp Solutions',
+      projectName: 'E-commerce Platform',
+      value: 25000,
+      status: 'completed',
+      signedDate: '2024-01-15',
+      contractNumber: 'CTR-2024-001',
+      description: 'Desenvolvimento de plataforma de e-commerce completa com integração de pagamentos'
+    },
+    {
+      id: 2,
+      clientName: 'StartupXYZ',
+      projectName: 'Mobile App Development',
+      value: 18000,
+      status: 'in_progress',
+      signedDate: '2024-02-20',
+      contractNumber: 'CTR-2024-002',
+      description: 'Aplicativo mobile para iOS e Android com funcionalidades de geolocalização'
+    },
+    {
+      id: 3,
+      clientName: 'Consultoria ABC',
+      projectName: 'Sistema de Gestão',
+      value: 32000,
+      status: 'completed',
+      signedDate: '2024-03-10',
+      contractNumber: 'CTR-2024-003',
+      description: 'Sistema ERP personalizado para gestão de estoque e vendas'
+    }
+  ])
+
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-3xl font-bold mb-6">Contratos</h1>
@@ -133,30 +166,70 @@ export default function Contratos() {
               </CardContent>
             </Card>
           </TabsContent>
+
           <TabsContent value="assinados">
-            <Card>
-              <CardHeader>
-                <CardTitle>Contratos Assinados</CardTitle>
-                <CardDescription>
-                  Histórico de contratos finalizados
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {/* Lista de contratos assinados simulada */}
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="flex items-center justify-between p-4 border rounded-md">
-                      <div>
-                        <h4 className="font-semibold">Projeto {i}</h4>
-                        <p className="text-sm text-gray-500">Cliente {i}</p>
-                      </div>
-                      <Button variant="outline" disabled={true}>Ver Contrato</Button>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+  <Card>
+    <CardHeader>
+      <CardTitle>Contratos Assinados</CardTitle>
+      <CardDescription>
+        Histórico de contratos finalizados e em andamento
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div className="space-y-4">
+        {(Array.isArray(signedContracts) ? signedContracts : []).map((contract: any) => (
+          <div
+            key={contract?.id ?? Math.random()}
+            className="flex items-center justify-between p-4 border rounded-md hover:bg-gray-50 transition-colors"
+          >
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <h4 className="font-semibold text-lg">{contract.projectName}</h4>
+                <span className={`px-2 py-1 text-xs rounded-full ${
+                  contract.status === 'completed' 
+                    ? 'bg-green-100 text-green-800' 
+                    : 'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {contract.status === 'completed' ? 'Finalizado' : 'Em Andamento'}
+                </span>
+              </div>
+              <p className="text-sm text-gray-600 mb-1">
+                <strong>Cliente:</strong> {contract.clientName}
+              </p>
+              <p className="text-sm text-gray-600 mb-1">
+                <strong>Valor:</strong> R$ {contract.value.toLocaleString('pt-BR')}
+              </p>
+              <p className="text-sm text-gray-600 mb-1">
+                <strong>Contrato:</strong> {contract.contractNumber}
+              </p>
+              <p className="text-sm text-gray-600 mb-1">
+                <strong>Assinado em:</strong> {new Date(contract.signedDate).toLocaleDateString('pt-BR')}
+              </p>
+              <p className="text-xs text-gray-500 mt-2 line-clamp-2">
+                {contract.description}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 ml-4">
+              <Button variant="outline" size="sm">
+                Ver Contrato
+              </Button>
+              <Button variant="ghost" size="sm">
+                Download PDF
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {signedContracts.length === 0 && (
+        <div className="text-center py-8 text-gray-500">
+          <p>Nenhum contrato assinado encontrado.</p>
+          <p className="text-sm">Crie seu primeiro contrato na aba "Novo Contrato".</p>
+        </div>
+      )}
+    </CardContent>
+  </Card>
+</TabsContent>
         </Tabs>
       </div>
 
