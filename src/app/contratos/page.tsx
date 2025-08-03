@@ -150,7 +150,7 @@ export default function Contratos() {
                         <h4 className="font-semibold">Projeto {i}</h4>
                         <p className="text-sm text-gray-500">Cliente {i}</p>
                       </div>
-                      <Button variant="outline">Ver Contrato</Button>
+                      <Button variant="outline" disabled={true}>Ver Contrato</Button>
                     </div>
                   ))}
                 </div>
