@@ -17,16 +17,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Contratos() {
   const [formData, setFormData] = useState({
-    clientName: '',
     projectName: '',
     value: '',
     description: '',
   })
 
-  const [signedContracts] = useState([
+  const [signedContracts, setSignedContracts] = useState([
     {
       id: 1,
-      clientName: 'TechCorp Solutions',
       projectName: 'E-commerce Platform',
       value: 25000,
       status: 'completed',
@@ -36,7 +34,6 @@ export default function Contratos() {
     },
     {
       id: 2,
-      clientName: 'StartupXYZ',
       projectName: 'Mobile App Development',
       value: 18000,
       status: 'in_progress',
@@ -46,7 +43,6 @@ export default function Contratos() {
     },
     {
       id: 3,
-      clientName: 'Consultoria ABC',
       projectName: 'Sistema de Gestão',
       value: 32000,
       status: 'completed',
@@ -78,14 +74,6 @@ export default function Contratos() {
                 </CardHeader>
                 <CardContent>
                   <form className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="clientName">Nome do Cliente</Label>
-                      <Input
-                        id="clientName"
-                        value={formData.clientName}
-                        onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-                      />
-                    </div>
                     <div className="space-y-2">
                       <Label htmlFor="projectName">Nome do Projeto</Label>
                       <Input
@@ -127,7 +115,6 @@ export default function Contratos() {
                     <div className="p-4 border rounded-md max-h-[300px] overflow-y-auto">
                       <h3 className="font-bold mb-4">Contrato de Prestação de Serviços</h3>
                       <div className="space-y-2">
-                        <p><strong>Cliente:</strong> {formData.clientName || '[Nome do Cliente]'}</p>
                         <p><strong>Projeto:</strong> {formData.projectName || '[Nome do Projeto]'}</p>
                         <p><strong>Valor:</strong> R$ {formData.value || '0,00'}</p>
                         <p><strong>Descrição:</strong> {formData.description || '[Descrição do Projeto]'}</p>
@@ -194,7 +181,7 @@ export default function Contratos() {
                 </span>
               </div>
               <p className="text-sm text-gray-600 mb-1">
-                <strong>Cliente:</strong> {contract.clientName}
+                <strong>Projeto:</strong> {contract.projectName}
               </p>
               <p className="text-sm text-gray-600 mb-1">
                 <strong>Valor:</strong> R$ {contract.value.toLocaleString('pt-BR')}
@@ -244,15 +231,6 @@ export default function Contratos() {
           </CardHeader>
           <CardContent>
             <form className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="clientName">Nome do Cliente</Label>
-                <Input
-                  id="clientName"
-                  value={formData.clientName}
-                  onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-                  required
-                />
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="projectName">Nome do Projeto</Label>
                 <Input
