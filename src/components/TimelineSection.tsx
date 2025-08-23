@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useState } from "react" // Import useState for managing state
 
 import { motion } from "framer-motion" // Corrected import
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -200,24 +201,59 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry }) => {
   )
 }
 
-export default function TimelineSection() {
+export default function perfeitoTimelineSection() {
+  const [isReversed, setIsReversed] = useState(false) // State to track order
+  const [filterType, setFilterType] = useState<"all" | "education" | "experience">("all") // State to filter by type
+
   // Sort entries by period in descending order (most recent first)
   const sortedEntries = [...timelineEntries].sort((a, b) => {
-    const periodA = a.period.split(" - ")[1] || a.period.split(" - ")[0]
-    const periodB = b.period.split(" - ")[1] || b.period.split(" - ")[0]
-    return new Date(periodB).getTime() - new Date(periodA).getTime()
+    const parseDate = (period: string): number => {
+      const [start, end] = period.split(" - ").map((date: string) => date.trim())
+      const dateStr = end || start
+      const parsedDate = Date.parse(dateStr) || new Date(`${dateStr} 01`).getTime()
+      return parsedDate
+    }
+
+    return parseDate(b.period) - parseDate(a.period)
   })
+
+  // Apply filters and reverse order if needed
+  const filteredEntries = filterType === "all" ? sortedEntries : sortedEntries.filter((entry) => entry.type === filterType)
+  const displayedEntries = isReversed ? filteredEntries.reverse() : filteredEntries
 
   return (
     <section className="py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
         <div className="max-w-3xl w-full">
           <h2 className="text-3xl font-bold mb-8 text-center">Linha do Tempo</h2>
-          <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
-            Explore minha trajetória profissional, principais conquistas e habilidades adquiridas ao longo do tempo.
-          </p>
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={() => setIsReversed(!isReversed)}
+              className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+            >
+              {isReversed ? "Mais Recentes" : "Mais Antigos"}
+            </button>
+            <button
+              onClick={() => setFilterType("all")}
+              className={`px-4 py-2 rounded ${filterType === "all" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"}`}
+            >
+              Todos
+            </button>
+            <button
+              onClick={() => setFilterType("education")}
+              className={`px-4 py-2 rounded ${filterType === "education" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"}`}
+            >
+              Escolaridade
+            </button>
+            <button
+              onClick={() => setFilterType("experience")}
+              className={`px-4 py-2 rounded ${filterType === "experience" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"}`}
+            >
+              Trabalho
+            </button>
+          </div>
           <div className="max-w-3xl mx-auto">
-            {sortedEntries.map((entry) => (
+            {displayedEntries.map((entry) => (
               <TimelineEntry key={entry.id} entry={entry} />
             ))}
           </div>
