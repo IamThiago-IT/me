@@ -1,4 +1,5 @@
 import type React from "react"
+import { ThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "IamThiago",
@@ -13,6 +14,8 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <RootLayout>{children}</RootLayout>
-  )
+    <ThemeProvider attribute="class" defaultTheme="system">
+      <RootLayout>{children}</RootLayout>
+    </ThemeProvider>
+  );
 }
