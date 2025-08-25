@@ -26,7 +26,7 @@ export default function Contratos() {
     {
       id: 1,
       projectName: 'E-commerce Platform',
-      value: 25000,
+      value: '***',
       status: 'completed',
       signedDate: '2024-01-15',
       contractNumber: 'CTR-2024-001',
@@ -35,7 +35,7 @@ export default function Contratos() {
     {
       id: 2,
       projectName: 'Mobile App Development',
-      value: 18000,
+      value: '***',
       status: 'in_progress',
       signedDate: '2024-02-20',
       contractNumber: 'CTR-2024-002',
@@ -44,7 +44,7 @@ export default function Contratos() {
     {
       id: 3,
       projectName: 'Sistema de Gestão',
-      value: 32000,
+      value: '***',
       status: 'completed',
       signedDate: '2024-03-10',
       contractNumber: 'CTR-2024-003',
@@ -116,7 +116,7 @@ export default function Contratos() {
                       <h3 className="font-bold mb-4">Contrato de Prestação de Serviços</h3>
                       <div className="space-y-2">
                         <p><strong>Projeto:</strong> {formData.projectName || '[Nome do Projeto]'}</p>
-                        <p><strong>Valor:</strong> R$ {formData.value || '0,00'}</p>
+                        <p><strong>Valor:</strong> ***</p>
                         <p><strong>Descrição:</strong> {formData.description || '[Descrição do Projeto]'}</p>
                       </div>
                     </div>
@@ -167,32 +167,32 @@ export default function Contratos() {
         {(Array.isArray(signedContracts) ? signedContracts : []).map((contract: any) => (
           <div
             key={contract?.id ?? Math.random()}
-            className="flex items-center justify-between p-4 border rounded-md hover:bg-gray-50 transition-colors"
+            className="flex items-center justify-between p-4 border rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
                 <h4 className="font-semibold text-lg">{contract.projectName}</h4>
                 <span className={`px-2 py-1 text-xs rounded-full ${
                   contract.status === 'completed' 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-yellow-100 text-yellow-800'
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
+                    : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                 }`}>
                   {contract.status === 'completed' ? 'Finalizado' : 'Em Andamento'}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 mb-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>Projeto:</strong> {contract.projectName}
               </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Valor:</strong> R$ {contract.value.toLocaleString('pt-BR')}
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <strong>Valor:</strong> ***
               </p>
-              <p className="text-sm text-gray-600 mb-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>Contrato:</strong> {contract.contractNumber}
               </p>
-              <p className="text-sm text-gray-600 mb-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>Assinado em:</strong> {new Date(contract.signedDate).toLocaleDateString('pt-BR')}
               </p>
-              <p className="text-xs text-gray-500 mt-2 line-clamp-2">
+              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2 line-clamp-2">
                 {contract.description}
               </p>
             </div>
