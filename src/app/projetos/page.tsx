@@ -121,7 +121,7 @@ export default function Projetos() {
 
         {/* Filtros avançados */}
         {showFilters && (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 border rounded-lg bg-gray-50">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
             {/* Ordenação */}
             <div>
               <Label htmlFor="sort">Ordenar por</Label>
@@ -129,7 +129,7 @@ export default function Projetos() {
                 id="sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="w-full mt-1 p-2 border rounded-md"
+                className="w-full mt-1 p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
               >
                 <option value="stars">Mais estrelas</option>
                 <option value="name">Nome A-Z</option>
@@ -144,7 +144,7 @@ export default function Projetos() {
                 id="language"
                 value={languageFilter}
                 onChange={(e) => setLanguageFilter(e.target.value as LanguageFilter)}
-                className="w-full mt-1 p-2 border rounded-md"
+                className="w-full mt-1 p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
               >
                 <option value="all">Todas as linguagens</option>
                 {uniqueLanguages.map(lang => (
@@ -156,7 +156,7 @@ export default function Projetos() {
         )}
 
         {/* Estatísticas */}
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-gray-600 dark:text-gray-400">
           {projects.length} projeto{projects.length !== 1 ? 's' : ''} encontrado{projects.length !== 1 ? 's' : ''}
           {searchTerm && ` para "${searchTerm}"`}
           {languageFilter !== "all" && ` em ${languageFilter}`}
@@ -164,22 +164,22 @@ export default function Projetos() {
       </div>
 
       {error ? (
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500 dark:text-red-400">{error}</p>
       ) : (
         <>
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((project) => (
-              <div key={project.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <h2 className="text-xl font-semibold mb-2">{project.name}</h2>
-                <p className="text-gray-600 mb-4">{project.description || "Sem descrição"}</p>
+              <div key={project.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow dark:border-gray-700 dark:hover:shadow-lg">
+                <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">{project.name}</h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description || "Sem descrição"}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     {project.language && (
-                      <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                      <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded dark:bg-gray-700 dark:text-gray-300">
                         {project.language}
                       </span>
                     )}
-                    <span className="flex items-center text-sm text-gray-500">
+                    <span className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                       <Star className="w-4 h-4 mr-1" />
                       {project.stars}
                     </span>
@@ -188,7 +188,7 @@ export default function Projetos() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-600 flex items-center"
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500 flex items-center"
                   >
                     Ver no GitHub
                     <ExternalLink className="w-4 h-4 ml-1" />
@@ -201,7 +201,7 @@ export default function Projetos() {
           {/* Mostrar botão apenas se não houver filtros ativos */}
           {!searchTerm && languageFilter === "all" && (
             <div className="mt-8 text-center">
-              <Button onClick={loadProjects} disabled={loading}>
+              <Button onClick={loadProjects} disabled={loading} className="dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
                 {loading ? "Carregando..." : "Mostrar mais"}
               </Button>
             </div>
