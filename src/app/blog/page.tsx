@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { fetchTabNewsArticles } from "@/lib/tabnews-api"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -80,14 +79,6 @@ function BlogContent() {
         <div className="grid gap-8">
           {articles.map((article) => (
             <Card key={article.id} className="overflow-hidden">
-              <div className="relative h-48 w-full">
-                <Image
-                  src={article.coverImage || "/placeholder.svg"}
-                  alt={article.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <CardTitle className="text-xl sm:text-2xl flex-1">
