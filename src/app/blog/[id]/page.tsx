@@ -13,12 +13,12 @@ import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-conte
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-function BlogPostContent({ params }: PageProps) {
+function BlogPostContent({ params }: { params: { id: string } }) {
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
   const { language } = useBlogLanguage()
@@ -125,9 +125,10 @@ function BlogPostContent({ params }: PageProps) {
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
+  const resolvedParams = await params
   return (
     <BlogLanguageProvider>
-      <BlogPostContent params={params} />
+      <BlogPostContent params={resolvedParams} />
     </BlogLanguageProvider>
   )
 }
