@@ -71,20 +71,23 @@ export async function getTabNewsArticles(): Promise<TabNewsArticle[]> {
   }
 }
 
+/* Update getTabNewsArticleBySlug to use the provided model: GET {{BaseUrl}}/contents/{user}/{slug} */
 export async function getTabNewsArticleBySlug(slug: string): Promise<TabNewsArticle | null> {
   try {
-    const response = await fetch(`https://www.tabnews.com.br/api/v1/contents/IamThiagoIT/${slug}`, {
+    const url = `${TABNEWS_API_BASE_URL}/contents/IamThiagoIT/${slug}`;
+    console.log("Obter conteúdo e dados de uma publicação GET", url);
+    const response = await fetch(url, {
       next: { revalidate: 3600 },
-    })
+    });
 
     if (!response.ok) {
-      return null
+      return null;
     }
 
-    return await response.json()
+    return await response.json();
   } catch (error) {
-    console.error("Error fetching TabNews article:", error)
-    return null
+    console.error("Error fetching TabNews article:", error);
+    return null;
   }
 }
 
