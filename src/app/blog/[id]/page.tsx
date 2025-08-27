@@ -124,7 +124,7 @@ function BlogPostContent({ params }: PageProps) {
   )
 }
 
-export default function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params }: PageProps) {
   return (
     <BlogLanguageProvider>
       <BlogPostContent params={params} />
