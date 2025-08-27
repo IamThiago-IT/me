@@ -15,7 +15,7 @@ import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 interface PageProps {
   params: {
     id: string
-  }
+  } & { then?: never }
 }
 
 function BlogPostContent({ params }: PageProps) {
