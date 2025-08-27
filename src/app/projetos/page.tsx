@@ -129,7 +129,15 @@ export default function Projetos() {
                 id="sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="w-full mt-1 p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                className="w-full mt-1 p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "none",
+                  backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "right 0.75rem center",
+                  backgroundSize: "1.25rem 1.25rem",
+                }}
               >
                 <option value="stars">Mais estrelas</option>
                 <option value="name">Nome A-Z</option>
@@ -144,7 +152,15 @@ export default function Projetos() {
                 id="language"
                 value={languageFilter}
                 onChange={(e) => setLanguageFilter(e.target.value as LanguageFilter)}
-                className="w-full mt-1 p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                className="w-full mt-1 p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "none",
+                  backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "right 0.75rem center",
+                  backgroundSize: "1.25rem 1.25rem",
+                }}
               >
                 <option value="all">Todas as linguagens</option>
                 {uniqueLanguages.map(lang => (
