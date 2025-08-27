@@ -12,13 +12,13 @@ import Markdown from "react-markdown"
 import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-context"
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 
-interface BlogPostPageProps {
+interface PageProps {
   params: {
     id: string
   }
 }
 
-function BlogPostContent({ params }: BlogPostPageProps) {
+function BlogPostContent({ params }: PageProps) {
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
   const { language } = useBlogLanguage()
@@ -124,7 +124,7 @@ function BlogPostContent({ params }: BlogPostPageProps) {
   )
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: PageProps) {
   return (
     <BlogLanguageProvider>
       <BlogPostContent params={params} />
