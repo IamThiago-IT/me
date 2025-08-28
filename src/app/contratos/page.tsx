@@ -52,6 +52,14 @@ export default function Contratos() {
     }
   ])
 
+  const formatCurrency = (value: number) => {
+    if (!value) return ''
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value)
+  }
+
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-3xl font-bold mb-6">Contratos</h1>
@@ -116,7 +124,7 @@ export default function Contratos() {
                       <h3 className="font-bold mb-4">Contrato de Prestação de Serviços</h3>
                       <div className="space-y-2">
                         <p><strong>Projeto:</strong> {formData.projectName || '[Nome do Projeto]'}</p>
-                        <p><strong>Valor:</strong> ***</p>
+                        <p><strong>Valor:</strong> {formatCurrency(Number(formData.value)) || '***'}</p>
                         <p><strong>Descrição:</strong> {formData.description || '[Descrição do Projeto]'}</p>
                       </div>
                     </div>
