@@ -26,7 +26,6 @@
     "react-icons": "^5.5.0",
     "react-markdown": "^10.1.0",
     "react-signature-canvas": "1.1.0-alpha.2",
-    "react-syntax-highlighter": "^15.6.6",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
@@ -38,9 +37,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "better-sqlite3": "^11.10.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
+    "react-syntax-highlighter": "^15.6.6",
     "sqlite3": "^5.1.7",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",

@@ -11,8 +11,8 @@ import { ChevronLeft, Coins, ExternalLink } from "lucide-react"
 import Markdown from "react-markdown"
 import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-context"
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter" 
-import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import dracula from "react-syntax-highlighter/dist/esm/styles/prism/dracula"
 
 interface PageProps {
   params: Promise<{
@@ -123,7 +123,8 @@ function BlogPostContent({ params }: { params: { id: string } }) {
         <div className="prose prose-sm sm:prose prose-lg max-w-none">
           <Markdown
             components={{
-              code({ node, inline, className, children, ...props }) {
+              code({ node, className, children, ...props }) {
+                const { inline } = arguments[0] as any
                 const match = /language-(\w+)/.exec(className || "")
                 return !inline && match ? (
                   <SyntaxHighlighter
