@@ -128,7 +128,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
                 const match = /language-(\w+)/.exec(className || "")
                 return !inline && match ? (
                   <SyntaxHighlighter
-                    style={dracula as { [key: string]: React.CSSProperties }}
+                    style={dracula}
                     language={match[1]}
                     PreTag="div"
                     {...props}
