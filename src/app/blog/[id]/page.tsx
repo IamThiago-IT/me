@@ -12,7 +12,7 @@ import Markdown from "react-markdown"
 import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-context"
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import dracula from "react-syntax-highlighter/dist/esm/styles/prism/dracula"
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 interface PageProps {
   params: Promise<{
@@ -127,10 +127,10 @@ function BlogPostContent({ params }: { params: { id: string } }) {
                 const { inline } = arguments[0] as any
                 const match = /language-(\w+)/.exec(className || "")
                 return !inline && match ? (
+                  // @ts-ignore
                   <SyntaxHighlighter
-                    style={dracula}
                     language={match[1]}
-                    PreTag="div"
+                    style={dracula}
                     {...props}
                   >
                     {String(children).replace(/\n$/, "")}
