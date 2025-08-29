@@ -14,6 +14,8 @@ function BlogContent() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const articlesPerPage = 10
 
   useEffect(() => {
     async function loadArticles() {
@@ -39,6 +41,24 @@ function BlogContent() {
   const filteredArticles = articles.filter(article =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   )
+
+  const totalPages = Math.ceil(filteredArticles.length / articlesPerPage)
+  const paginatedArticles = filteredArticles.slice(
+    (currentPage - 1) * articlesPerPage,
+    currentPage * articlesPerPage
+  )
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
 
   if (loading) {
     return (
@@ -93,7 +113,7 @@ function BlogContent() {
         </div>
 
         <div className="grid gap-8">
-          {filteredArticles.map((article) => (
+          {paginatedArticles.map((article) => (
             <Card key={article.id} className="overflow-hidden">
               <CardHeader>
                 <div className="flex items-start justify-between">
@@ -135,11 +155,29 @@ function BlogContent() {
           ))}
         </div>
 
-        {filteredArticles.length === 0 && !loading && (
+        {paginatedArticles.length === 0 && !loading && (
           <div className="text-center py-12">
             <p className="text-gray-600">Nenhum artigo encontrado.</p>
           </div>
         )}
+
+        <div className="flex justify-between mt-6">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+          >
+            Anterior
+          </button>
+          <span>Página {currentPage} de {totalPages}</span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+          >
+            Próxima
+          </button>
+        </div>
       </div>
     </div>
   )
