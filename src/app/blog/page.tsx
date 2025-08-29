@@ -7,11 +7,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
 import { Coins, ExternalLink } from "lucide-react"
+import { Input } from "@/components/ui/input"
 
 function BlogContent() {
   const [articles, setArticles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     async function loadArticles() {
@@ -33,6 +35,10 @@ function BlogContent() {
 
     loadArticles()
   }, [])
+
+  const filteredArticles = articles.filter(article =>
+    article.title.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   if (loading) {
     return (
@@ -76,8 +82,18 @@ function BlogContent() {
           </div>
         </div>
 
+        <div className="mb-6">
+          <Input
+            type="text"
+            placeholder="Buscar artigos..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
+
         <div className="grid gap-8">
-          {articles.map((article) => (
+          {filteredArticles.map((article) => (
             <Card key={article.id} className="overflow-hidden">
               <CardHeader>
                 <div className="flex items-start justify-between">
@@ -119,7 +135,7 @@ function BlogContent() {
           ))}
         </div>
 
-        {articles.length === 0 && !loading && (
+        {filteredArticles.length === 0 && !loading && (
           <div className="text-center py-12">
             <p className="text-gray-600">Nenhum artigo encontrado.</p>
           </div>
