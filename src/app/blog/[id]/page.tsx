@@ -11,6 +11,8 @@ import { ChevronLeft, Coins, ExternalLink } from "lucide-react"
 import Markdown from "react-markdown"
 import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-context"
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter" 
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 interface PageProps {
   params: Promise<{
@@ -76,7 +78,9 @@ function BlogPostContent({ params }: { params: { id: string } }) {
           <BlogLanguageToggle />
         </div>
 
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">{article.title[language]}</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight text-gray-800">
+          {article.title[language]}
+        </h1>
 
         <div className="flex flex-wrap items-center text-gray-600 mb-6 text-sm">
           <span>{formatDate(article.date)}</span>
@@ -117,7 +121,29 @@ function BlogPostContent({ params }: { params: { id: string } }) {
         </div>
 
         <div className="prose prose-sm sm:prose prose-lg max-w-none">
-          <Markdown>{article.content[language]}</Markdown>
+          <Markdown
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "")
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    style={dracula}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                )
+              },
+            }}
+          >
+            {article.content[language]}
+          </Markdown>
         </div>
       </div>
     </div>
