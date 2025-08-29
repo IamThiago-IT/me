@@ -156,44 +156,47 @@ export function convertTabNewsToBlogs(articles: TabNewsArticle[]): BlogArticle[]
  */
 export async function fetchTabNewsArticles(
   username: string,
-  page: number = 1,
-  perPage: number = 10,
   strategy: string = "relevant"
 ) {
   try {
-    // Updated URL to use the 'contents' path segment
-    const url = `${TABNEWS_API_BASE_URL}/contents/${username}?page=${page}&per_page=${perPage}&strategy=${strategy}`;
-    console.log("Fetching TabNews articles from:", url);
+    let allArticles: any[] = [];
+    let page = 1;
+    const perPage = 10;
 
-    const response = await axios.get(url);
-    console.log("Raw response data:", response.data);
+    while (true) {
+      const url = `${TABNEWS_API_BASE_URL}/contents/${username}?page=${page}&per_page=${perPage}&strategy=${strategy}`;
+      console.log("Fetching TabNews articles from:", url);
 
-    // Ensure the response is an array
-    if (!Array.isArray(response.data)) {
-      throw new Error("Invalid data format: Expected an array of articles.");
+      const response = await axios.get(url);
+      console.log("Raw response data:", response.data);
+
+      if (!Array.isArray(response.data) || response.data.length === 0) {
+        break; // Exit loop if no more articles are returned
+      }
+
+      const filteredArticles = response.data.filter((article: any) => article.parent_id === null);
+      console.log("Filtered articles:", filteredArticles);
+
+      const transformedArticles = filteredArticles.map((article: any) => {
+        return {
+          id: article.slug,
+          title: article.title || "Sem título",
+          slug: article.slug,
+          date: article.created_at || article.date,
+          author: article.user && article.user.username ? article.user.username : "Desconhecido",
+          excerpt: article.body ? (article.body.length > 200 ? article.body.substring(0, 200) + "..." : article.body) : "",
+          tabcoins: article.tabcoins || 0,
+          tags: article.tags || [],
+          coverImage: article.coverImage || "/placeholder.svg"
+        };
+      });
+
+      allArticles = allArticles.concat(transformedArticles);
+      page++;
     }
 
-    // Filter only root contents (posts without parent_id)
-    const filteredArticles = response.data.filter((article: any) => article.parent_id === null);
-    console.log("Filtered articles:", filteredArticles);
-
-    // Transform articles into a consistent format
-    const transformedArticles = filteredArticles.map((article: any) => {
-      return {
-        id: article.slug, // using slug as unique identifier
-        title: article.title || "Sem título",
-        slug: article.slug,
-        date: article.created_at || article.date,
-        author: article.user && article.user.username ? article.user.username : "Desconhecido",
-        excerpt: article.body ? (article.body.length > 200 ? article.body.substring(0, 200) + "..." : article.body) : "",
-        tabcoins: article.tabcoins || 0,
-        tags: article.tags || [],
-        coverImage: article.coverImage || "/placeholder.svg"
-      };
-    });
-
-    console.log("Transformed articles:", transformedArticles);
-    return transformedArticles;
+    console.log("All fetched articles:", allArticles);
+    return allArticles;
   } catch (error) {
     console.error("Error fetching TabNews articles:", error);
     throw new Error("Failed to fetch TabNews articles.");
