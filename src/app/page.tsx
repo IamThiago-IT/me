@@ -6,10 +6,11 @@ export default function Home() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="space-y-6">
-        <h1 className="text-4xl md:text-5xl font-bold">Bem-vindo ao meu Portfólio</h1>
+        <h1 className="text-4xl md:text-5xl font-bold">Bem-vindo</h1>
         <p className="text-xl text-gray-600">
-          Olá! Sou um desenvolvedor apaixonado por criar soluções inovadoras e eficientes. Explore meu portfólio para
-          conhecer mais sobre mim e meus projetos.
+          Sou um desenvolvedor front-end especializado em JavaScript e ReactJS, focado em criar interfaces de usuário agradáveis e acessíveis para uma ampla variedade de usuários. Minha paixão é desenvolver soluções inovadoras que proporcionem uma experiência de usuário intuitiva e envolvente.
+
+
         </p>
         <div className="flex gap-4">
           <Button asChild size="lg">

@@ -130,7 +130,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
                   // @ts-ignore
                   <SyntaxHighlighter
                     language={match[1]}
-                    style={dracula}
+                    style={dracula as unknown as any}
                     {...props}
                   >
                     {String(children).replace(/\n$/, "")}
