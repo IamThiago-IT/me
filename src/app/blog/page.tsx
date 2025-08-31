@@ -15,6 +15,7 @@ function BlogContent() {
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
+  const [dateFilter, setDateFilter] = useState<string>("")
   const articlesPerPage = 10
 
   useEffect(() => {
@@ -38,9 +39,26 @@ function BlogContent() {
     loadArticles()
   }, [])
 
-  const filteredArticles = articles.filter(article =>
-    article.title.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  const filteredArticles = articles.filter(article => {
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase())
+    const articleDate = new Date(article.date)
+    let matchesDate = true
+
+    if (dateFilter === "last7days") {
+      const sevenDaysAgo = new Date()
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+      matchesDate = articleDate >= sevenDaysAgo
+    } else if (dateFilter === "last30days") {
+      const thirtyDaysAgo = new Date()
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+      matchesDate = articleDate >= thirtyDaysAgo
+    } else if (dateFilter === "thisYear") {
+      const startOfYear = new Date(new Date().getFullYear(), 0, 1)
+      matchesDate = articleDate >= startOfYear
+    }
+
+    return matchesSearch && matchesDate
+  })
 
   const totalPages = Math.ceil(filteredArticles.length / articlesPerPage)
   const paginatedArticles = filteredArticles.slice(
@@ -58,6 +76,10 @@ function BlogContent() {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1)
     }
+  }
+
+  const handleDateFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDateFilter(e.target.value)
   }
 
   if (loading) {
@@ -102,14 +124,24 @@ function BlogContent() {
           </div>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 flex items-center gap-4">
           <Input
             type="text"
             placeholder="Buscar artigos..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="flex-1 p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           />
+          <select
+            value={dateFilter}
+            onChange={handleDateFilterChange}
+            className="p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
+          >
+            <option value="">Todas as Datas</option>
+            <option value="last7days">Últimos 7 Dias</option>
+            <option value="last30days">Últimos 30 Dias</option>
+            <option value="thisYear">Este Ano</option>
+          </select>
         </div>
 
         <div className="grid gap-8">
