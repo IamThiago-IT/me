@@ -137,7 +137,7 @@ function BlogContent() {
             onChange={handleDateFilterChange}
             className="p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           >
-            <option value="">Todas as Datas</option>
+            <option value="">Datas</option>
             <option value="last7days">Últimos 7 Dias</option>
             <option value="last30days">Últimos 30 Dias</option>
             <option value="thisYear">Este Ano</option>
@@ -197,15 +197,15 @@ function BlogContent() {
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+            className={`px-4 py-2 rounded-md disabled:opacity-50 ${currentPage === 1 ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
           >
             Anterior
           </button>
-          <span>Página {currentPage} de {totalPages}</span>
+          <span className="text-gray-800 dark:text-gray-200">Página {currentPage} de {totalPages}</span>
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+            className={`px-4 py-2 rounded-md disabled:opacity-50 ${currentPage === totalPages ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
           >
             Próxima
           </button>
