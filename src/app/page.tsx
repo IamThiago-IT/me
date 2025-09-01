@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
@@ -12,6 +14,14 @@ export default function Home() {
 
 
         </p>
+        
+<div className="relative overflow-hidden h-6 group">
+  <div className="flex flex-col transition-transform duration-[8s] ease-linear group-hover:duration-0 group-hover:translate-y-[calc(-100%)]">
+    <div className="h-6 flex items-center justify-center">use o comando Control + M para abrir o menu de comandos</div>
+    <div className="h-6 flex items-center justify-center">use o comando Control + T para abrir o menu de comandos</div>
+  </div>
+</div>
+
         <div className="flex gap-4">
           <Button asChild size="lg">
             <Link href="/projetos" className="flex items-center gap-2">
