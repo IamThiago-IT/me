@@ -16,11 +16,20 @@ export default function Home() {
         </p>
         
 <div className="relative overflow-hidden h-6 group">
-  <div className="flex flex-col transition-transform duration-[8s] ease-linear group-hover:duration-0 group-hover:translate-y-[calc(-100%)]">
+  <div className="flex flex-col transition-transform duration-[8s] ease-linear group-hover:duration-0 animate-[scroll_8s_linear_infinite]">
     <div className="h-6 flex items-center justify-center">use o comando Control + M para abrir o menu de comandos</div>
     <div className="h-6 flex items-center justify-center">use o comando Control + T para abrir o menu de comandos</div>
+    <div className="h-6 flex items-center justify-center">use o comando Control + P para abrir o menu de projetos</div>
+    <div className="h-6 flex items-center justify-center">use o comando Control + C para abrir o menu de contatos</div>
   </div>
 </div>
+
+<style jsx>{`
+  @keyframes scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+  }
+`}</style>
 
         <div className="flex gap-4">
           <Button asChild size="lg">
