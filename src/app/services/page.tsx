@@ -7,7 +7,7 @@ const services = [
   { id: 3, name: "Consultoria de TI", description: "Soluções personalizadas para otimizar seus processos tecnológicos." },
 ];
 
-const ServicesPage = () => {
+export default function Services() {
   return (
     <main className="p-6">
       <h1 className="text-3xl font-bold mb-4">Nossos Serviços</h1>
@@ -22,5 +22,3 @@ const ServicesPage = () => {
     </main>
   );
 };
-
-export default ServicesPage;
