@@ -24,7 +24,9 @@ export default function Sponsors() {
             <div>
               <h2 className="text-xl font-semibold">{sponsor.name}</h2>
               <p className="text-gray-700">{sponsor.description}</p>
-              <span className="text-sm text-blue-600 font-medium mt-1 inline-block">#{sponsor.tag}</span>
+              <span className="text-sm font-medium mt-1 inline-block px-2 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-300">
+                #{sponsor.tag}
+              </span>
             </div>
           </li>
         ))}
