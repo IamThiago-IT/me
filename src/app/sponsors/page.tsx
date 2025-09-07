@@ -10,7 +10,7 @@ const sponsors = [
 export default function Sponsors() {
   return (
     <main className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Nossos Patrocinadores</h1>
+      <h1 className="text-3xl font-bold mb-4">Patrocinadores</h1>
       <ul className="space-y-4">
         {sponsors.map((sponsor) => (
           <li key={sponsor.id} className="p-4 border rounded shadow flex items-center space-x-4">
