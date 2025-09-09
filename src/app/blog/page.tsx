@@ -10,6 +10,9 @@ import { Coins, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
 function BlogContent() {
+
+  
+
   const [articles, setArticles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

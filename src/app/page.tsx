@@ -1,10 +1,13 @@
 "use client";
 
+import { useMetadata } from "@/hooks/useMetadata";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
+  useMetadata("Home");
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="space-y-6">
@@ -13,7 +16,6 @@ export default function Home() {
           Sou um desenvolvedor front-end especializado em JavaScript e ReactJS, focado em criar interfaces de usuário agradáveis e acessíveis para uma ampla variedade de usuários. Minha paixão é desenvolver soluções inovadoras que proporcionem uma experiência de usuário intuitiva e envolvente.
         </p>
 
-        {/* Melhorando a acessibilidade e removendo animações contínuas */}
         <div className="relative overflow-hidden h-6 group" aria-live="polite">
           <div className="flex flex-col transition-transform duration-[8s] ease-linear group-hover:duration-0">
             <div className="h-6 flex items-center justify-center">Control + M: Menu de comandos</div>

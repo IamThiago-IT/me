@@ -6,6 +6,7 @@ import { ExternalLink, Star, Search, Filter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useMetadata } from "@/hooks/useMetadata"
 
 type Project = {
   id: number;
@@ -20,6 +21,9 @@ type SortOption = "stars" | "name" | "updated";
 type LanguageFilter = string | "all";
 
 export default function Projetos() {
+
+  useMetadata("Projetos");
+
   const [projects, setProjects] = useState<Project[]>([])
   const [allProjects, setAllProjects] = useState<Project[]>([])
   const [page, setPage] = useState(1)
