@@ -8,10 +8,11 @@ import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
 import { Coins, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { useMetadata } from "@/hooks/useMetadata"
 
 function BlogContent() {
 
-  
+  useMetadata("Blog")
 
   const [articles, setArticles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
