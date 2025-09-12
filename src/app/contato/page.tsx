@@ -1,8 +1,12 @@
+import { useMetadata } from "@/hooks/useMetadata";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa" // Importing icons from react-icons
 import { FaThreads } from "react-icons/fa6";
 
 export default function Contato() {
+
+  useMetadata("Contato")
+
   const contactLinks = [
     { icon: Mail, label: "Email", href: "mailto:seu.thiagodossantos315@gmail.com" },
     { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/seu-perfil" },
