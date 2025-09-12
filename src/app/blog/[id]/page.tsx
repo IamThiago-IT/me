@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -13,6 +13,7 @@ import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-conte
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { useMetadata } from "@/hooks/useMetadata"
 
 interface PageProps {
   params: Promise<{
@@ -21,6 +22,9 @@ interface PageProps {
 }
 
 function BlogPostContent({ params }: { params: { id: string } }) {
+
+  useMetadata("Blog Post")
+
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
   const { language } = useBlogLanguage()
