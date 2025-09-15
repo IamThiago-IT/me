@@ -2,6 +2,7 @@ import { Star } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useMetadata } from "@/hooks/useMetadata"
 
 const feedbacks = [
 	{
@@ -28,6 +29,9 @@ const feedbacks = [
 ]
 
 export default function Feedbacks() {
+
+	useMetadata("Feedbacks")
+
 	return (
 		<div className="container mx-auto px-4">
 			<div className="max-w-4xl mx-auto">
