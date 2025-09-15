@@ -18,17 +18,6 @@ export default function Contato() {
     { icon: FaThreads, label: "Threads", href: "https://www.threads.net/@IamThiago-IT" },
   ]
 
-  const hoverStyles = {
-    GitHub: { text: "hover:text-[#181717]", icon: "group-hover:text-[#181717]", border: "hover:border-[#181717]" },
-    Twitter: { text: "hover:text-[#1DA1F2]", icon: "group-hover:text-[#1DA1F2]", border: "hover:border-[#1DA1F2]" },
-    Linkedin: { text: "hover:text-[#0077B5]", icon: "group-hover:text-[#0077B5]", border: "hover:border-[#0077B5]" },
-    Email: { text: "hover:text-[#EA4335]", icon: "group-hover:text-[#EA4335]", border: "hover:border-[#EA4335]" },
-    TikTok: { text: "hover:text-[#000000]", icon: "group-hover:text-[#000000]", border: "hover:border-[#000000]" },
-    Threads: { text: "hover:text-[#000000]", icon: "group-hover:text-[#000000]", border: "hover:border-[#000000]" },
-    Instagram: { text: "hover:text-[#E4405F]", icon: "group-hover:text-[#E4405F]", border: "hover:border-[#E4405F]" },
-    Facebook: { text: "hover:text-[#1877F2]", icon: "group-hover:text-[#1877F2]", border: "hover:border-[#1877F2]" },
-  };
-
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Entre em Contato</h1>
@@ -38,7 +27,56 @@ export default function Contato() {
       </p>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         {contactLinks.map((link) => {
-          const { text: hoverText, icon: hoverIcon, border: hoverBorder } = hoverStyles[link.label] || { text: "hover:text-blue-700", icon: "group-hover:text-blue-700", border: "hover:border-blue-700" };
+          // Define brand color classes
+          let hoverText = ""
+          let hoverIcon = ""
+          let hoverBorder = ""
+          switch (link.label) {
+            case "GitHub":
+              hoverText = "hover:text-[#181717]" // GitHub black
+              hoverIcon = "group-hover:text-[#181717]"
+              hoverBorder = "hover:border-[#181717]"
+              break
+            case "Twitter":
+              hoverText = "hover:text-[#1DA1F2]" // Twitter blue
+              hoverIcon = "group-hover:text-[#1DA1F2]"
+              hoverBorder = "hover:border-[#1DA1F2]"
+              break
+            case "LinkedIn":
+              hoverText = "hover:text-[#0077B5]" // LinkedIn blue
+              hoverIcon = "group-hover:text-[#0077B5]"
+              hoverBorder = "hover:border-[#0077B5]"
+              break
+            case "Email":
+              hoverText = "hover:text-[#EA4335]" // Gmail red
+              hoverIcon = "group-hover:text-[#EA4335]"
+              hoverBorder = "hover:border-[#EA4335]"
+              break
+            case "TikTok":
+              hoverText = "hover:text-[#000000]" // TikTok black
+              hoverIcon = "group-hover:text-[#000000]"
+              hoverBorder = "hover:border-[#000000]"
+              break
+            case "Threads":
+              hoverText = "hover:text-[#000000]" // Threads black
+              hoverIcon = "group-hover:text-[#000000]"
+              hoverBorder = "hover:border-[#000000]"
+              break
+            case "Instagram":
+              hoverText = "hover:text-[#E4405F]" // Instagram pink
+              hoverIcon = "group-hover:text-[#E4405F]"
+              hoverBorder = "hover:border-[#E4405F]"
+              break
+            case "Facebook":
+              hoverText = "hover:text-[#1877F2]" // Facebook blue
+              hoverIcon = "group-hover:text-[#1877F2]"
+              hoverBorder = "hover:border-[#1877F2]"
+              break
+            default:
+              hoverText = "hover:text-blue-700"
+              hoverIcon = "group-hover:text-blue-700"
+              hoverBorder = "hover:border-blue-700"
+          }
           return (
             <a
               key={link.label}
