@@ -1,4 +1,5 @@
 "use client";
+import { MetadataSetter } from "@/components/MetadataSetter";
 import React from "react";
 
 const services = [
@@ -10,6 +11,7 @@ const services = [
 export default function Services() {
   return (
     <main className="p-6">
+      <MetadataSetter title="Serviços" />
       <h1 className="text-3xl font-bold mb-4">Nossos Serviços</h1>
       <ul className="space-y-4">
         {services.map((service) => (
