@@ -13,7 +13,7 @@ import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-conte
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
-import { useMetadata } from "@/hooks/useMetadata"
+import { MetadataSetter } from "@/components/MetadataSetter"
 
 interface PageProps {
   params: Promise<{
@@ -22,8 +22,6 @@ interface PageProps {
 }
 
 function BlogPostContent({ params }: { params: { id: string } }) {
-
-  useMetadata("Blog Post")
 
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
@@ -70,6 +68,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
 
   return (
     <div className="container mx-auto px-4">
+      <MetadataSetter title="Blog Post" />
       <div className="max-w-3xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
           <Link

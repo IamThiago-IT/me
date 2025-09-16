@@ -1,15 +1,15 @@
 "use client";
 
-import { useMetadata } from "@/hooks/useMetadata";
+import { MetadataSetter } from "@/components/MetadataSetter";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
-  useMetadata("Home");
 
   return (
     <div className="max-w-4xl mx-auto">
+      <MetadataSetter title="Home" />
       <div className="space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold">Bem-vindo</h1>
         <p className="text-xl text-gray-600">

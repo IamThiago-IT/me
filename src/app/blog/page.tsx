@@ -8,11 +8,9 @@ import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
 import { Coins, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { useMetadata } from "@/hooks/useMetadata"
+import { MetadataSetter } from "@/components/MetadataSetter"
 
 function BlogContent() {
-
-  useMetadata("Blog")
 
   const [articles, setArticles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -118,6 +116,7 @@ function BlogContent() {
 
   return (
     <div className="container mx-auto px-4">
+      <MetadataSetter title="Blog" />
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
           <div className="mb-4 sm:mb-0">
