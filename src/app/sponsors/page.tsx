@@ -2,9 +2,9 @@
 import React from "react";
 
 const sponsors = [
-  { id: 1, name: "Empresa X", description: "Líder em soluções tecnológicas para empresas de todos os portes.", logo: "/public/globe.svg", tag: "Tecnologia" },
-  { id: 2, name: "Empresa Y", description: "Especialista em marketing digital e estratégias de crescimento.", logo: "/public/next.svg", tag: "Marketing" },
-  { id: 3, name: "Empresa Z", description: "Inovação em produtos sustentáveis para um futuro melhor.", logo: null, tag: "Sustentabilidade" },
+  { id: 1, name: "Empresa X", description: "Líder em soluções tecnológicas para empresas de todos os portes.", logo: "/public/globe.svg", tag: "Tecnologia", link: "https://empresax.com" },
+  { id: 2, name: "Empresa Y", description: "Especialista em marketing digital e estratégias de crescimento.", logo: "/public/next.svg", tag: "Marketing", link: "https://empresay.com" },
+  { id: 3, name: "Empresa Z", description: "Inovação em produtos sustentáveis para um futuro melhor.", logo: null, tag: "Sustentabilidade", link: "https://empresaz.com" },
 ];
 
 export default function Sponsors() {
@@ -27,6 +27,11 @@ export default function Sponsors() {
               <span className="text-sm font-medium mt-1 inline-block px-2 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-300">
                 #{sponsor.tag}
               </span>
+              <div className="mt-2">
+                <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  Visitar
+                </a>
+              </div>
             </div>
           </li>
         ))}
