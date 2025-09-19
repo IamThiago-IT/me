@@ -1,4 +1,5 @@
 "use client";
+import { MetadataSetter } from "@/components/MetadataSetter";
 import React from "react";
 
 const sponsors = [
@@ -10,6 +11,7 @@ const sponsors = [
 export default function Sponsors() {
   return (
     <main className="p-6">
+      <MetadataSetter title="Patrocinadores" />
       <h1 className="text-3xl font-bold mb-4">Patrocinadores</h1>
       <ul className="space-y-4">
         {sponsors.map((sponsor) => (
