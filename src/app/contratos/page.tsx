@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { SignaturePad } from '@/components/SignaturePad'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { MetadataSetter } from '@/components/MetadataSetter'
 
 export default function Contratos() {
   const [formData, setFormData] = useState({
@@ -62,6 +63,7 @@ export default function Contratos() {
 
   return (
     <div className="container mx-auto px-4">
+      <MetadataSetter title="Contratos" />
       <h1 className="text-3xl font-bold mb-6">Contratos</h1>
       
       <div className="hidden md:block">
