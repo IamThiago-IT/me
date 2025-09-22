@@ -8,6 +8,11 @@ const sponsors = [
   { id: 3, name: "Empresa Z", description: "Inovação em produtos sustentáveis para um futuro melhor.", logo: null, tag: "Sustentabilidade", link: "https://empresaz.com" },
 ];
 
+const discountCodes = [
+  { id: 1, code: "DESCONTO10", description: "10% off em compras acima de R$100" },
+  { id: 2, code: "FRETEGRATIS", description: "Frete grátis no primeiro pedido" },
+];
+
 export default function Sponsors() {
   return (
     <main className="p-6">
@@ -30,7 +35,12 @@ export default function Sponsors() {
                 #{sponsor.tag}
               </span>
               <div className="mt-2">
-                <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a
+                  href={sponsor.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
                   Visitar
                 </a>
               </div>
@@ -38,6 +48,19 @@ export default function Sponsors() {
           </li>
         ))}
       </ul>
+      <section className="mt-8">
+        <h2 className="text-2xl font-bold mb-4">Códigos de Descontos</h2>
+        <ul className="space-y-4">
+          {discountCodes.map((code) => (
+            <li key={code.id} className="p-4 border rounded shadow">
+              <div className="flex justify-between">
+                <span className="font-semibold">{code.code}</span>
+                <span className="text-gray-700">{code.description}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 };
