@@ -14,6 +14,11 @@ const discountCodes = [
 ];
 
 export default function Sponsors() {
+  const copyCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    alert("Código copiado: " + code);
+  };
+
   return (
     <main className="p-6">
       <MetadataSetter title="Patrocinadores" />
@@ -53,9 +58,17 @@ export default function Sponsors() {
         <ul className="space-y-4">
           {discountCodes.map((code) => (
             <li key={code.id} className="p-4 border rounded shadow">
-              <div className="flex justify-between">
-                <span className="font-semibold">{code.code}</span>
-                <span className="text-gray-700">{code.description}</span>
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="font-semibold">{code.code}</span>
+                  <span className="text-gray-700 ml-2">{code.description}</span>
+                </div>
+                <button
+                  onClick={() => copyCode(code.code)}
+                  className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                >
+                  Copiar
+                </button>
               </div>
             </li>
           ))}
