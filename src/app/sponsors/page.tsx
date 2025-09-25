@@ -1,6 +1,7 @@
 "use client";
 import { MetadataSetter } from "@/components/MetadataSetter";
 import React from "react";
+import { Copy } from "lucide-react";
 
 const sponsors = [
   { id: 1, name: "Empresa X", description: "Líder em soluções tecnológicas para empresas de todos os portes.", logo: "/public/globe.svg", tag: "Tecnologia", link: "https://empresax.com" },
@@ -64,14 +65,7 @@ export default function Sponsors() {
                   <span className="text-gray-700 ml-2">{code.description}</span>
                 </div>
                 <span onClick={() => copyCode(code.code)} className="cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-500 hover:text-gray-700"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M8 2a2 2 0 00-2 2v2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-2h2a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H8z" />
-                  </svg>
+                  <Copy className="h-5 w-5 text-gray-500 hover:text-gray-700" />
                 </span>
               </div>
             </li>
