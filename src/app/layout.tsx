@@ -2,7 +2,7 @@ import type React from "react"
 import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google"
 import { Navbar } from "@/components/Navbar"
-import { CommandDialogDemo } from "../../components/CommandDialogDemo"
+import { CommandDialogDemo } from "@/components/CommandDialogDemo"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
