@@ -10,11 +10,6 @@ Atenciosamente,
 [Seu Nome]
 `;
 
-// Separate style objects for better readability and reusability
-const containerStyle: React.CSSProperties = { padding: '2rem', maxWidth: '800px', margin: '0 auto' };
-const preStyle: React.CSSProperties = { backgroundColor: '#f5f5f5', padding: '1rem', borderRadius: '5px', whiteSpace: 'pre-wrap' };
-const buttonStyle: React.CSSProperties = { marginTop: '1rem', padding: '0.5rem 1rem', fontSize: '1rem', cursor: 'pointer' };
-
 const CoverLetterPage: React.FC = () => {
     const [copied, setCopied] = useState(false);
 
@@ -29,16 +24,16 @@ const CoverLetterPage: React.FC = () => {
     }, []);
 
     return (
-        <main style={containerStyle}>
-            <h1>Carta de Apresentação</h1>
-            <article style={preStyle}>
-                <pre style={{ margin: 0 }}>{coverLetterText}</pre>
+        <main className="p-8 max-w-3xl mx-auto">
+            <h1 className="text-2xl font-bold mb-4">Carta de Apresentação</h1>
+            <article className="bg-gray-100 p-4 rounded whitespace-pre-wrap">
+                <pre className="m-0">{coverLetterText}</pre>
             </article>
-            <div style={{ marginTop: '1rem' }}>
-                <button onClick={handleCopy} style={buttonStyle}>
+            <div className="mt-4">
+                <button onClick={handleCopy} className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600">
                     Copiar texto
                 </button>
-                {copied && <span style={{ marginLeft: '1rem' }}>Texto copiado!</span>}
+                {copied && <span className="ml-4">Texto copiado!</span>}
             </div>
         </main>
     );
