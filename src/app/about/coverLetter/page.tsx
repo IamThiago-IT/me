@@ -12,7 +12,7 @@ Atenciosamente,
 [Seu Nome]
 `;
 
-const CoverLetterPage: React.FC = () => {
+export default function CoverLetterPage() {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = useCallback(async () => {
@@ -41,4 +41,3 @@ const CoverLetterPage: React.FC = () => {
     );
 };
 
-export default CoverLetterPage;
