@@ -31,12 +31,17 @@ export default function Page() {
                 </pre>
             </section>
 
-            <section aria-labelledby="setup-list">
-                <h2 id="setup-list" style={{ fontSize: 16 }}>Readable</h2>
+            <section aria-labelledby="setup-hardware" style={{ marginBottom: 16 }}>
+                <h2 id="setup-hardware" style={{ fontSize: 16 }}>Hardware</h2>
                 <ul>
                     <li><strong>OS:</strong> {mySetup.os}</li>
                     <li><strong>CPU:</strong> {mySetup.cpu}</li>
                     <li><strong>RAM:</strong> {mySetup.ram}</li>
+                </ul>
+            </section>
+            <section aria-labelledby="setup-software">
+                <h2 id="setup-software" style={{ fontSize: 16 }}>Software</h2>
+                <ul>
                     <li><strong>Editor:</strong> {mySetup.editor}</li>
                     <li><strong>Node:</strong> {mySetup.nodeVersion}</li>
                     <li><strong>Packages:</strong> {mySetup.packages.join(", ")}</li>
