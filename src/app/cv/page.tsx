@@ -1,6 +1,9 @@
-import React from "react";
+export const metadata = {
+    title: "Currículo / Résumé",
+    description: "Baixe o currículo em português ou inglês (PDF). Coloque os arquivos em /public).",
+}
 
-export default function Page(): JSX.Element {
+export default function Page() {
     return (
         <main
             style={{
