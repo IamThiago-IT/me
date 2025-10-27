@@ -10,7 +10,7 @@ const menuItems = [
 	{ label: "Início", href: "/" },
 	{ label: "Sobre", href: "/about" },
 	{ label: "Projetos", href: "/projetos" },
-	{ label: "Blog", href: "/blog" },
+	//{ label: "Blog", href: "/blog" },
 	{ label: "Agendar", href: "/agendar" },
 	{ label: "Contratos", href: "/contratos" },
 	{ label: "Feedbacks", href: "/feedbacks" },
