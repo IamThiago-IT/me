@@ -15,7 +15,7 @@ export default function Home() {
         <p className="text-xl text-gray-600">
           Sou um desenvolvedor front-end especializado em JavaScript e ReactJS, focado em criar interfaces de usuário agradáveis e acessíveis para uma ampla variedade de usuários. Minha paixão é desenvolver soluções inovadoras que proporcionem uma experiência de usuário intuitiva e envolvente.
         </p>
-
+{/* Animacao de texto rolando com atalhos
         <div className="relative overflow-hidden h-6 group" aria-live="polite">
           <div className="flex flex-col transition-transform duration-[8s] ease-linear group-hover:duration-0">
             <div className="h-6 flex items-center justify-center">Control + M: Menu de comandos</div>
@@ -24,7 +24,7 @@ export default function Home() {
             <div className="h-6 flex items-center justify-center">Control + C: Menu de contatos</div>
           </div>
         </div>
-
+ */}
         <div className="flex gap-4">
           <Button asChild size="lg">
             <Link href="/projetos" className="flex items-center gap-2">
