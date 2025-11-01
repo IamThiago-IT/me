@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+*.js
+*.jsx
+*.ts
+*.tsx
+*.d.ts
+*.map
+*.test.ts
+*.test.tsx
+coverage/
+```
