@@ -16,7 +16,11 @@
     "playwright": "playwright test",
     "postinstall": "next build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy",
+    "pages:watch": "npx @cloudflare/next-on-pages --watch",
+    "pages:dev": "npx wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat"
   },
   "dependencies": {
     "@polar-sh/nextjs": "^0.4.4",

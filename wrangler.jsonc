@@ -1,0 +1,11 @@
+{
+    // Configuration for deploying Next.js app to Cloudflare Pages
+    "name": "me",
+    "compatibility_date": "2025-11-29",
+    "pages_build_output_dir": ".vercel/output/static"
+    // For Next.js on Cloudflare Pages, you'll need to use @cloudflare/next-on-pages
+    // Run: npm install --save-dev @cloudflare/next-on-pages
+    // To deploy:
+    // 1. Build your Next.js app: npm run build
+    // 2. Deploy to Pages: npx wrangler pages deploy .vercel/output/static
+}
