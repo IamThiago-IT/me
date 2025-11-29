@@ -18,6 +18,7 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <Navbar />
@@ -27,5 +28,6 @@ export default function Layout({
         </ThemeProvider>
         <CommandDialogDemo />
       </body>
+    </html>
   )
 }
