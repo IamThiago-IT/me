@@ -1,9 +1,4 @@
-import path from 'path';
-import Database from 'better-sqlite3';
-import { betterAuth } from 'better-auth';
-
+// Auth configuration removed
 export const getAuth = () => {
-  const dbPath = path.resolve(process.cwd(), 'src/database/sqlite.db');
-  const db = new Database(dbPath);
-  return betterAuth({ database: db });
+  throw new Error('Better Auth has been removed');
 };
