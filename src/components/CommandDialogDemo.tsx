@@ -1,13 +1,23 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
 import {
-  Calculator,
+  Home,
   Calendar,
-  CreditCard,
-  Settings,
-  Smile,
+  Mail,
+  FileText,
+  Briefcase,
   User,
+  MessageSquare,
+  Newspaper,
+  Settings,
+  Gift,
+  Clock,
+  UserCircle,
+  Code,
+  Moon,
+  Sun,
 } from "lucide-react"
 
 import {
@@ -23,6 +33,7 @@ import {
 
 export function CommandDialogDemo() {
   const [open, setOpen] = React.useState(false)
+  const router = useRouter()
 
   // Function to toggle between dark and light theme
   const toggleTheme = () => {
@@ -32,6 +43,12 @@ export function CommandDialogDemo() {
     } else {
       html.classList.add("dark")
     }
+  }
+
+  // Navigation helper
+  const navigate = (path: string) => {
+    router.push(path)
+    setOpen(false)
   }
 
   React.useEffect(() => {
@@ -58,45 +75,94 @@ export function CommandDialogDemo() {
         </kbd>
       </p>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder="Digite para buscar páginas..." />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar />
-              <span>Calendar</span>
+          <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
+          
+          <CommandGroup heading="Páginas Principais">
+            <CommandItem onSelect={() => navigate("/")}>
+              <Home />
+              <span>Início</span>
             </CommandItem>
-            <CommandItem>
-              <Smile />
-              <span>Search Emoji</span>
+            <CommandItem onSelect={() => navigate("/blog")}>
+              <Newspaper />
+              <span>Blog</span>
             </CommandItem>
-            <CommandItem>
-              <Calculator />
-              <span>Calculator</span>
+            <CommandItem onSelect={() => navigate("/projetos")}>
+              <Code />
+              <span>Projetos</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/services")}>
+              <Briefcase />
+              <span>Serviços</span>
             </CommandItem>
           </CommandGroup>
+
           <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
+          
+          <CommandGroup heading="Sobre">
+            <CommandItem onSelect={() => navigate("/about")}>
               <User />
-              <span>Profile</span>
-              <CommandShortcut>{shortcutKey}P</CommandShortcut>
+              <span>Sobre Mim</span>
             </CommandItem>
-            <CommandItem>
-              <CreditCard />
-              <span>Billing</span>
-              <CommandShortcut>{shortcutKey}B</CommandShortcut>
+            <CommandItem onSelect={() => navigate("/cv")}>
+              <FileText />
+              <span>Currículo</span>
             </CommandItem>
-            <CommandItem>
-              <Settings />
-              <span>Settings</span>
-              <CommandShortcut>{shortcutKey}S</CommandShortcut>
+            <CommandItem onSelect={() => navigate("/about/timeline")}>
+              <Clock />
+              <span>Linha do Tempo</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/about/coverLetter")}>
+              <Mail />
+              <span>Carta de Apresentação</span>
             </CommandItem>
           </CommandGroup>
+
           <CommandSeparator />
-          <CommandGroup heading="Theme">
+          
+          <CommandGroup heading="Interação">
+            <CommandItem onSelect={() => navigate("/contato")}>
+              <Mail />
+              <span>Contato</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/agendar")}>
+              <Calendar />
+              <span>Agendar</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/feedbacks")}>
+              <MessageSquare />
+              <span>Feedbacks</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/newsletter")}>
+              <Newspaper />
+              <span>Newsletter</span>
+            </CommandItem>
+          </CommandGroup>
+
+          <CommandSeparator />
+          
+          <CommandGroup heading="Outros">
+            <CommandItem onSelect={() => navigate("/contratos")}>
+              <FileText />
+              <span>Contratos</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/sponsors")}>
+              <Gift />
+              <span>Apoiadores</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/setup")}>
+              <Settings />
+              <span>Setup</span>
+            </CommandItem>
+          </CommandGroup>
+
+          <CommandSeparator />
+          
+          <CommandGroup heading="Tema">
             <CommandItem onSelect={toggleTheme}>
-              <span>Toggle Theme</span>
+              <Moon />
+              <span>Alternar Tema</span>
               <CommandShortcut>{shortcutKey}T</CommandShortcut>
             </CommandItem>
           </CommandGroup>
