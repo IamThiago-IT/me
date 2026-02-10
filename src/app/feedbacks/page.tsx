@@ -1,8 +1,11 @@
+"use client"
+
 import { Star } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MetadataSetter } from "@/components/MetadataSetter"
+import { useI18n } from "@/lib/i18n"
 
 const feedbacks = [
 	{
@@ -29,12 +32,13 @@ const feedbacks = [
 ]
 
 export default function Feedbacks() {
+	const { t } = useI18n()
 
 	return (
 		<div className="container mx-auto px-4">
-			<MetadataSetter title="Feedbacks" />
+			<MetadataSetter title={t.feedbacks.title} />
 			<div className="max-w-4xl mx-auto">
-				<h1 className="text-3xl font-bold mb-6">Feedbacks e Avaliações</h1>
+				<h1 className="text-3xl font-bold mb-6">{t.feedbacks.title}</h1>
 
 				<div className="grid gap-6">
 					{feedbacks.map((feedback) => (
@@ -71,7 +75,7 @@ export default function Feedbacks() {
 										</div>
 										<div>
 											<p className="text-sm font-medium text-gray-500">
-												Projeto: {feedback.project}
+												{t.feedbacks.project}: {feedback.project}
 											</p>
 											<p className="mt-2">{feedback.comment}</p>
 										</div>

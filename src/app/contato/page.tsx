@@ -1,9 +1,13 @@
+"use client";
+
 import { MetadataSetter } from "@/components/MetadataSetter";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
-import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa" // Importing icons from react-icons
+import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa"
 import { FaThreads } from "react-icons/fa6";
+import { useI18n } from "@/lib/i18n";
 
 export default function Contato() {
+  const { t } = useI18n();
 
   const contactLinks = [
     { icon: Mail, label: "Email", href: "mailto:seu.thiagodossantos315@gmail.com" },
@@ -18,11 +22,10 @@ export default function Contato() {
 
   return (
     <div>
-      <MetadataSetter title="Contato" />
-      <h1 className="text-3xl font-bold mb-6">Entre em Contato</h1>
+      <MetadataSetter title={t.contact.title} />
+      <h1 className="text-3xl font-bold mb-6">{t.contact.title}</h1>
       <p className="text-lg mb-6">
-        Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato comigo
-        através dos seguintes meios:
+        {t.contact.description}
       </p>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         {contactLinks.map((link) => {

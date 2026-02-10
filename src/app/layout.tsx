@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google"
 import { Navbar } from "@/components/Navbar"
 import { CommandDialogDemo } from "@/components/CommandDialogDemo"
+import { I18nProvider } from "@/lib/i18n"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -20,13 +21,15 @@ export default function Layout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <Navbar />
-          <main className="pt-16 min-h-screen">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">{children}</div>
-          </main>
-        </ThemeProvider>
-        <CommandDialogDemo />
+        <I18nProvider>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <Navbar />
+            <main className="pt-16 min-h-screen">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">{children}</div>
+            </main>
+          </ThemeProvider>
+          <CommandDialogDemo />
+        </I18nProvider>
       </body>
     </html>
   )

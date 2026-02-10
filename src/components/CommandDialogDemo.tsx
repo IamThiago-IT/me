@@ -30,10 +30,12 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
+import { useI18n } from "@/lib/i18n"
 
 export function CommandDialogDemo() {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
+  const { t } = useI18n()
 
   // Function to toggle between dark and light theme
   const toggleTheme = () => {
@@ -69,100 +71,100 @@ export function CommandDialogDemo() {
   return (
     <>
       <p className="text-muted-foreground text-sm">
-        Press{" "}
+        {t.common.press}{" "}
         <kbd className="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none">
           <span className="text-xs">{shortcutKey}</span>J
         </kbd>
       </p>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Digite para buscar páginas..." />
+        <CommandInput placeholder={t.command.searchPlaceholder} />
         <CommandList>
-          <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
+          <CommandEmpty>{t.command.noResults}</CommandEmpty>
           
-          <CommandGroup heading="Páginas Principais">
+          <CommandGroup heading={t.command.mainPages}>
             <CommandItem onSelect={() => navigate("/")}>
               <Home />
-              <span>Início</span>
+              <span>{t.command.home}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/blog")}>
               <Newspaper />
-              <span>Blog</span>
+              <span>{t.command.blog}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/projetos")}>
               <Code />
-              <span>Projetos</span>
+              <span>{t.command.projects}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/services")}>
               <Briefcase />
-              <span>Serviços</span>
+              <span>{t.command.services}</span>
             </CommandItem>
           </CommandGroup>
 
           <CommandSeparator />
           
-          <CommandGroup heading="Sobre">
+          <CommandGroup heading={t.command.about}>
             <CommandItem onSelect={() => navigate("/about")}>
               <User />
-              <span>Sobre Mim</span>
+              <span>{t.command.aboutMe}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/cv")}>
               <FileText />
-              <span>Currículo</span>
+              <span>{t.command.resume}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/about/timeline")}>
               <Clock />
-              <span>Linha do Tempo</span>
+              <span>{t.command.timeline}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/about/coverLetter")}>
               <Mail />
-              <span>Carta de Apresentação</span>
+              <span>{t.command.coverLetter}</span>
             </CommandItem>
           </CommandGroup>
 
           <CommandSeparator />
           
-          <CommandGroup heading="Interação">
+          <CommandGroup heading={t.command.interaction}>
             <CommandItem onSelect={() => navigate("/contato")}>
               <Mail />
-              <span>Contato</span>
+              <span>{t.command.contact}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/agendar")}>
               <Calendar />
-              <span>Agendar</span>
+              <span>{t.command.schedule}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/feedbacks")}>
               <MessageSquare />
-              <span>Feedbacks</span>
+              <span>{t.command.feedbacks}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/newsletter")}>
               <Newspaper />
-              <span>Newsletter</span>
+              <span>{t.command.newsletter}</span>
             </CommandItem>
           </CommandGroup>
 
           <CommandSeparator />
           
-          <CommandGroup heading="Outros">
+          <CommandGroup heading={t.command.others}>
             <CommandItem onSelect={() => navigate("/contratos")}>
               <FileText />
-              <span>Contratos</span>
+              <span>{t.command.contracts}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/sponsors")}>
               <Gift />
-              <span>Apoiadores</span>
+              <span>{t.command.supporters}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/setup")}>
               <Settings />
-              <span>Setup</span>
+              <span>{t.command.setup}</span>
             </CommandItem>
           </CommandGroup>
 
           <CommandSeparator />
           
-          <CommandGroup heading="Tema">
+          <CommandGroup heading={t.command.theme}>
             <CommandItem onSelect={toggleTheme}>
               <Moon />
-              <span>Alternar Tema</span>
+              <span>{t.command.toggleTheme}</span>
               <CommandShortcut>{shortcutKey}T</CommandShortcut>
             </CommandItem>
           </CommandGroup>

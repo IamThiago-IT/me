@@ -1,13 +1,18 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { useI18n } from '@/lib/i18n';
 
 export default function NotFound() {
+  const { t } = useI18n();
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white px-6 py-12">
       <main className="max-w-3xl w-full text-center">
         <div className="inline-flex items-center gap-4 mb-6">
-          <h1 className="text-4xl font-extrabold text-slate-900">404</h1>
-          <span className="text-lg text-slate-600">Página Não Encontrada</span>
+          <h1 className="text-4xl font-extrabold text-slate-900">{t.notFound.title}</h1>
+          <span className="text-lg text-slate-600">{t.notFound.subtitle}</span>
         </div>
 
         <div className="bg-white shadow-lg rounded-2xl p-8 sm:p-10">
@@ -17,24 +22,24 @@ export default function NotFound() {
             <path d="M9 10h.01M15 10h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
 
-          <h2 className="text-2xl font-semibold text-slate-900 mb-3">Você está um pouco perdido?</h2>
+          <h2 className="text-2xl font-semibold text-slate-900 mb-3">{t.notFound.question}</h2>
 
           <p className="text-slate-600 mb-4">
-            Se você é um desenvolvedor ou trabalhador: momentos de incerteza acontecem. Recalibre, aprenda algo novo hoje e continue construindo.
+            {t.notFound.devMessage}
           </p>
 
           <p className="text-slate-700 font-medium mb-4">
-            Para quem busca trabalho e só recebe "não": eu entendo. Já foram <span className="text-sky-600">387</span> tentativas de candidatura e muitos "nãos" — e ainda assim nunca desisti.
+            {t.notFound.jobMessage} <span className="text-sky-600">387</span> {t.notFound.attempts}
           </p>
 
-          <p className="text-slate-500 mb-6">Persistência, pequenos aprendizados e cuidar da saúde mental fazem a diferença. Um "não" hoje pode ser o passo para um "sim" maior amanhã.</p>
+          <p className="text-slate-500 mb-6">{t.notFound.encouragement}</p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link href="/" className="inline-block px-4 py-2 rounded-md bg-sky-600 text-white font-semibold hover:bg-sky-700">
-              Voltar para a Home
+              {t.notFound.backHome}
             </Link>
             <Link href="/contato" className="inline-block px-4 py-2 rounded-md border border-slate-200 text-slate-700 hover:bg-slate-50">
-              Entrar em Contato
+              {t.notFound.getInTouch}
             </Link>
           </div>
         </div>

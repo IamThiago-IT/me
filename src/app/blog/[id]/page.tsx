@@ -14,6 +14,7 @@ import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { MetadataSetter } from "@/components/MetadataSetter"
+import { useI18n } from "@/lib/i18n"
 
 interface PageProps {
   params: Promise<{
@@ -22,6 +23,7 @@ interface PageProps {
 }
 
 function BlogPostContent({ params }: { params: { id: string } }) {
+  const { t } = useI18n()
 
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
@@ -54,7 +56,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
           <div className="flex items-center justify-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">Carregando artigo...</p>
+              <p className="text-gray-600">{t.blog.loading}</p>
             </div>
           </div>
         </div>
@@ -76,7 +78,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
             className="inline-flex items-center text-sm text-gray-600 hover:text-indigo-600 mb-4 sm:mb-0"
           >
             <ChevronLeft className="h-4 w-4 mr-1" />
-            {language === "pt" ? "Voltar para o blog" : "Back to blog"}
+            {t.blog.backToBlog}
           </Link>
           <BlogLanguageToggle />
         </div>
@@ -101,7 +103,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
             rel="noopener noreferrer"
             className="flex items-center text-indigo-600 hover:text-indigo-800"
           >
-            Ver no TabNews
+            {t.blog.viewOnTabNews}
             <ExternalLink className="w-4 h-4 ml-1" />
           </Link>
         </div>

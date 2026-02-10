@@ -9,8 +9,10 @@ import { formatDate } from "@/lib/utils"
 import { Coins, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { MetadataSetter } from "@/components/MetadataSetter"
+import { useI18n } from "@/lib/i18n"
 
 function BlogContent() {
+  const { t } = useI18n()
 
   const [articles, setArticles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -31,7 +33,7 @@ function BlogContent() {
         }
         setArticles(fetchedArticles)
       } catch (err) {
-        setError("Erro ao carregar artigos do TabNews")
+        setError(t.blog.error)
         console.error("Error loading TabNews articles:", err)
       } finally {
         setLoading(false)
@@ -91,7 +93,7 @@ function BlogContent() {
           <div className="flex items-center justify-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">Carregando artigos...</p>
+              <p className="text-gray-600">{t.blog.loading}</p>
             </div>
           </div>
         </div>
@@ -106,7 +108,7 @@ function BlogContent() {
           <div className="text-center py-12">
             <p className="text-red-600 mb-4">{error}</p>
             <button onClick={() => window.location.reload()} className="text-indigo-600 hover:underline">
-              Tentar novamente
+              {t.blog.tryAgain}
             </button>
           </div>
         </div>
@@ -116,13 +118,13 @@ function BlogContent() {
 
   return (
     <div className="container mx-auto px-4">
-      <MetadataSetter title="Blog" />
+      <MetadataSetter title={t.blog.title} />
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
           <div className="mb-4 sm:mb-0">
-            <h1 className="text-3xl font-bold mb-2">Blog</h1>
+            <h1 className="text-3xl font-bold mb-2">{t.blog.title}</h1>
             <p className="text-lg text-gray-600">
-              Artigos do meu TabNews - compartilhando conhecimento sobre desenvolvimento web e tecnologia.
+              {t.blog.description}
             </p>
           </div>
         </div>
@@ -130,7 +132,7 @@ function BlogContent() {
         <div className="mb-6 flex items-center gap-4">
           <Input
             type="text"
-            placeholder="Buscar artigos..."
+            placeholder={t.blog.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="flex-1 p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
@@ -140,10 +142,10 @@ function BlogContent() {
             onChange={handleDateFilterChange}
             className="p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           >
-            <option value="">Datas</option>
-            <option value="last7days">Últimos 7 Dias</option>
-            <option value="last30days">Últimos 30 Dias</option>
-            <option value="thisYear">Este Ano</option>
+            <option value="">{t.blog.dates}</option>
+            <option value="last7days">{t.blog.last7days}</option>
+            <option value="last30days">{t.blog.last30days}</option>
+            <option value="thisYear">{t.blog.thisYear}</option>
           </select>
         </div>
 
@@ -192,7 +194,7 @@ function BlogContent() {
 
         {paginatedArticles.length === 0 && !loading && (
           <div className="text-center py-12">
-            <p className="text-gray-600">Nenhum artigo encontrado.</p>
+            <p className="text-gray-600">{t.blog.noArticles}</p>
           </div>
         )}
 
@@ -202,15 +204,15 @@ function BlogContent() {
             disabled={currentPage === 1}
             className={`px-4 py-2 rounded-md disabled:opacity-50 ${currentPage === 1 ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
           >
-            Anterior
+            {t.blog.previous}
           </button>
-          <span className="text-gray-800 dark:text-gray-200">Página {currentPage} de {totalPages}</span>
+          <span className="text-gray-800 dark:text-gray-200">{t.blog.page} {currentPage} {t.blog.of} {totalPages}</span>
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
             className={`px-4 py-2 rounded-md disabled:opacity-50 ${currentPage === totalPages ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
           >
-            Próxima
+            {t.blog.next}
           </button>
         </div>
       </div>

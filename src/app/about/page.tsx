@@ -1,9 +1,14 @@
+"use client";
+
 import { SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiGraphql, SiMongodb, SiPostgresql } from "react-icons/si";
-import { Globe2, History } from "lucide-react"; // Import History icon
-import Link from "next/link"; // Import Link
-import { ArrowRight } from "lucide-react"; // Import ArrowRight icon
+import { Globe2, History } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export default function Sobre() {
+  const { t } = useI18n();
+
   const skills = [
     { name: "React", icon: SiReact },
     { name: "Next.js", icon: SiNextdotjs },
@@ -15,20 +20,19 @@ export default function Sobre() {
   ];
 
   const languages = [
-    { name: "Português", level: "Nativo", cefr: "C2" },
-    { name: "Inglês", level: "Fluente", cefr: "C1" },
-    { name: "Espanhol", level: "Intermediário", cefr: "B1" },
+    { name: t.about.portuguese, level: t.about.native, cefr: "C2" },
+    { name: t.about.english, level: t.about.fluent, cefr: "C1" },
+    { name: t.about.spanish, level: t.about.intermediate, cefr: "B1" },
   ];
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">Sobre Mim</h1>
+      <h1 className="text-3xl font-bold mb-4">{t.about.title}</h1>
       <p className="text-lg mb-6">
-        Sou um desenvolvedor full-stack com experiência em React, Node.js e TypeScript. Minha paixão é criar aplicações
-        web performáticas e escaláveis.
+        {t.about.description}
       </p>
 
-      <h2 className="text-2xl font-semibold mb-4">Habilidades</h2>
+      <h2 className="text-2xl font-semibold mb-4">{t.about.skills}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         {skills.map((skill) => (
           <div
@@ -43,7 +47,7 @@ export default function Sobre() {
 
       <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
         <Globe2 className="w-6 h-6" />
-        Idiomas
+        {t.about.languages}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {languages.map((language) => (
@@ -72,11 +76,11 @@ export default function Sobre() {
       <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
         <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
           <History className="w-6 h-6" />
-          Minha Trajetória
+          {t.about.myJourney}
         </h2>
-        <p className="text-lg mb-4">Conheça mais sobre minha jornada profissional e acadêmica em detalhes.</p>
+        <p className="text-lg mb-4">{t.about.journeyDescription}</p>
         <Link href="/about/timeline" className="inline-flex items-center text-indigo-600 hover:underline dark:text-indigo-400">
-          Ver Linha do Tempo
+          {t.about.viewTimeline}
           <ArrowRight className="ml-1 w-4 h-4" />
         </Link>
       </div>

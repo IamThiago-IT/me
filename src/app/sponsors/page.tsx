@@ -2,6 +2,7 @@
 import { MetadataSetter } from "@/components/MetadataSetter";
 import React from "react";
 import { Copy } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const sponsors = [
   { id: 1, name: "Empresa X", description: "Líder em soluções tecnológicas para empresas de todos os portes.", logo: "/public/globe.svg", tag: "Tecnologia", link: "https://empresax.com" },
@@ -15,15 +16,17 @@ const discountCodes = [
 ];
 
 export default function Sponsors() {
+  const { t } = useI18n();
+
   const copyCode = (code: string) => {
     navigator.clipboard.writeText(code);
-    alert("Código copiado: " + code);
+    alert(t.sponsors.codeCopied + code);
   };
 
   return (
     <main className="p-6">
-      <MetadataSetter title="Patrocinadores" />
-      <h1 className="text-3xl font-bold mb-4">Patrocinadores</h1>
+      <MetadataSetter title={t.sponsors.title} />
+      <h1 className="text-3xl font-bold mb-4">{t.sponsors.title}</h1>
       <ul className="space-y-4">
         {sponsors.map((sponsor) => (
           <li key={sponsor.id} className="p-4 border rounded shadow flex items-center space-x-4">
@@ -47,7 +50,7 @@ export default function Sponsors() {
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
                 >
-                  Visitar
+                  {t.sponsors.visit}
                 </a>
               </div>
             </div>
@@ -55,7 +58,7 @@ export default function Sponsors() {
         ))}
       </ul>
       <section className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Códigos de Descontos</h2>
+        <h2 className="text-2xl font-bold mb-4">{t.sponsors.discountCodes}</h2>
         <ul className="space-y-4">
           {discountCodes.map((code) => (
             <li key={code.id} className="p-4 border rounded shadow">

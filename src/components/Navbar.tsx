@@ -5,21 +5,23 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const menuItems = [
-	{ label: "Início", href: "/" },
-	{ label: "Sobre", href: "/about" },
-	{ label: "Projetos", href: "/projetos" },
-	//{ label: "Blog", href: "/blog" },
-	{ label: "Agendar", href: "/agendar" },
-	{ label: "Contratos", href: "/contratos" },
-	{ label: "Feedbacks", href: "/feedbacks" },
-	{ label: "Contato", href: "/contato" },
-]
+import { LanguageSwitcher } from "@/components/LanguageSwitcher"
+import { useI18n } from "@/lib/i18n"
 
 export function Navbar() {
 	const pathname = usePathname()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const { t } = useI18n()
+
+	const menuItems = [
+		{ label: t.nav.home, href: "/" },
+		{ label: t.nav.about, href: "/about" },
+		{ label: t.nav.projects, href: "/projetos" },
+		{ label: t.nav.schedule, href: "/agendar" },
+		{ label: t.nav.contracts, href: "/contratos" },
+		{ label: t.nav.feedbacks, href: "/feedbacks" },
+		{ label: t.nav.contact, href: "/contato" },
+	]
 
 	return (
 		<nav className="bg-white text-black dark:bg-black dark:text-white shadow-sm fixed w-full z-10">
@@ -48,16 +50,21 @@ export function Navbar() {
 							))}
 						</div>
 					</div>
-					<div className="-mr-2 flex items-center sm:hidden">
-						<Button
-							variant="ghost"
-							size="sm"
-							onClick={() => setIsMenuOpen(!isMenuOpen)}
-							className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-						>
-							<span className="sr-only">Abrir menu principal</span>
-							{isMenuOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
-						</Button>
+					<div className="flex items-center gap-2">
+						<div className="hidden sm:flex">
+							<LanguageSwitcher />
+						</div>
+						<div className="-mr-2 flex items-center sm:hidden">
+							<Button
+								variant="ghost"
+								size="sm"
+								onClick={() => setIsMenuOpen(!isMenuOpen)}
+								className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+							>
+								<span className="sr-only">{t.nav.openMenu}</span>
+								{isMenuOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+							</Button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -80,6 +87,9 @@ export function Navbar() {
 							{item.label}
 						</Link>
 					))}
+					<div className="pl-3 pr-4 py-2">
+						<LanguageSwitcher />
+					</div>
 				</div>
 			</div>
 		</nav>

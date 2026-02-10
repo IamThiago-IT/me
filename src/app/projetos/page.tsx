@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { MetadataSetter } from "@/components/MetadataSetter"
+import { useI18n } from "@/lib/i18n"
 
 type Project = {
   id: number;
@@ -21,6 +22,7 @@ type SortOption = "stars" | "name" | "updated";
 type LanguageFilter = string | "all";
 
 export default function Projetos() {
+  const { t } = useI18n()
 
   const [projects, setProjects] = useState<Project[]>([])
   const [allProjects, setAllProjects] = useState<Project[]>([])
@@ -42,7 +44,7 @@ export default function Projetos() {
       setPage((prevPage) => prevPage + 1)
       setError(null)
     } catch {
-      setError("Não foi possível carregar os projetos. Por favor, tente novamente mais tarde.")
+      setError(t.projects.loadError)
     }
     setLoading(false)
   }
@@ -94,8 +96,8 @@ export default function Projetos() {
 
   return (
     <div>
-      <MetadataSetter title="Projetos" />
-      <h1 className="text-3xl font-bold mb-6">Meus Projetos</h1>
+      <MetadataSetter title={t.projects.title} />
+      <h1 className="text-3xl font-bold mb-6">{t.projects.title}</h1>
       
       {/* Filtros */}
       <div className="mb-6 space-y-4">
@@ -105,7 +107,7 @@ export default function Projetos() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
               type="text"
-              placeholder="Buscar projetos..."
+              placeholder={t.projects.searchPlaceholder}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -118,7 +120,7 @@ export default function Projetos() {
             className="flex items-center gap-2 whitespace-nowrap"
           >
             <Filter className="w-4 h-4" />
-            Filtros
+            {t.projects.filters}
           </Button>
         </div>
 
@@ -127,7 +129,7 @@ export default function Projetos() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
             {/* Ordenação */}
             <div>
-              <Label htmlFor="sort">Ordenar por</Label>
+              <Label htmlFor="sort">{t.projects.sortBy}</Label>
               <select
                 id="sort"
                 value={sortBy}
@@ -142,15 +144,15 @@ export default function Projetos() {
                   backgroundSize: "1.25rem 1.25rem",
                 }}
               >
-                <option value="stars">Mais estrelas</option>
-                <option value="name">Nome A-Z</option>
-                <option value="updated">Mais recentes</option>
+                <option value="stars">{t.projects.mostStars}</option>
+                <option value="name">{t.projects.nameAZ}</option>
+                <option value="updated">{t.projects.mostRecent}</option>
               </select>
             </div>
 
             {/* Filtro por linguagem */}
             <div>
-              <Label htmlFor="language">Linguagem</Label>
+              <Label htmlFor="language">{t.projects.language}</Label>
               <select
                 id="language"
                 value={languageFilter}
@@ -165,7 +167,7 @@ export default function Projetos() {
                   backgroundSize: "1.25rem 1.25rem",
                 }}
               >
-                <option value="all">Todas as linguagens</option>
+                <option value="all">{t.projects.allLanguages}</option>
                 {uniqueLanguages.map(lang => (
                   <option key={lang} value={lang || ""}>{lang}</option>
                 ))}
@@ -176,9 +178,9 @@ export default function Projetos() {
 
         {/* Estatísticas */}
         <div className="text-sm text-gray-600 dark:text-gray-400">
-          {projects.length} projeto{projects.length !== 1 ? 's' : ''} encontrado{projects.length !== 1 ? 's' : ''}
-          {searchTerm && ` para "${searchTerm}"`}
-          {languageFilter !== "all" && ` em ${languageFilter}`}
+          {projects.length} {t.projects.projectsFound}
+          {searchTerm && ` ${t.projects.for} "${searchTerm}"`}
+          {languageFilter !== "all" && ` ${t.projects.in} ${languageFilter}`}
         </div>
       </div>
 
@@ -190,7 +192,7 @@ export default function Projetos() {
             {projects.map((project) => (
               <div key={project.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow dark:border-gray-700 dark:hover:shadow-lg">
                 <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">{project.name}</h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description || "Sem descrição"}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description || t.projects.noDescription}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     {project.language && (
@@ -209,7 +211,7 @@ export default function Projetos() {
                     rel="noopener noreferrer"
                     className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500 flex items-center"
                   >
-                    Ver no GitHub
+                    {t.projects.viewOnGithub}
                     <ExternalLink className="w-4 h-4 ml-1" />
                   </a>
                 </div>
@@ -221,7 +223,7 @@ export default function Projetos() {
           {!searchTerm && languageFilter === "all" && (
             <div className="mt-8 text-center">
               <Button onClick={loadProjects} disabled={loading} className="dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
-                {loading ? "Carregando..." : "Mostrar mais"}
+                {loading ? t.projects.loading : t.projects.showMore}
               </Button>
             </div>
           )}

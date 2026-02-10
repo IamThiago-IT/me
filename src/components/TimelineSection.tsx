@@ -1,13 +1,14 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react" // Import useState for managing state
+import { useState } from "react"
 
-import { motion } from "framer-motion" // Corrected import
+import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Briefcase, GraduationCap } from "lucide-react"
 import Link from "next/link"
+import { useI18n } from "@/lib/i18n"
 
 // Mock data for timeline entries
 const timelineEntries: TimelineEntryProps["entry"][] = [
@@ -137,6 +138,7 @@ interface TimelineEntryProps {
 
 const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry }) => {
   const IconComponent = entry.type === "experience" ? Briefcase : GraduationCap
+  const { t } = useI18n()
 
   return (
     <motion.div
@@ -168,7 +170,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry }) => {
         <CardContent>
           <p className="text-gray-700 mb-4">{entry.description}</p>
           <div className="mb-4">
-            <h4 className="font-semibold mb-2">Habilidades Adquiridas:</h4>
+            <h4 className="font-semibold mb-2">{t.timeline.skillsAcquired}</h4>
             <div className="flex flex-wrap gap-2">
               {entry.skills.map((skill, index) => (
                 <Badge key={index} variant="secondary">
@@ -188,9 +190,9 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry }) => {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-indigo-600 hover:underline inline-flex items-center" // Changed to indigo-600
+                  className="text-indigo-600 hover:underline inline-flex items-center"
                 >
-                  Ver Projeto <ExternalLink className="ml-1 w-4 h-4" />
+                  {t.timeline.viewProject} <ExternalLink className="ml-1 w-4 h-4" />
                 </Link>
               </CardContent>
             </Card>
@@ -202,8 +204,9 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry }) => {
 }
 
 export default function perfeitoTimelineSection() {
-  const [isReversed, setIsReversed] = useState(false) // State to track order
-  const [filterType, setFilterType] = useState<"all" | "education" | "experience">("all") // State to filter by type
+  const [isReversed, setIsReversed] = useState(false)
+  const [filterType, setFilterType] = useState<"all" | "education" | "experience">("all")
+  const { t } = useI18n()
 
   // Sort entries by period in descending order (most recent first)
   const sortedEntries = [...timelineEntries].sort((a, b) => {
@@ -225,31 +228,31 @@ export default function perfeitoTimelineSection() {
     <section className="py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
         <div className="max-w-3xl w-full">
-          <h2 className="text-3xl font-bold mb-8 text-center">Linha do Tempo</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">{t.timeline.title}</h2>
           <div className="flex justify-center gap-4 mb-8">
             <button
               onClick={() => setIsReversed(!isReversed)}
               className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
             >
-              {isReversed ? "Mais Recentes" : "Mais Antigos"}
+              {isReversed ? t.timeline.mostRecent : t.timeline.oldest}
             </button>
             <button
               onClick={() => setFilterType("all")}
               className={`px-4 py-2 rounded ${filterType === "all" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"}`}
             >
-              Todos
+              {t.timeline.all}
             </button>
             <button
               onClick={() => setFilterType("education")}
               className={`px-4 py-2 rounded ${filterType === "education" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"}`}
             >
-              Escolaridade
+              {t.timeline.education}
             </button>
             <button
               onClick={() => setFilterType("experience")}
               className={`px-4 py-2 rounded ${filterType === "experience" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"}`}
             >
-              Trabalho
+              {t.timeline.work}
             </button>
           </div>
           <div className="max-w-3xl mx-auto">
