@@ -62,6 +62,11 @@ Atenciosamente,
     description:
       "Estou sempre aberto a novas oportunidades e colaborações. Envie uma proposta diretamente ou entre em contato pelas redes sociais.",
     socialTitle: "Redes Sociais",
+    proposalCta: {
+      title: "Enviar uma Proposta",
+      description: "Tem um projeto em mente? Me envie os detalhes e eu retorno em breve.",
+      back: "Voltar para Contato",
+    },
     form: {
       title: "Envie uma Proposta",
       subtitle: "Preencha o formulário abaixo para me enviar uma proposta de projeto ou contato direto.",

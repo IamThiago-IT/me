@@ -62,6 +62,11 @@ Best regards,
     description:
       "I'm always open to new opportunities and collaborations. Send a proposal directly or reach out via social media.",
     socialTitle: "Social Media",
+    proposalCta: {
+      title: "Send a Proposal",
+      description: "Have a project in mind? Send me the details and I'll get back to you soon.",
+      back: "Back to Contact",
+    },
     form: {
       title: "Send a Proposal",
       subtitle: "Fill out the form below to send me a project proposal or direct contact.",
