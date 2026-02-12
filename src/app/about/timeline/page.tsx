@@ -2,19 +2,22 @@
 
 import TimelineSection from "@/components/TimelineSection"
 import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import { useI18n } from "@/lib/i18n"
 
 export default function TimelinePage() {
   const { t } = useI18n()
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="max-w-4xl mx-auto">
-        <Link href="/about" className="inline-flex items-center text-sm text-gray-600 hover:text-indigo-600 mb-6">
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          {t.about.backToAbout}
-        </Link>
+    <div className="flex flex-col h-[calc(100vh-7rem)] max-w-5xl mx-auto">
+      <Link
+        href="/about"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4 shrink-0"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        {t.about.backToAbout}
+      </Link>
+      <div className="flex-1 overflow-y-auto min-h-0 pr-1">
         <TimelineSection />
       </div>
     </div>
