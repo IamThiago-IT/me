@@ -1,6 +1,7 @@
 import type React from "react"
 import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Navbar } from "@/components/Navbar"
 import { CommandDialogDemo } from "@/components/CommandDialogDemo"
 import { I18nProvider } from "@/lib/i18n"
@@ -30,6 +31,7 @@ export default function Layout({
           </ThemeProvider>
           <CommandDialogDemo />
         </I18nProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
