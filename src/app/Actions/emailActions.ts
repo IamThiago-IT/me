@@ -11,6 +11,27 @@ interface SendProposalEmailInput {
   budget?: string;
 }
 
+export async function sendEmail(to: string, subject: string, body: string) {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Portfólio <onboarding@resend.dev>",
+      to: [to],
+      subject,
+      html: `<p>${body}</p>`,
+    });
+
+    if (error) {
+      console.error("Erro ao enviar email via Resend:", error);
+      return { success: false, error: "Falha ao enviar o email." };
+    }
+
+    return { success: true, id: data?.id };
+  } catch (err) {
+    console.error("Erro interno ao enviar email:", err);
+    return { success: false, error: "Erro interno." };
+  }
+}
+
 export async function sendProposalEmail(input: SendProposalEmailInput) {
   const { name, email, subject, message, projectType, budget } = input;
 
