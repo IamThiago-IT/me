@@ -104,6 +104,10 @@ export function CommandDialogDemo() {
               <Briefcase />
               <span>{t.command.services}</span>
             </CommandItem>
+            <CommandItem onSelect={() => navigate("/papers")}>
+              <FileText />
+              <span>{t.command.papers}</span>
+            </CommandItem>
           </CommandGroup>
 
           <CommandSeparator />

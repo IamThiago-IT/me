@@ -8,6 +8,7 @@ const en = {
     contracts: "Contracts",
     feedbacks: "Feedbacks",
     contact: "Contact",
+    papers: "Papers",
     openMenu: "Open main menu",
   },
 
@@ -253,6 +254,19 @@ Best regards,
     getInTouch: "Get in Touch",
   },
 
+  // Papers
+  papers: {
+    title: "Scientific Papers",
+    description: "My academic articles and publications.",
+    searchPlaceholder: "Search papers...",
+    all: "All",
+    empty: "No papers published yet.",
+    noResults: "No papers found.",
+    viewPaper: "View paper",
+    of: "of",
+    papersCount: "papers",
+  },
+
   // Command Dialog
   command: {
     searchPlaceholder: "Type to search pages...",
@@ -278,6 +292,7 @@ Best regards,
     contracts: "Contracts",
     supporters: "Supporters",
     setup: "Setup",
+    papers: "Papers",
   },
 
   // Timeline

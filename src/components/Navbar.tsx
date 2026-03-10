@@ -21,6 +21,7 @@ export function Navbar() {
 		{ label: t.nav.contracts, href: "/contratos" },
 		{ label: t.nav.feedbacks, href: "/feedbacks" },
 		{ label: t.nav.contact, href: "/contato" },
+		{ label: t.nav.papers, href: "/papers" },
 	]
 
 	return (

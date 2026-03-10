@@ -8,6 +8,7 @@ const ptBR = {
     contracts: "Contratos",
     feedbacks: "Feedbacks",
     contact: "Contato",
+    papers: "Papers",
     openMenu: "Abrir menu principal",
   },
 
@@ -253,6 +254,19 @@ Atenciosamente,
     getInTouch: "Entrar em Contato",
   },
 
+  // Papers
+  papers: {
+    title: "Artigos Científicos",
+    description: "Meus artigos e publicações acadêmicas.",
+    searchPlaceholder: "Buscar artigos...",
+    all: "Todos",
+    empty: "Nenhum artigo publicado ainda.",
+    noResults: "Nenhum artigo encontrado.",
+    viewPaper: "Ver artigo",
+    of: "de",
+    papersCount: "artigos",
+  },
+
   // Command Dialog
   command: {
     searchPlaceholder: "Digite para buscar páginas...",
@@ -278,6 +292,7 @@ Atenciosamente,
     contracts: "Contratos",
     supporters: "Apoiadores",
     setup: "Setup",
+    papers: "Artigos Científicos",
   },
 
   // Timeline
