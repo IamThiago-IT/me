@@ -194,7 +194,7 @@ export async function fetchTabNewsArticles(
           id: article.slug,
           title: article.title || "Sem título",
           slug: article.slug,
-          date: article.created_at || article.date,
+          date: article.created_at,
           author: article.user && article.user.username ? article.user.username : "Desconhecido",
           excerpt: article.body ? (article.body.length > 200 ? article.body.substring(0, 200) + "..." : article.body) : "",
           tabcoins: article.tabcoins || 0,
@@ -244,7 +244,7 @@ export async function fetchUserContents(username: string) {
         id: article.slug, // using slug as unique identifier
         title: article.title || "Sem título",
         slug: article.slug,
-        date: article.created_at || article.date,
+        date: article.created_at,
         author: article.user && article.user.username ? article.user.username : "Desconhecido",
         excerpt: article.body ? (article.body.length > 200 ? article.body.substring(0, 200) + "..." : article.body) : "",
         tabcoins: article.tabcoins || 0,
