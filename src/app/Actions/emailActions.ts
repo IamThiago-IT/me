@@ -56,7 +56,7 @@ export async function sendEmail(to: string, subject: string, body: string) {
 export async function sendProposalEmail(input: SendProposalEmailInput) {
   const parsed = proposalSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0].message };
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   const { name, email, subject, message, projectType, budget } = parsed.data;
