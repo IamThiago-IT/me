@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { fetchTabNewsArticles } from "@/lib/tabnews-api"
+import { fetchTabNewsArticles, type TransformedArticle } from "@/lib/tabnews-api"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
@@ -14,7 +14,7 @@ import { useI18n } from "@/lib/i18n"
 function BlogContent() {
   const { t } = useI18n()
 
-  const [articles, setArticles] = useState<any[]>([])
+  const [articles, setArticles] = useState<TransformedArticle[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")

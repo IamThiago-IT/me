@@ -154,12 +154,24 @@ export function convertTabNewsToBlogs(articles: TabNewsArticle[]): BlogArticle[]
  * @param strategy The strategy for sorting articles (default is "relevant").
  * @returns A promise resolving to an array of transformed articles.
  */
+export interface TransformedArticle {
+  id: string;
+  title: string;
+  slug: string;
+  date: string;
+  author: string;
+  excerpt: string;
+  tabcoins: number;
+  tags: string[];
+  coverImage: string;
+}
+
 export async function fetchTabNewsArticles(
   username: string,
   strategy: string = "relevant"
 ) {
   try {
-    let allArticles: any[] = [];
+    let allArticles: TransformedArticle[] = [];
     let page = 1;
     const perPage = 10;
 
@@ -174,10 +186,10 @@ export async function fetchTabNewsArticles(
         break; // Exit loop if no more articles are returned
       }
 
-      const filteredArticles = response.data.filter((article: any) => article.parent_id === null);
+      const filteredArticles = response.data.filter((article: TabNewsArticle) => article.parent_id === null);
       console.log("Filtered articles:", filteredArticles);
 
-      const transformedArticles = filteredArticles.map((article: any) => {
+      const transformedArticles: TransformedArticle[] = filteredArticles.map((article: TabNewsArticle & { user?: { username: string }; tags?: string[]; coverImage?: string }) => {
         return {
           id: article.slug,
           title: article.title || "Sem título",
@@ -223,11 +235,11 @@ export async function fetchUserContents(username: string) {
     }
 
     // Filter only root contents (posts without parent_id)
-    const filteredArticles = response.data.filter((article: any) => article.parent_id === null);
+    const filteredArticles = response.data.filter((article: TabNewsArticle) => article.parent_id === null);
     console.log("Filtered user contents:", filteredArticles);
 
     // Transform contents into a consistent format
-    const transformedArticles = filteredArticles.map((article: any) => {
+    const transformedArticles: TransformedArticle[] = filteredArticles.map((article: TabNewsArticle & { user?: { username: string }; tags?: string[]; coverImage?: string }) => {
       return {
         id: article.slug, // using slug as unique identifier
         title: article.title || "Sem título",

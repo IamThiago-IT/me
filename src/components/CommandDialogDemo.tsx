@@ -66,7 +66,13 @@ export function CommandDialogDemo() {
   }, [])
 
   // Determine the shortcut key symbol based on platform
-  const shortcutKey = typeof navigator !== 'undefined' && /Mac/i.test(navigator.platform) ? '⌘ +' : 'Ctrl + '
+  const [shortcutKey, setShortcutKey] = React.useState('Ctrl + ')
+
+  React.useEffect(() => {
+    if (/Mac/i.test(navigator.platform)) {
+      setShortcutKey('⌘ +')
+    }
+  }, [])
 
   return (
     <>

@@ -3,8 +3,9 @@ export const metadata = {
     description: "Baixe o currículo em português ou inglês (PDF). Coloque os arquivos em /public).",
 }
 
+import { getCvFiles } from '../../domain/cv';
+
 export default function Page() {
-    const { getCvFiles } = require('../../domain/cv');
     const files = getCvFiles();
 
     return (
@@ -13,7 +14,7 @@ export default function Page() {
             <p className="mt-1 text-gray-600">Escolha o idioma • Choose the language</p>
 
             <div className="flex gap-3 mt-3">
-                {files.map((f: any) => (
+                {files.map((f) => (
                     <a
                         key={f.href}
                         href={f.href}

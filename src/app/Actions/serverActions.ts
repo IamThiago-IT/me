@@ -1,12 +1,16 @@
 "use server";
+
+import { z } from "zod";
+
+const serviceSchema = z.object({
+  name: z.string().min(1).max(200),
+  description: z.string().min(1).max(2000),
+  price: z.string().min(1).max(50),
+});
+
 export async function addService(data: FormData): Promise<void> {
-  // Extrai os dados do formulário
-  const name = data.get("name");
-  const description = data.get("description");
-  const price = data.get("price");
+  const raw = Object.fromEntries(data.entries());
+  const parsed = serviceSchema.parse(raw);
 
-  // ...lógica de inserção (ex.: salvar no BD)...
-  console.log("Criando serviço:", { name, description, price });
-
-  // Retorne uma resposta ou redirecione (se necessário)
+  console.log("Criando serviço:", parsed);
 }

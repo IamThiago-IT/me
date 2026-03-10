@@ -1,18 +1,18 @@
 'use server'
 
 import { revalidatePath } from 'next/cache';
+import { randomUUID } from 'node:crypto';
 
 // Action para criar um novo contrato
 export async function createContract(formData: { projectName: string; value: number; description: string }) {
-  // Lógica para criar o contrato (ex: inserir em um banco de dados)
   const newContract = {
-    id: Math.floor(Math.random() * 10000),
+    id: randomUUID(),
     projectName: formData.projectName,
     value: formData.value,
     description: formData.description,
     status: 'pending',
     signedDate: null,
-    contractNumber: `CTR-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000 + 1000)}`
+    contractNumber: `CTR-${new Date().getFullYear()}-${randomUUID().slice(0, 8).toUpperCase()}`
   };
 
   console.log('Criando contrato:', newContract);
@@ -26,15 +26,14 @@ export async function createContract(formData: { projectName: string; value: num
 
 // Action para finalizar e assinar um contrato
 export async function finalizeContract(formData: { projectName: string; value: number; description: string }) {
-  // Lógica para finalizar o contrato (ex: salvar assinatura, atualizar status, etc.)
   const finalizedContract = {
-    id: Math.floor(Math.random() * 10000),
+    id: randomUUID(),
     projectName: formData.projectName,
     value: formData.value,
     description: formData.description,
     status: 'completed',
     signedDate: new Date().toISOString(),
-    contractNumber: `CTR-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000 + 1000)}`
+    contractNumber: `CTR-${new Date().getFullYear()}-${randomUUID().slice(0, 8).toUpperCase()}`
   };
 
   console.log('Finalizando contrato:', finalizedContract);

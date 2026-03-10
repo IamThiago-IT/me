@@ -12,7 +12,7 @@ export default function Contato() {
 
   const contactLinks = [
     { icon: Mail, label: "Email", href: "mailto:thiagodossantos315@gmail.com" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/seu-perfil" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/IamThiago-IT" },
     { icon: Github, label: "GitHub", href: "https://github.com/IamThiago-IT" },
     { icon: Twitter, label: "Twitter", href: "https://twitter.com/IamThiago-IT" },
     { icon: FaTiktok, label: "TikTok", href: "https://www.tiktok.com/@IamThiago-IT" },
