@@ -40,7 +40,13 @@ export default function Projetos() {
     setLoading(true)
     try {
       const newProjects: Project[] = await getGithubProjects(page, 30) // Aumentei para 30 para ter mais dados para filtrar
-      setAllProjects((prevProjects) => [...prevProjects, ...newProjects])
+      setAllProjects((prevProjects) => {
+        // Create a Set of existing IDs for quick lookup
+        const existingIds = new Set(prevProjects.map(p => p.id))
+        // Filter out projects that already exist
+        const uniqueNewProjects = newProjects.filter(p => !existingIds.has(p.id))
+        return [...prevProjects, ...uniqueNewProjects]
+      })
       setPage((prevPage) => prevPage + 1)
       setError(null)
     } catch {
