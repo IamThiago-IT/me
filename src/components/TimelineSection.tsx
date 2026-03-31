@@ -16,14 +16,14 @@ const timelineEntries: TimelineEntryProps["entry"][] = [
     title: "Técnico em Informática para Internet",
     company: "SENAI",
     companyUrl: "https://www.portaldaindustria.com.br/senai/",
-    period: "2018 - 2020",
+    period: "2019 - 2020",
     description: "Curso técnico focado em desenvolvimento de aplicações web e manutenção de sistemas.",
     skills: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     projects: [
       {
-        name: "Portal de E-commerce",
-        description: "Desenvolvimento de um portal de e-commerce completo como projeto final.",
-        link: "https://github.com/IamThiago-IT/ecommerce-portal",
+        name: "Cella - Sistema de Gerenciamento de Almoxarifado",
+        description: "Desenvolvimento de um sistema completo para gerenciamento de almoxarifado, incluindo cadastro de produtos, controle de estoque e geração de relatórios.",
+        link: "https://github.com/IamThiago-IT/cella",
       },
     ],
   },
