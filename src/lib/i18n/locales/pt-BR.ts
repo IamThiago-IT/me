@@ -314,6 +314,20 @@ Atenciosamente,
     saved: "Assinatura salva:",
   },
 
+  // Events
+  events: {
+    title: "Eventos",
+    description: "Confira os eventos e palestras que estou realizando.",
+    learnMore: "Saiba Mais",
+    watchLive: "Assistir Ao Vivo",
+    register: "Se Registrar",
+    date: "Data",
+    location: "Local",
+    online: "Online",
+    type: "Tipo",
+    noUpcoming: "Nenhum evento agendado no momento.",
+  },
+
   // Common
   common: {
     press: "Aperte",

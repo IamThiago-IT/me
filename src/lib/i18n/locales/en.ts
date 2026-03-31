@@ -314,6 +314,20 @@ Best regards,
     saved: "Signature saved:",
   },
 
+  // Events
+  events: {
+    title: "Events",
+    description: "Check out the events and talks I'm hosting.",
+    learnMore: "Learn More",
+    watchLive: "Watch Live",
+    register: "Register",
+    date: "Date",
+    location: "Location",
+    online: "Online",
+    type: "Type",
+    noUpcoming: "No upcoming events at the moment.",
+  },
+
   // Common
   common: {
     press: "Press",
