@@ -15,6 +15,8 @@ const en = {
   // Home
   home: {
     greeting: "Hello",
+    badge: "Developer & Creator",
+    intro: "Hi, I'm",
     description:
       "I'm a Fullstack developer passionate about turning complex challenges into elegant, scalable solutions focused on user experience.",
     viewWork: "View my work",

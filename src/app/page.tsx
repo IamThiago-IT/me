@@ -18,57 +18,21 @@ export default function Home() {
 	return (
 		<div className="max-w-4xl mx-auto px-4">
 			<MetadataSetter title="Home" />
-			<style>{`
-				@keyframes fadeInUp {
-					from {
-						opacity: 0;
-						transform: translateY(20px);
-					}
-					to {
-						opacity: 1;
-						transform: translateY(0);
-					}
-				}
-				@keyframes underlineGrow {
-					from {
-						width: 0;
-					}
-					to {
-						width: 100%;
-					}
-				}
-				.fade-in-1 { animation: fadeInUp 0.6s ease-out; }
-				.fade-in-2 { animation: fadeInUp 0.6s ease-out 0.15s both; }
-				.fade-in-3 { animation: fadeInUp 0.6s ease-out 0.3s both; }
-				.underline-animate {
-					position: relative;
-					display: inline-block;
-				}
-				.underline-animate::after {
-					content: '';
-					position: absolute;
-					bottom: -4px;
-					left: 0;
-					height: 2px;
-					background: currentColor;
-					animation: underlineGrow 0.8s ease-out 0.5s both;
-				}
-			`}</style>
 			<div className="flex flex-col items-center justify-center space-y-12 py-32">
-				<div className="space-y-6 text-center fade-in-1">
+				<div className="space-y-6 text-center animate-fade-in-up-1">
 					<div className="inline-flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
 						<Sparkles className="h-4 w-4" />
-						<span>Developer & Creator</span>
+						<span>{t.home.badge}</span>
 					</div>
 					<h1 className="text-7xl md:text-8xl font-bold tracking-tight">
-						Oi, <span className="underline-animate">Thiago</span>
+						{t.home.intro} <span className="underline-animate">Thiago</span>
 					</h1>
-					<p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+					<p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-2">
 						{t.home.description}
 					</p>
 				</div>
 
-				<div className="flex flex-col sm:flex-row gap-3 pt-8 fade-in-3">
+				<div className="flex flex-col sm:flex-row gap-3 pt-8 animate-fade-in-up-3">
 					<Button
 						asChild
 						size="lg"

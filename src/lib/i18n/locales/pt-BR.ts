@@ -15,6 +15,8 @@ const ptBR = {
   // Home
   home: {
     greeting: "Hello",
+    badge: "Desenvolvedor & Criador",
+    intro: "Oi, eu sou",
     description:
       "Sou um desenvolvedor Fullstack apaixonado por transformar desafios complexos em soluções elegantes, escaláveis e focadas na experiência do usuário.",
     viewWork: "Ver meu trabalho",
