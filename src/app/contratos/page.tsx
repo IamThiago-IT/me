@@ -16,6 +16,7 @@ import { SignaturePad } from '@/components/SignaturePad'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { MetadataSetter } from '@/components/MetadataSetter'
 import { useI18n } from '@/lib/i18n'
+import { toast } from 'sonner'
 
 export default function Contratos() {
   const { t } = useI18n()
@@ -360,7 +361,7 @@ export default function Contratos() {
                           if (formData.clientName && formData.clientDocument && formData.projectName && formData.value && formData.startDate && formData.endDate) {
                             setCurrentStep('preview')
                           } else {
-                            alert('Preencha todos os campos obrigatórios')
+                            toast.error('Preencha todos os campos obrigatórios')
                           }
                         }}
                       >

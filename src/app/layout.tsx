@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import type React from "react";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,6 +31,7 @@ export default function Layout({
 								{children}
 							</div>
 						</main>
+						<Toaster />
 					</ThemeProvider>
 					<CommandDialogDemo />
 				</I18nProvider>

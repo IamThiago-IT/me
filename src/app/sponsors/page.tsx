@@ -3,6 +3,7 @@ import { MetadataSetter } from "@/components/MetadataSetter";
 import React from "react";
 import { Copy } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { toast } from "sonner";
 
 const sponsors = [
   { id: 1, name: "Empresa X", description: "Líder em soluções tecnológicas para empresas de todos os portes.", logo: "/public/globe.svg", tag: "Tecnologia", link: "https://empresax.com" },
@@ -20,7 +21,7 @@ export default function Sponsors() {
 
   const copyCode = (code: string) => {
     navigator.clipboard.writeText(code);
-    alert(t.sponsors.codeCopied + code);
+    toast.success(t.sponsors.codeCopied + code);
   };
 
   return (
