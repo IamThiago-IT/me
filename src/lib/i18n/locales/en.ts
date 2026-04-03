@@ -222,6 +222,7 @@ Best regards,
     createFirst: 'Create your first contract in the "New Contract" tab.',
     generateContract: "Generate Contract",
     fillInfo: "Fill in the information to generate a new contract",
+    mobileNotice: "We're working to adapt this page for mobile devices. For now, please access it from your computer for the best experience.",
     templateNames: ["Web Development", "Consulting", "Maintenance", "Software Development", "Mobile Development"],
   },
 

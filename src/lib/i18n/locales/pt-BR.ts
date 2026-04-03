@@ -222,6 +222,7 @@ Atenciosamente,
     createFirst: 'Crie seu primeiro contrato na aba "Novo Contrato".',
     generateContract: "Gerar Contrato",
     fillInfo: "Preencha as informações para gerar um novo contrato",
+    mobileNotice: "Estamos trabalhando para adaptar esta página para dispositivos móveis. Por enquanto, acesse pelo seu computador para melhor experiência.",
     templateNames: ["Desenvolvimento Web", "Consultoria", "Manutenção", "Desenvolvimento de Software", "Desenvolvimento Mobile"],
   },
 

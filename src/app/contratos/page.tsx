@@ -186,9 +186,22 @@ export default function Contratos() {
   return (
     <div className="container mx-auto px-3 sm:px-4 md:px-6 h-auto md:h-[calc(100vh-7rem)] flex flex-col gap-4 md:gap-0">
       <MetadataSetter title={t.contracts.title} />
-      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 shrink-0">{t.contracts.title}</h1>
       
-      <div className="hidden md:block flex-1 overflow-y-auto custom-scrollbar">
+      {/* Mobile Warning */}
+      <div className="md:hidden min-h-screen flex items-center justify-center">
+        <Card className="w-full max-w-sm">
+          <CardHeader className="text-center">
+            <CardTitle className="mb-2">{t.contracts.title}</CardTitle>
+            <CardDescription>
+              ⚙️ {t.contracts.mobileNotice || 'Estamos trabalhando para adaptar esta página para dispositivos móveis. Por enquanto, acesse pelo seu computador para melhor experiência.'}
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+      
+      <h1 className="hidden md:block text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 shrink-0">{t.contracts.title}</h1>
+      
+      <div className="hidden md:flex flex-col flex-1 overflow-y-auto custom-scrollbar">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 text-xs sm:text-sm">
             <TabsTrigger value="novo">{t.contracts.newContract}</TabsTrigger>
