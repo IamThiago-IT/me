@@ -131,7 +131,18 @@ Best regards,
   // Feedbacks
   feedbacks: {
     title: "Feedbacks & Reviews",
+    description: "Learn about the experiences of clients I've worked with. Their feedback helps me improve continuously.",
     project: "Project",
+    avgRating: "Average Rating",
+    totalFeedbacks: "Total Clients",
+    fiveStars: "Five Stars",
+    filterByCategory: "Filter by Category",
+    filterByRating: "Filter by Rating",
+    all: "All",
+    noResults: "No feedback found with these filters.",
+    shareFeedback: "Share Your Experience",
+    feedbackCTA: "Worked with me? Leave your feedback and help others discover my work!",
+    sendFeedback: "Send Feedback",
   },
 
   // Services

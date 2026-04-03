@@ -131,7 +131,18 @@ Atenciosamente,
   // Feedbacks
   feedbacks: {
     title: "Feedbacks e Avaliações",
+    description: "Conheça as experiências de clientes que trabalharam comigo. Seus feedbacks me ajudam a melhorar continuamente.",
     project: "Projeto",
+    avgRating: "Avaliação Média",
+    totalFeedbacks: "Total de Clientes",
+    fiveStars: "Cinco Estrelas",
+    filterByCategory: "Filtrar por Categoria",
+    filterByRating: "Filtrar por Avaliação",
+    all: "Todos",
+    noResults: "Nenhum feedback encontrado com esses filtros.",
+    shareFeedback: "Compartilhe sua Experiência",
+    feedbackCTA: "Trabalhou comigo? Deixe seu feedback e ajude outras pessoas a conhecer meu trabalho!",
+    sendFeedback: "Enviar Feedback",
   },
 
   // Services
