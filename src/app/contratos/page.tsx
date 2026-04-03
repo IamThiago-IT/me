@@ -184,13 +184,13 @@ export default function Contratos() {
   }
 
   return (
-    <div className="container mx-auto px-4 h-[calc(100vh-7rem)] flex flex-col">
+    <div className="container mx-auto px-3 sm:px-4 md:px-6 h-auto md:h-[calc(100vh-7rem)] flex flex-col gap-4 md:gap-0">
       <MetadataSetter title={t.contracts.title} />
-      <h1 className="text-3xl font-bold mb-6 shrink-0">{t.contracts.title}</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 shrink-0">{t.contracts.title}</h1>
       
       <div className="hidden md:block flex-1 overflow-y-auto custom-scrollbar">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-3 text-xs sm:text-sm">
             <TabsTrigger value="novo">{t.contracts.newContract}</TabsTrigger>
             <TabsTrigger value="modelos">{t.contracts.templates}</TabsTrigger>
             <TabsTrigger value="assinados">{t.contracts.signed}</TabsTrigger>
@@ -299,7 +299,7 @@ export default function Contratos() {
                     {/* Prazos */}
                     <div className="border-t pt-6 space-y-3">
                       <h4 className="font-semibold text-sm">Prazos e Termos</h4>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="space-y-2">
                           <Label htmlFor="startDate">Data de Início *</Label>
                           <Input
@@ -321,7 +321,7 @@ export default function Contratos() {
                           />
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="space-y-2">
                           <Label htmlFor="warranty">Garantia (dias)</Label>
                           <Input
@@ -347,7 +347,7 @@ export default function Contratos() {
                       ⚠️ Este contrato é um modelo genérico. Para casos específicos ou valores altos, recomenda-se consultoria jurídica.
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <Button 
                         variant="outline" 
                         className="flex-1"
@@ -490,7 +490,7 @@ export default function Contratos() {
                       </div>
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <Button 
                         variant="outline" 
                         className="flex-1"
@@ -535,7 +535,7 @@ export default function Contratos() {
                       <p>• Documento: {formData.clientDocument}</p>
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <Button 
                         variant="outline" 
                         className="flex-1"
@@ -594,7 +594,7 @@ export default function Contratos() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {contractTemplates.map((template) => (
                     <Card key={template.id} className="flex flex-col">
                       <CardHeader>
@@ -629,16 +629,16 @@ export default function Contratos() {
       </CardDescription>
     </CardHeader>
     <CardContent>
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {(Array.isArray(signedContracts) ? signedContracts : []).map((contract: any) => (
           <div
             key={contract?.id ?? Math.random()}
-            className="flex items-center justify-between p-4 border rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 sm:p-4 border rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h4 className="font-semibold text-lg">{contract.projectName}</h4>
-                <span className={`px-2 py-1 text-xs rounded-full ${
+            <div className="flex-1 w-full">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                <h4 className="font-semibold text-base sm:text-lg">{contract.projectName}</h4>
+                <span className={`px-2 py-1 text-xs rounded-full whitespace-nowrap ${
                   contract.status === 'completed' 
                     ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
                     : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
@@ -646,24 +646,24 @@ export default function Contratos() {
                   {contract.status === 'completed' ? t.contracts.completed : t.contracts.inProgress}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>{t.contracts.project}:</strong> {contract.projectName}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>{t.contracts.value}:</strong> ***
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>{t.contracts.contract}:</strong> {contract.contractNumber}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <strong>{t.contracts.signedOn}:</strong> {new Date(contract.signedDate).toLocaleDateString('pt-BR')}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-500 mt-2 line-clamp-2">
                 {contract.description}
               </p>
             </div>
-            <div className="flex flex-col gap-2 ml-4">
-              <Button variant="outline" size="sm">
+            <div className="flex flex-col gap-2 w-full sm:w-auto">
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
                 {t.contracts.viewContract}
               </Button>
               <Button variant="ghost" size="sm">
@@ -675,9 +675,9 @@ export default function Contratos() {
       </div>
       
       {signedContracts.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          <p>{t.contracts.noContracts}</p>
-          <p className="text-sm">{t.contracts.createFirst}</p>
+        <div className="text-center py-6 sm:py-8 text-gray-500">
+          <p className="text-sm sm:text-base">{t.contracts.noContracts}</p>
+          <p className="text-xs sm:text-sm">{t.contracts.createFirst}</p>
         </div>
       )}
     </CardContent>

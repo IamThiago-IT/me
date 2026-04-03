@@ -101,14 +101,14 @@ export default function Projetos() {
   const uniqueLanguages = Array.from(new Set(allProjects.map(p => p.language).filter(Boolean)))
 
   return (
-    <div>
+    <div className="px-3 sm:px-4 md:px-6">
       <MetadataSetter title={t.projects.title} />
-      <h1 className="text-3xl font-bold mb-6">{t.projects.title}</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{t.projects.title}</h1>
       
       {/* Filtros */}
-      <div className="mb-6 space-y-4">
+      <div className="mb-4 sm:mb-6 space-y-3 sm:space-y-4">
         {/* Barra de busca e botão de filtros alinhados */}
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-stretch sm:items-center">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
@@ -116,7 +116,7 @@ export default function Projetos() {
               placeholder={t.projects.searchPlaceholder}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="pl-10 text-sm"
             />
           </div>
 
@@ -126,13 +126,13 @@ export default function Projetos() {
             className="flex items-center gap-2 whitespace-nowrap"
           >
             <Filter className="w-4 h-4" />
-            {t.projects.filters}
+            <span className="text-xs sm:text-sm">{t.projects.filters}</span>
           </Button>
         </div>
 
         {/* Filtros avançados */}
         {showFilters && (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+          <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-3 sm:p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
             {/* Ordenação */}
             <div>
               <Label htmlFor="sort">{t.projects.sortBy}</Label>
@@ -183,7 +183,7 @@ export default function Projetos() {
         )}
 
         {/* Estatísticas */}
-        <div className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
           {projects.length} {t.projects.projectsFound}
           {searchTerm && ` ${t.projects.for} "${searchTerm}"`}
           {languageFilter !== "all" && ` ${t.projects.in} ${languageFilter}`}
@@ -194,10 +194,10 @@ export default function Projetos() {
         <p className="text-red-500 dark:text-red-400">{error}</p>
       ) : (
         <>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2">
             {projects.map((project) => (
-              <div key={project.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow dark:border-gray-700 dark:hover:shadow-lg">
-                <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">{project.name}</h2>
+              <div key={project.id} className="border rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow dark:border-gray-700 dark:hover:shadow-lg">
+                <h2 className="text-lg sm:text-xl font-semibold mb-2 dark:text-gray-200">{project.name}</h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description || t.projects.noDescription}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">

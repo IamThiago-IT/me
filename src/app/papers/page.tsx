@@ -62,12 +62,12 @@ export default function Papers() {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-3 sm:px-4 md:px-6">
       <MetadataSetter title={t.papers.title} />
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">{t.papers.title}</h1>
-          <p className="text-lg text-muted-foreground">{t.papers.description}</p>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">{t.papers.title}</h1>
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">{t.papers.description}</p>
         </div>
 
         {/* Filtros */}
@@ -108,9 +108,9 @@ export default function Papers() {
 
         {/* Lista de Papers */}
         {filteredPapers.length === 0 ? (
-          <div className="text-center py-16">
-            <BookOpen className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-muted-foreground text-lg">
+          <div className="text-center py-12 sm:py-16">
+            <BookOpen className="mx-auto h-10 sm:h-12 w-10 sm:w-12 text-muted-foreground mb-3 sm:mb-4" />
+            <p className="text-muted-foreground text-sm sm:text-base md:text-lg">
               {papers.length === 0 ? t.papers.empty : t.papers.noResults}
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function Papers() {
             {filteredPapers.map((paper) => (
               <Card key={paper.id} className="hover:shadow-md transition-shadow">
                 <CardHeader>
-                  <CardTitle className="text-xl leading-tight">
+                  <CardTitle className="text-lg sm:text-xl md:text-2xl leading-tight">
                     {paper.url ? (
                       <a
                         href={paper.url}
@@ -133,9 +133,9 @@ export default function Papers() {
                       paper.title
                     )}
                   </CardTitle>
-                  <CardDescription className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                  <CardDescription className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 text-xs sm:text-sm">
                     <span className="flex items-center gap-1">
-                      <Users className="h-3.5 w-3.5" />
+                      <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                       {paper.authors.join(", ")}
                     </span>
                     <span className="flex items-center gap-1">

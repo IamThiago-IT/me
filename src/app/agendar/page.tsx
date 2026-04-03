@@ -16,8 +16,8 @@ export default function Agendar() {
   }, [])
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-6">{t.schedule.title}</h1>
+    <div className="container mx-auto px-3 sm:px-4 md:px-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{t.schedule.title}</h1>
 
       <div className="lg:grid lg:grid-cols-12 gap-6">
         {/* Cal.com Embed */}

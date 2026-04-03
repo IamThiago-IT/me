@@ -145,47 +145,47 @@ function EventCard({ event }: EventCardProps) {
 
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
-      <CardHeader>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
-            <CardTitle className="text-xl">{event.title}</CardTitle>
-            <CardDescription className="mt-2">{event.description}</CardDescription>
+      <CardHeader className="pb-3 sm:pb-4">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-4">
+          <div className="flex-1 min-w-0">
+            <CardTitle className="text-lg sm:text-xl break-words">{event.title}</CardTitle>
+            <CardDescription className="mt-1 sm:mt-2 text-xs sm:text-sm line-clamp-2">{event.description}</CardDescription>
           </div>
-          <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+          <span className="inline-flex items-center rounded-full bg-blue-100 px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900 dark:text-blue-200 whitespace-nowrap flex-shrink-0">
             {event.type}
           </span>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
-        <div className="space-y-2 text-sm">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Calendar className="h-4 w-4" />
+      <CardContent className="space-y-3 sm:space-y-4">
+        <div className="space-y-2 text-xs sm:text-sm">
+          <div className="flex items-center gap-2 text-muted-foreground break-words">
+            <Calendar className="h-4 w-4 flex-shrink-0" />
             <span>
               {formattedDate}
               {event.time && ` • ${event.time}`}
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <MapPin className="h-4 w-4" />
+          <div className="flex items-center gap-2 text-muted-foreground break-words">
+            <MapPin className="h-4 w-4 flex-shrink-0" />
             <span>{event.location}</span>
           </div>
 
           {event.isUpcoming && (
             <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
-              <Users className="h-4 w-4" />
-              <span className="font-medium">Upcoming Event</span>
+              <Users className="h-4 w-4 flex-shrink-0" />
+              <span className="font-medium text-xs sm:text-sm">Upcoming Event</span>
             </div>
           )}
         </div>
 
         {event.tags && event.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-2 sm:pt-3">
             {event.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                className="inline-flex items-center rounded-full bg-gray-100 px-2 sm:px-2.5 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
               >
                 #{tag}
               </span>
@@ -193,9 +193,9 @@ function EventCard({ event }: EventCardProps) {
           </div>
         )}
 
-        <div className="flex gap-2 pt-4">
+        <div className="flex flex-col sm:flex-row gap-2 pt-3 sm:pt-4">
           {event.url && (
-            <Button asChild className="flex-1">
+            <Button asChild className="flex-1 text-xs sm:text-sm">
               <a href={event.url}>
                 {event.isUpcoming ? "Register" : "Learn More"}
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -283,16 +283,16 @@ export default function EventPage() {
     <>
       <MetadataSetter title={t.events.title} />
 
-      <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen bg-background py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           {/* Header */}
-          <section className="mb-12">
-            <h1 className="text-4xl font-bold tracking-tight">{t.events.title}</h1>
-            <p className="mt-4 text-lg text-muted-foreground">{t.events.description}</p>
+          <section className="mb-8 sm:mb-12">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">{t.events.title}</h1>
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-muted-foreground">{t.events.description}</p>
           </section>
 
           {/* Search and Filters */}
-          <section className="mb-8 space-y-6">
+          <section className="mb-6 sm:mb-8 space-y-4 sm:space-y-6">
             {/* Search Bar */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -309,12 +309,13 @@ export default function EventPage() {
             </div>
 
             {/* Year Filter */}
-            <div className="space-y-2">
-              <div className="text-sm font-medium">Filter by Year</div>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="text-xs sm:text-sm font-medium">Filter by Year</div>
               <div className="flex flex-wrap gap-2">
                 <Button
                   variant={!selectedYear ? "default" : "outline"}
                   size="sm"
+                  className="text-xs sm:text-sm"
                   onClick={() => {
                     setSelectedYear(null)
                     setItemsToShow(4)
@@ -327,6 +328,7 @@ export default function EventPage() {
                     key={year}
                     variant={selectedYear === year ? "default" : "outline"}
                     size="sm"
+                    className="text-xs sm:text-sm"
                     onClick={() => {
                       setSelectedYear(year)
                       setItemsToShow(4)
@@ -339,14 +341,15 @@ export default function EventPage() {
             </div>
 
             {/* Tag Filters */}
-            <div className="space-y-2">
-              <div className="text-sm font-medium">Filter by Tags</div>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="text-xs sm:text-sm font-medium">Filter by Tags</div>
               <div className="flex flex-wrap gap-2">
                 {allTags.map((tag) => (
                   <Button
                     key={tag}
                     variant={selectedTags.includes(tag) ? "default" : "outline"}
                     size="sm"
+                    className="text-xs sm:text-sm"
                     onClick={() => toggleTag(tag)}
                   >
                     #{tag}
@@ -369,8 +372,8 @@ export default function EventPage() {
           </section>
 
           {/* Events Counter */}
-          <section className="mb-6">
-            <p className="text-sm text-muted-foreground">
+          <section className="mb-4 sm:mb-6">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Showing {displayedEvents.length} of {filteredEvents.length} events
               {selectedYear && ` in ${selectedYear}`}
             </p>
@@ -378,8 +381,8 @@ export default function EventPage() {
 
           {/* Events Grid */}
           {displayedEvents.length > 0 ? (
-            <section className="space-y-6">
-              <div className="grid gap-6 md:grid-cols-2">
+            <section className="space-y-4 sm:space-y-6">
+              <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2">
                 {displayedEvents.map((event) => (
                   <EventCard key={event.id} event={event} />
                 ))}
@@ -387,12 +390,12 @@ export default function EventPage() {
 
               {/* Show More Button */}
               {hasMoreEvents && (
-                <div className="flex justify-center pt-4">
+                <div className="flex justify-center pt-3 sm:pt-4">
                   <Button
                     type="button"
                     variant="outline"
                     onClick={() => setItemsToShow((prev) => prev + 4)}
-                    className="w-full sm:w-auto"
+                    className="w-full sm:w-auto text-sm"
                   >
                     <ChevronDown className="mr-2 h-4 w-4" />
                     Show More Events
@@ -403,9 +406,9 @@ export default function EventPage() {
           ) : (
             <Card>
               <CardContent className="pt-6">
-                <div className="text-center py-12">
-                  <Calendar className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
-                  <p className="text-muted-foreground text-lg mb-4">
+                <div className="text-center py-8 sm:py-12">
+                  <Calendar className="mx-auto h-10 sm:h-12 w-10 sm:w-12 text-muted-foreground/50 mb-3 sm:mb-4" />
+                  <p className="text-muted-foreground text-sm sm:text-base md:text-lg mb-3 sm:mb-4">
                     No events found matching your filters
                   </p>
                   <Button type="button" variant="outline" onClick={clearFilters}>
@@ -417,9 +420,9 @@ export default function EventPage() {
           )}
 
           {/* CTA Section */}
-          <section className="mt-16 rounded-lg bg-muted p-8 text-center">
-            <h2 className="text-2xl font-bold mb-4">Want to collaborate?</h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+          <section className="mt-10 sm:mt-16 rounded-lg bg-muted p-4 sm:p-6 md:p-8 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Want to collaborate?</h2>
+            <p className="text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               I'm always interested in speaking opportunities, workshops, and collaborations. Feel free to get in touch!
             </p>
             <Button size="lg" asChild>

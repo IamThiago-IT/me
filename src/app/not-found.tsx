@@ -8,23 +8,23 @@ export default function NotFound() {
   const { t } = useI18n();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white px-6 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 dark:from-slate-900 to-white dark:to-slate-800 px-3 sm:px-6 py-8 sm:py-12">
       <main className="max-w-3xl w-full text-center">
-        <div className="inline-flex items-center gap-4 mb-6">
-          <h1 className="text-4xl font-extrabold text-slate-900">{t.notFound.title}</h1>
-          <span className="text-lg text-slate-600">{t.notFound.subtitle}</span>
+        <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">{t.notFound.title}</h1>
+          <span className="text-sm sm:text-base text-slate-600 dark:text-slate-400">{t.notFound.subtitle}</span>
         </div>
 
-        <div className="bg-white shadow-lg rounded-2xl p-8 sm:p-10">
-          <svg className="mx-auto mb-6 h-28 w-28 text-sky-500" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <div className="bg-white dark:bg-slate-800 shadow-lg rounded-lg sm:rounded-2xl p-6 sm:p-8 md:p-10">
+          <svg className="mx-auto mb-4 sm:mb-6 h-20 sm:h-28 w-20 sm:w-28 text-sky-500" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M8 14s1.5-2 4-2 4 2 4 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M9 10h.01M15 10h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
 
-          <h2 className="text-2xl font-semibold text-slate-900 mb-3">{t.notFound.question}</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white mb-2 sm:mb-3">{t.notFound.question}</h2>
 
-          <p className="text-slate-600 mb-4">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-3 sm:mb-4">
             {t.notFound.devMessage}
           </p>
 

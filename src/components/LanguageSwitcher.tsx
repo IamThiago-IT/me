@@ -15,7 +15,7 @@ export function LanguageSwitcher() {
       variant="ghost"
       size="sm"
       onClick={() => setLocale(nextLocale)}
-      className="flex items-center gap-1.5 text-sm font-medium"
+      className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
       title={locale === "pt-BR" ? "Switch to English" : "Mudar para Português"}
     >
       <Languages className="h-4 w-4" />

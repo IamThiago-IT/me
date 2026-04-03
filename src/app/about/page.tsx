@@ -26,16 +26,16 @@ export default function Sobre() {
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)]">
-      <h1 className="text-3xl font-bold mb-1">{t.about.title}</h1>
-      <p className="text-base mb-4 text-muted-foreground">
+    <div className="flex flex-col h-auto md:h-[calc(100vh-7rem)]">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-1">{t.about.title}</h1>
+      <p className="text-sm sm:text-base mb-4 sm:mb-6 text-muted-foreground">
         {t.about.description}
       </p>
 
-      <div className="flex-1 grid grid-rows-[auto_1fr_auto_1fr_auto] gap-3 min-h-0">
+      <div className="flex-1 grid grid-rows-[auto_1fr_auto_1fr_auto] gap-4 sm:gap-6 min-h-0">
         {/* Skills */}
-        <h2 className="text-xl font-semibold">{t.about.skills}</h2>
-        <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 min-h-0">
+        <h2 className="text-lg sm:text-xl font-semibold">{t.about.skills}</h2>
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3 min-h-0">
           {skills.map((skill) => (
             <div
               key={skill.name}
@@ -48,8 +48,8 @@ export default function Sobre() {
         </div>
 
         {/* Languages */}
-        <h2 className="text-xl font-semibold flex items-center gap-2">
-          <Globe2 className="w-5 h-5" />
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center gap-2">
+          <Globe2 className="w-4 h-4 sm:w-5 sm:h-5" />
           {t.about.languages}
         </h2>
         <div className="grid grid-cols-3 gap-2 min-h-0">
@@ -70,7 +70,7 @@ export default function Sobre() {
                 >
                   {language.cefr}
                 </span>
-                <span className="text-xs text-gray-600 dark:text-gray-400">{language.level}</span>
+                <span className="text-xs sm:text-xs text-gray-600 dark:text-gray-400">{language.level}</span>
               </div>
             </div>
           ))}
@@ -79,18 +79,18 @@ export default function Sobre() {
         {/* Journey CTA */}
         <Link
           href="/about/timeline"
-          className="group flex items-center gap-3 p-3 border-2 border-dashed border-indigo-400/40 rounded-xl bg-indigo-500/5 hover:bg-indigo-500/10 hover:border-indigo-500 transition-all duration-200"
+          className="group flex items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-dashed border-indigo-400/40 rounded-xl bg-indigo-500/5 hover:bg-indigo-500/10 hover:border-indigo-500 transition-all duration-200"
         >
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500/10 group-hover:bg-indigo-500/20 transition-colors shrink-0">
-            <History className="w-5 h-5 text-indigo-500" />
+          <div className="flex items-center justify-center w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-indigo-500/10 group-hover:bg-indigo-500/20 transition-colors shrink-0">
+            <History className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-500" />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="text-base font-semibold group-hover:text-indigo-500 transition-colors">
+            <h2 className="text-sm sm:text-base md:text-lg font-semibold group-hover:text-indigo-500 transition-colors">
               {t.about.myJourney}
             </h2>
-            <p className="text-sm text-muted-foreground truncate">{t.about.journeyDescription}</p>
+            <p className="text-xs sm:text-sm text-muted-foreground truncate">{t.about.journeyDescription}</p>
           </div>
-          <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-indigo-500 group-hover:translate-x-1 transition-all shrink-0" />
+          <ArrowRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-muted-foreground group-hover:text-indigo-500 group-hover:translate-x-1 transition-all shrink-0" />
         </Link>
       </div>
     </div>

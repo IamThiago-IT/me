@@ -35,35 +35,35 @@ export default function Contato() {
   const defaultColors = { text: "hover:text-blue-700", icon: "group-hover:text-blue-700", border: "hover:border-blue-700" };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)]">
+    <div className="flex flex-col h-auto md:h-[calc(100vh-7rem)]">
       <MetadataSetter title={t.contact.title} />
-      <h1 className="text-3xl font-bold mb-1">{t.contact.title}</h1>
-      <p className="text-base mb-5 text-muted-foreground">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-1">{t.contact.title}</h1>
+      <p className="text-sm sm:text-base mb-4 sm:mb-5 text-muted-foreground">
         {t.contact.description}
       </p>
 
       {/* CTA para Proposta */}
       <Link
         href="/contato/proposta"
-        className="group mb-5 flex items-center gap-3 p-4 border-2 border-dashed border-primary/40 rounded-xl bg-primary/5 hover:bg-primary/10 hover:border-primary transition-all duration-200"
+        className="group mb-4 sm:mb-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 p-3 sm:p-4 border-2 border-dashed border-primary/40 rounded-xl bg-primary/5 hover:bg-primary/10 hover:border-primary transition-all duration-200"
       >
-        <div className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors shrink-0">
-          <FileText className="w-5 h-5 text-primary" />
+        <div className="flex items-center justify-center w-9 sm:w-11 h-9 sm:h-11 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors shrink-0">
+          <FileText className="w-4 sm:w-5 h-4 sm:h-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <h2 className="text-lg font-semibold group-hover:text-primary transition-colors">
+          <h2 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors">
             {t.contact.proposalCta.title}
           </h2>
-          <p className="text-sm text-muted-foreground mt-0.5 truncate">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 line-clamp-2">
             {t.contact.proposalCta.description}
           </p>
         </div>
-        <Send className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+        <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
       </Link>
 
       {/* Social Links */}
-      <h2 className="text-xl font-semibold mb-3">{t.contact.socialTitle}</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.contact.socialTitle}</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 flex-1">
         {contactLinks.map((link) => {
           const colors = brandColors[link.label] || defaultColors;
           return (
@@ -72,10 +72,10 @@ export default function Contato() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group flex flex-col items-center justify-center rounded-xl border-2 shadow-sm bg-white dark:bg-neutral-900 hover:bg-blue-100/60 dark:hover:bg-blue-900/40 transition-all duration-200 ${colors.text} ${colors.border}`}
+              className={`group flex flex-col items-center justify-center rounded-lg sm:rounded-xl border-2 shadow-sm bg-white dark:bg-neutral-900 hover:bg-blue-100/60 dark:hover:bg-blue-900/40 transition-all duration-200 p-2 sm:p-3 ${colors.text} ${colors.border}`}
             >
-              <link.icon className={`w-7 h-7 mb-1.5 transition-colors ${colors.icon}`} />
-              <span className="font-medium text-sm">{link.label}</span>
+              <link.icon className={`w-5 sm:w-6 md:w-7 h-5 sm:h-6 md:h-7 mb-1 sm:mb-1.5 transition-colors ${colors.icon}`} />
+              <span className="font-medium text-xs sm:text-sm text-center line-clamp-2">{link.label}</span>
             </a>
           )
         })}

@@ -51,12 +51,12 @@ function BlogPostContent({ params }: { params: { id: string } }) {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-3 sm:px-4">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-center h-64">
+          <div className="flex items-center justify-center h-48 sm:h-64">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">{t.blog.loading}</p>
+              <div className="animate-spin rounded-full h-10 sm:h-12 w-10 sm:w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t.blog.loading}</p>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ function BlogPostContent({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-3 sm:px-4 md:px-6">
       <MetadataSetter title="Blog Post" />
       <div className="max-w-3xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">

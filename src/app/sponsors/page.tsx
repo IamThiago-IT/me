@@ -25,52 +25,57 @@ export default function Sponsors() {
   };
 
   return (
-    <main className="p-6">
+    <main className="p-3 sm:p-4 md:p-6">
       <MetadataSetter title={t.sponsors.title} />
-      <h1 className="text-3xl font-bold mb-4">{t.sponsors.title}</h1>
-      <ul className="space-y-4">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{t.sponsors.title}</h1>
+      <ul className="space-y-3 sm:space-y-4">
         {sponsors.map((sponsor) => (
-          <li key={sponsor.id} className="p-4 border rounded shadow flex items-center space-x-4">
-            {sponsor.logo ? (
-              <img src={sponsor.logo} alt={`${sponsor.name} logo`} className="w-12 h-12" />
-            ) : (
-              <div className="w-12 h-12 flex items-center justify-center bg-gray-200 text-gray-700 font-bold rounded">
-                {sponsor.name.charAt(0)}
-              </div>
-            )}
-            <div>
-              <h2 className="text-xl font-semibold">{sponsor.name}</h2>
-              <p className="text-gray-700">{sponsor.description}</p>
-              <span className="text-sm font-medium mt-1 inline-block px-2 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-300">
-                #{sponsor.tag}
-              </span>
-              <div className="mt-2">
+          <li key={sponsor.id} className="p-3 sm:p-4 md:p-5 border rounded shadow flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow">
+            <div className="flex-shrink-0">
+              {sponsor.logo ? (
+                <img src={sponsor.logo} alt={`${sponsor.name} logo`} className="w-10 h-10 sm:w-12 sm:h-12" />
+              ) : (
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 font-bold rounded">
+                  {sponsor.name.charAt(0)}
+                </div>
+              )}
+            </div>
+            <div className="flex-1">
+              <h2 className="text-lg sm:text-xl font-semibold mb-1">{sponsor.name}</h2>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2">{sponsor.description}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                <span className="text-xs sm:text-sm font-medium inline-block px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 border border-blue-300 dark:border-blue-700">
+                  #{sponsor.tag}
+                </span>
                 <a
                   href={sponsor.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
+                  className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   {t.sponsors.visit}
                 </a>
-              </div>
             </div>
           </li>
         ))}
       </ul>
-      <section className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">{t.sponsors.discountCodes}</h2>
-        <ul className="space-y-4">
+      <section className="mt-8 sm:mt-10 md:mt-12">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{t.sponsors.discountCodes}</h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {discountCodes.map((code) => (
-            <li key={code.id} className="p-4 border rounded shadow">
-              <div className="flex justify-between items-center">
-                <div>
-                  <span className="font-semibold">{code.code}</span>
-                  <span className="text-gray-700 ml-2">{code.description}</span>
+            <li key={code.id} className="p-3 sm:p-4 border rounded shadow hover:shadow-md transition-shadow">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div className="flex-1">
+                  <span className="block text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400 mb-1">{code.code}</span>
+                  <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{code.description}</span>
                 </div>
-                <span onClick={() => copyCode(code.code)} className="cursor-pointer">
-                  <Copy className="h-5 w-5 text-gray-500 hover:text-gray-700" />
-                </span>
+                <button
+                  onClick={() => copyCode(code.code)}
+                  className="flex-shrink-0 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  title="Copiar código"
+                >
+                  <Copy className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" />
+                </button>
               </div>
             </li>
           ))}

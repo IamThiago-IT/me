@@ -88,12 +88,12 @@ function BlogContent() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center h-64">
+          <div className="flex items-center justify-center h-48 sm:h-64">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">{t.blog.loading}</p>
+              <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-indigo-600 mx-auto mb-3 sm:mb-4"></div>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t.blog.loading}</p>
             </div>
           </div>
         </div>
@@ -103,11 +103,11 @@ function BlogContent() {
 
   if (error) {
     return (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center py-12">
-            <p className="text-red-600 mb-4">{error}</p>
-            <button onClick={() => window.location.reload()} className="text-indigo-600 hover:underline">
+          <div className="text-center py-8 sm:py-12">
+            <p className="text-red-600 dark:text-red-400 mb-3 sm:mb-4 text-sm sm:text-base">{error}</p>
+            <button onClick={() => window.location.reload()} className="text-xs sm:text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
               {t.blog.tryAgain}
             </button>
           </div>
@@ -117,30 +117,30 @@ function BlogContent() {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-3 sm:px-4 md:px-6">
       <MetadataSetter title={t.blog.title} />
       <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-          <div className="mb-4 sm:mb-0">
-            <h1 className="text-3xl font-bold mb-2">{t.blog.title}</h1>
-            <p className="text-lg text-gray-600">
+        <div className="flex flex-col gap-3 sm:gap-0 sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
+          <div className="mb-0">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">{t.blog.title}</h1>
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400">
               {t.blog.description}
             </p>
           </div>
         </div>
 
-        <div className="mb-6 flex items-center gap-4">
+        <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row gap-2 sm:gap-4 items-stretch sm:items-center">
           <Input
             type="text"
             placeholder={t.blog.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
+            className="flex-1 p-2 sm:p-3 border border-gray-300 rounded-md text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600"
           />
           <select
             value={dateFilter}
             onChange={handleDateFilterChange}
-            className="p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
+            className="p-2 sm:p-3 border border-gray-300 rounded-md text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600"
           >
             <option value="">{t.blog.dates}</option>
             <option value="last7days">{t.blog.last7days}</option>
@@ -149,39 +149,39 @@ function BlogContent() {
           </select>
         </div>
 
-        <div className="grid gap-8">
+        <div className="grid gap-4 sm:gap-6 md:gap-8">
           {paginatedArticles.map((article) => (
-            <Card key={article.id} className="overflow-hidden">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <CardTitle className="text-xl sm:text-2xl flex-1">
-                    <Link href={`/blog/${article.id}`} className="hover:text-indigo-600 transition-colors">
+            <Card key={article.id} className="overflow-hidden hover:shadow-md transition-shadow">
+              <CardHeader className="pb-3 sm:pb-4">
+                <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-4">
+                  <CardTitle className="text-lg sm:text-xl md:text-2xl flex-1 break-words">
+                    <Link href={`/blog/${article.id}`} className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                       {article.title}
                     </Link>
                   </CardTitle>
-                  <div className="flex items-center gap-2 ml-4">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Coins className="w-4 h-4 mr-1" />
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      <Coins className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                       {article.tabcoins}
                     </div>
                     <Link
                       href={`https://www.tabnews.com.br/IamThiagoIT`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 hover:text-indigo-800"
+                      className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                     </Link>
                   </div>
                 </div>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   {formatDate(article.date)} • {article.author}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 text-sm sm:text-base">{article.excerpt}</p>
+              <CardContent className="pb-3">
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm md:text-base line-clamp-2">{article.excerpt}</p>
               </CardContent>
-              <CardFooter className="flex flex-wrap gap-2">
+              <CardFooter className="flex flex-wrap gap-1.5 sm:gap-2 pt-2">
                 {Array.isArray(article.tags) && article.tags.map((tag: string) => (
                   <Badge key={tag} variant="secondary" className="text-xs">
                     {tag}
@@ -193,24 +193,24 @@ function BlogContent() {
         </div>
 
         {paginatedArticles.length === 0 && !loading && (
-          <div className="text-center py-12">
-            <p className="text-gray-600">{t.blog.noArticles}</p>
+          <div className="text-center py-8 sm:py-12">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t.blog.noArticles}</p>
           </div>
         )}
 
-        <div className="flex justify-between mt-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-2 mt-4 sm:mt-6">
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-md disabled:opacity-50 ${currentPage === 1 ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
+            className={`px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium disabled:opacity-50 w-full sm:w-auto ${currentPage === 1 ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
           >
             {t.blog.previous}
           </button>
-          <span className="text-gray-800 dark:text-gray-200">{t.blog.page} {currentPage} {t.blog.of} {totalPages}</span>
+          <span className="text-xs sm:text-sm text-gray-800 dark:text-gray-200">{t.blog.page} {currentPage} {t.blog.of} {totalPages}</span>
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-md disabled:opacity-50 ${currentPage === totalPages ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
+            className={`px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium disabled:opacity-50 w-full sm:w-auto ${currentPage === totalPages ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed' : 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer'}`}
           >
             {t.blog.next}
           </button>

@@ -31,7 +31,13 @@ export default function Layout({
 								{children}
 							</div>
 						</main>
-						<Toaster />
+						<Toaster
+							position="top-right"
+							richColors
+							toastOptions={{
+								className: 'text-sm sm:text-base max-w-xs sm:max-w-sm md:max-w-md',
+							}}
+						/>
 					</ThemeProvider>
 					<CommandDialogDemo />
 				</I18nProvider>
