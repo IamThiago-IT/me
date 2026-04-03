@@ -17,7 +17,7 @@ export default function TimelinePage() {
         <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         {t.about.backToAbout}
       </Link>
-      <div className="flex-1 overflow-y-auto min-h-0 pr-1 custom-scrollbar">
+      <div className="flex-1 overflow-y-auto min-h-0 pr-1 ">
         <TimelineSection />
       </div>
     </div>

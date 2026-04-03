@@ -21,8 +21,8 @@ export default function Layout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="pt-BR" suppressHydrationWarning>
-			<body className={inter.className}>
+		<html lang="pt-BR" suppressHydrationWarning className="custom-scrollbar">
+			<body className={`${inter.className} custom-scrollbar`}>
 				<I18nProvider>
 					<ThemeProvider attribute="class" defaultTheme="system">
 						<Navbar />

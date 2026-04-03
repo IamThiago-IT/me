@@ -201,7 +201,7 @@ export default function Contratos() {
       
       <h1 className="hidden md:block text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 shrink-0">{t.contracts.title}</h1>
       
-      <div className="hidden md:flex flex-col flex-1 overflow-y-auto custom-scrollbar">
+      <div className="hidden md:flex flex-col flex-1 overflow-y-auto">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 text-xs sm:text-sm">
             <TabsTrigger value="novo">{t.contracts.newContract}</TabsTrigger>
@@ -396,7 +396,7 @@ export default function Contratos() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
-                    <div className="p-6 border rounded-md max-h-[600px] overflow-y-auto custom-scrollbar bg-white dark:bg-gray-950 text-sm">
+                    <div className="p-6 border rounded-md max-h-[600px] overflow-y-auto bg-white dark:bg-gray-950 text-sm">
                       {/* Cabeçalho */}
                       <div className="text-center mb-8 pb-4 border-b">
                         <h2 className="text-xl font-bold mb-1">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</h2>
@@ -700,7 +700,7 @@ export default function Contratos() {
       </div>
 
       {/* Versão mobile - Formulário simplificado */}
-      <div className="md:hidden flex-1 overflow-y-auto custom-scrollbar">
+      <div className="md:hidden flex-1 overflow-y-auto">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-6">
             <TabsTrigger value="novo">{t.contracts.newContract}</TabsTrigger>
