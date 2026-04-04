@@ -20,6 +20,8 @@ import { ptBR, enUS } from "date-fns/locale"
 export default function InviteMe() {
 	const { t, locale } = useI18n()
 	const [loading, setLoading] = useState(false)
+    const [date, setDate] = useState<Date | undefined>(new Date())
+
 	const [formData, setFormData] = useState({
 		eventName: "",
 		organizer: "",
@@ -209,13 +211,11 @@ export default function InviteMe() {
 										</PopoverTrigger>
 										<PopoverContent className="w-auto p-0" align="start">
 											<Calendar
-												mode="single"
-												selected={formData.eventDate || undefined}
-												onSelect={(date: Date | undefined) => setFormData(prev => ({ ...prev, eventDate: date || null }))}
-												disabled={(date: Date) =>
-													date < new Date(new Date().setHours(0, 0, 0, 0))
-												}
-											/>
+    mode="single"
+    selected={date}
+    onSelect={setDate}
+    className="rounded-lg border"
+  />
 										</PopoverContent>
 									</Popover>
 								</div>
