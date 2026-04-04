@@ -211,11 +211,12 @@ export default function InviteMe() {
 										</PopoverTrigger>
 										<PopoverContent className="w-auto p-0" align="start">
 											<Calendar
-    mode="single"
-    selected={date}
-    onSelect={setDate}
-    className="rounded-lg border"
-  />
+                                                mode="single"
+                                                selected={date}
+                                                captionLayout="dropdown"
+                                                onSelect={setDate}
+                                                className="rounded-lg border"
+                                            />
 										</PopoverContent>
 									</Popover>
 								</div>
