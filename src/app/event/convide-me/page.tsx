@@ -6,33 +6,45 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Calendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { MetadataSetter } from "@/components/MetadataSetter"
 import { useI18n } from "@/lib/i18n"
 import { toast } from "sonner"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Calendar as CalendarIcon } from "lucide-react"
+import { format } from "date-fns"
+import { ptBR, enUS } from "date-fns/locale"
 
 export default function InviteMe() {
-	const { t } = useI18n()
+	const { t, locale } = useI18n()
 	const [loading, setLoading] = useState(false)
 	const [formData, setFormData] = useState({
 		eventName: "",
 		organizer: "",
 		email: "",
 		phone: "",
-		eventDate: "",
+		eventDate: null as Date | null,
 		eventLocation: "",
 		description: "",
 		eventType: "workshop",
 	})
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target
 		setFormData((prev) => ({ ...prev, [name]: value }))
 	}
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
+		
+		// Validar se a data foi selecionada
+		if (!formData.eventDate) {
+			toast.error(t.events.pleaseSelectDate || "Por favor, selecione uma data para o evento")
+			return
+		}
+
 		setLoading(true)
 
 		try {
@@ -48,7 +60,7 @@ export default function InviteMe() {
 				organizer: "",
 				email: "",
 				phone: "",
-				eventDate: "",
+				eventDate: null,
 				eventLocation: "",
 				description: "",
 				eventType: "workshop",
@@ -59,6 +71,8 @@ export default function InviteMe() {
 			setLoading(false)
 		}
 	}
+
+	const dateLocale = locale === "pt-BR" ? ptBR : enUS
 
 	return (
 		<>
@@ -93,7 +107,7 @@ export default function InviteMe() {
 					</CardHeader>
 					<CardContent>
 						<form onSubmit={handleSubmit} className="space-y-6">
-							{/* Row 1: Event Name and Type */}
+							{/* Row 1: Event Name and Event Type */}
 							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
 								<div className="space-y-2">
 									<Label htmlFor="eventName" className="text-xs sm:text-sm">
@@ -110,23 +124,21 @@ export default function InviteMe() {
 									/>
 								</div>
 								<div className="space-y-2">
-									<Label htmlFor="eventType" className="text-xs sm:text-sm">
+									<Label className="text-xs sm:text-sm">
 										{t.events.eventType || "Tipo de Evento"} *
 									</Label>
-									<select
-										id="eventType"
-										name="eventType"
-										value={formData.eventType}
-										onChange={handleInputChange}
-										className="w-full px-3 sm:px-4 py-2 rounded-md border border-input bg-background text-xs sm:text-sm"
-										required
-									>
-										<option value="workshop">Workshop</option>
-										<option value="palestra">Palestra</option>
-										<option value="conferência">Conferência</option>
-										<option value="webinar">Webinar</option>
-										<option value="meetup">Meetup</option>
-									</select>
+									<Select value={formData.eventType} onValueChange={(value: string) => setFormData(prev => ({ ...prev, eventType: value }))}>
+										<SelectTrigger className="text-xs sm:text-sm">
+											<SelectValue />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="workshop">Workshop</SelectItem>
+											<SelectItem value="palestra">Palestra</SelectItem>
+											<SelectItem value="conferência">Conferência</SelectItem>
+											<SelectItem value="webinar">Webinar</SelectItem>
+											<SelectItem value="meetup">Meetup</SelectItem>
+										</SelectContent>
+									</Select>
 								</div>
 							</div>
 
@@ -180,18 +192,32 @@ export default function InviteMe() {
 									/>
 								</div>
 								<div className="space-y-2">
-									<Label htmlFor="eventDate" className="text-xs sm:text-sm">
+									<Label className="text-xs sm:text-sm">
 										{t.events.eventDate || "Data do Evento"} *
 									</Label>
-									<Input
-										id="eventDate"
-										name="eventDate"
-										type="date"
-										value={formData.eventDate}
-										onChange={handleInputChange}
-										required
-										className="text-xs sm:text-sm"
-									/>
+									<Popover>
+										<PopoverTrigger asChild>
+											<Button
+												variant="outline"
+												className="w-full justify-start text-left font-normal text-xs sm:text-sm"
+											>
+												<CalendarIcon className="mr-2 h-4 w-4" />
+												{formData.eventDate
+													? format(formData.eventDate, "PPP", { locale: dateLocale })
+													: "Selecionar data"}
+											</Button>
+										</PopoverTrigger>
+										<PopoverContent className="w-auto p-0" align="start">
+											<Calendar
+												mode="single"
+												selected={formData.eventDate || undefined}
+												onSelect={(date: Date | undefined) => setFormData(prev => ({ ...prev, eventDate: date || null }))}
+												disabled={(date: Date) =>
+													date < new Date(new Date().setHours(0, 0, 0, 0))
+												}
+											/>
+										</PopoverContent>
+									</Popover>
 								</div>
 							</div>
 
@@ -256,3 +282,4 @@ export default function InviteMe() {
 		</>
 	)
 }
+
