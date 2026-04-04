@@ -425,9 +425,14 @@ export default function EventPage() {
             <p className="text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               I'm always interested in speaking opportunities, workshops, and collaborations. Feel free to get in touch!
             </p>
-            <Button size="lg" asChild>
-              <a href="/contato">Get in Touch</a>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <Button size="lg" asChild>
+                <a href="/contato">Get in Touch</a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a href="/event/convide-me">{t.events.inviteMe || "Me convide para um evento"}</a>
+              </Button>
+            </div>
           </section>
         </div>
       </main>
