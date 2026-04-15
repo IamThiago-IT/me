@@ -9,6 +9,7 @@ const ptBR = {
     feedbacks: "Feedbacks",
     contact: "Contato",
     papers: "Papers",
+    changelog: "Changelog",
     openMenu: "Abrir menu principal",
   },
 
@@ -359,6 +360,30 @@ Atenciosamente,
     sendInvite: "Enviar Convite",
     cancel: "Cancelar",
     backToEvents: "Voltar aos Eventos",
+  },
+
+  // Changelog
+  changelog: {
+    title: "Changelog",
+    description: "Histórico de atualizações e melhorias do projeto",
+    loading: "Carregando histórico...",
+    error: "Erro ao carregar changelog",
+    tryAgain: "Tentar novamente",
+    noCommits: "Nenhum commit encontrado",
+    typeFeature: "Novo",
+    typeFix: "Correção",
+    typeDocs: "Documentação",
+    typeStyle: "Estilo",
+    typeRefactor: "Refatoração",
+    typePerf: "Performance",
+    typeTest: "Testes",
+    typeChore: "Manutenção",
+    filterAll: "Todos",
+    filterByType: "Filtrar por tipo",
+    viewOnGithub: "Ver no GitHub",
+    commitHash: "Commit",
+    author: "Autor",
+    date: "Data",
   },
 
   // Common

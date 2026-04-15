@@ -9,6 +9,7 @@ const en = {
     feedbacks: "Feedbacks",
     contact: "Contact",
     papers: "Papers",
+    changelog: "Changelog",
     openMenu: "Open main menu",
   },
 
@@ -359,6 +360,30 @@ Best regards,
     sendInvite: "Send Invitation",
     cancel: "Cancel",
     backToEvents: "Back to Events",
+  },
+
+  // Changelog
+  changelog: {
+    title: "Changelog",
+    description: "History of project updates and improvements",
+    loading: "Loading history...",
+    error: "Error loading changelog",
+    tryAgain: "Try again",
+    noCommits: "No commits found",
+    typeFeature: "Feature",
+    typeFix: "Fix",
+    typeDocs: "Documentation",
+    typeStyle: "Style",
+    typeRefactor: "Refactor",
+    typePerf: "Performance",
+    typeTest: "Tests",
+    typeChore: "Chore",
+    filterAll: "All",
+    filterByType: "Filter by type",
+    viewOnGithub: "View on GitHub",
+    commitHash: "Commit",
+    author: "Author",
+    date: "Date",
   },
 
   // Common

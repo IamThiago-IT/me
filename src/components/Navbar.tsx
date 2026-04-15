@@ -22,6 +22,7 @@ export function Navbar() {
 		{ label: t.nav.feedbacks, href: "/feedbacks" },
 		{ label: t.nav.contact, href: "/contato" },
 		{ label: t.nav.papers, href: "/papers" },
+		{ label: t.nav.changelog, href: "/changelog" },
 	]
 
 	return (
