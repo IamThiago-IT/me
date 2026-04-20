@@ -1,0 +1,14 @@
+name = "me"
+type = "javascript"
+account_id = ""
+workers_dev = true
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "me-production"
+compatibility_flags = ["nodejs_compat"]
+
+[env.preview]
+name = "me-preview"
+compatibility_flags = ["nodejs_compat"]
