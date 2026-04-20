@@ -1,72 +1,23 @@
 "use client"
 
-import { useState, useEffect, use } from "react"
+export const runtime = 'edge';
+
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { getArticleById, type Article } from "@/lib/blog-data"
+import type { Article } from "@/lib/blog-data"
 import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
 import { ChevronLeft, Coins, ExternalLink } from "lucide-react"
 import Markdown from "react-markdown"
-import { BlogLanguageProvider, useBlogLanguage } from "@/lib/blog-language-context"
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { MetadataSetter } from "@/components/MetadataSetter"
-import { useI18n } from "@/lib/i18n"
+import { useBlogLanguage } from "@/lib/blog-language-context"
 
-interface PageProps {
-  params: Promise<{
-    id: string
-  }>
-}
-
-function BlogPostContent({ params }: { params: { id: string } }) {
-  const { t } = useI18n()
-
-  const [article, setArticle] = useState<Article | null>(null)
-  const [loading, setLoading] = useState(true)
+function BlogPostContent({ article }: { article: Article }) {
   const { language } = useBlogLanguage()
-
-  useEffect(() => {
-    async function loadArticle() {
-      try {
-        setLoading(true)
-        const fetchedArticle = await getArticleById(params.id)
-        if (!fetchedArticle) {
-          notFound()
-        }
-        setArticle(fetchedArticle)
-      } catch (error) {
-        console.error("Error loading article:", error)
-        notFound()
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadArticle()
-  }, [params.id])
-
-  if (loading) {
-    return (
-      <div className="container mx-auto px-3 sm:px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-center h-48 sm:h-64">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-10 sm:h-12 w-10 sm:w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t.blog.loading}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (!article) {
-    notFound()
-  }
 
   return (
     <div className="container mx-auto px-3 sm:px-4 md:px-6">
@@ -156,11 +107,19 @@ function BlogPostContent({ params }: { params: { id: string } }) {
   )
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
-  const resolvedParams = await params
+export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const { getArticleById } = await import("@/lib/blog-data")
+  
+  const article = await getArticleById(id)
+  
+  if (!article) {
+    notFound()
+  }
+
   return (
-    <BlogLanguageProvider>
-      <BlogPostContent params={resolvedParams} />
-    </BlogLanguageProvider>
+    <div className="flex flex-col min-h-screen">
+      <BlogPostContent article={article} />
+    </div>
   )
 }

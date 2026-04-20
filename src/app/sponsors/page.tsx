@@ -70,13 +70,14 @@ export default function Sponsors() {
                   <span className="block text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400 mb-1">{code.code}</span>
                   <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{code.description}</span>
                 </div>
-                <button
+                {/* <button
                   onClick={() => copyCode(code.code)}
                   className="flex-shrink-0 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                   title="Copiar código"
                 >
                   <Copy className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" />
                 </button>
+                  */}
               </div>
             </li>
           ))}
