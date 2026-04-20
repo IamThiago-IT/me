@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 // Auth route removed - better-auth has been removed
 
 export const GET = async () => {

@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 import { notFound } from "next/navigation"
 import { getArticleById } from "@/lib/blog-data"
 import { BlogLanguageProvider } from "@/lib/blog-language-context"
