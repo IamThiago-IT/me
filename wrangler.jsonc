@@ -1,7 +1,4 @@
 {
-    // Configuration for deploying Next.js app to Cloudflare Pages
-    "name": "me",
-    "compatibility_date": "2025-11-29"
-    // Deploy using: npm run build && npm run pages:deploy
-    // Or via Cloudflare Dashboard for better Next.js support
+    // This file is deprecated - use wrangler.toml instead for Cloudflare Pages
+    // Configuration has been moved to wrangler.toml
 }
