@@ -55,6 +55,7 @@ export default function Sponsors() {
                 >
                   {t.sponsors.visit}
                 </a>
+              </div>
             </div>
           </li>
         ))}
