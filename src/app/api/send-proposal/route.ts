@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from "next/server";
 import { resend } from "@/lib/resend";
 import { z } from "zod";
