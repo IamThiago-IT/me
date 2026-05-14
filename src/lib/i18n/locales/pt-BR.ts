@@ -149,11 +149,30 @@ Atenciosamente,
   // Services
   services: {
     title: "Nossos Serviços",
+    subtitle: "Soluções completas para impulsionar seu negócio com tecnologia, design e estratégia.",
     price: "Preço",
     items: [
-      { name: "Desenvolvimento Web", description: "Criação de sites e aplicações web modernas e responsivas.", price: "R$ 5.000,00" },
-      { name: "Design Gráfico", description: "Design de logotipos, banners e materiais visuais.", price: "R$ 2.000,00" },
-      { name: "Consultoria de TI", description: "Soluções personalizadas para otimizar seus processos tecnológicos.", price: "R$ 3.500,00" },
+      {
+        name: "Desenvolvimento Web",
+        description: "Transforme sua ideia em uma máquina de resultados. Criamos sites e aplicações sob medida com design moderno, performance excepcional e foco total em conversão.",
+        price: "R$ 5.000,00",
+        features: "Design responsivo e moderno | Otimização para mecanismos de busca (SEO) | Performance de carregamento ultrarrápida | Integração com ferramentas e APIs",
+        cta: "Solicitar Orçamento",
+      },
+      {
+        name: "Design Gráfico",
+        description: "Sua marca merece uma identidade visual inesquecível. Do logotipo aos materiais de divulgação, criamos designs estratégicos que comunicam seu valor e atraem clientes.",
+        price: "R$ 2.000,00",
+        features: "Identidade visual completa | Materiais para redes sociais | Apresentações profissionais | Brand guide e diretrizes de uso",
+        cta: "Solicitar Orçamento",
+      },
+      {
+        name: "Consultoria de TI",
+        description: "Maximize a eficiência do seu negócio com tecnologia inteligente. Analisamos seus processos, identificamos gargalos e implementamos soluções que reduzem custos e aceleram resultados.",
+        price: "R$ 3.500,00",
+        features: "Diagnóstico tecnológico completo | Otimização de processos e infraestrutura | Segurança da informação | Suporte e acompanhamento contínuo",
+        cta: "Solicitar Orçamento",
+      },
     ],
   },
 

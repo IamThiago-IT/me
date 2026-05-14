@@ -149,11 +149,30 @@ Best regards,
   // Services
   services: {
     title: "Our Services",
+    subtitle: "Complete solutions to boost your business with technology, design, and strategy.",
     price: "Price",
     items: [
-      { name: "Web Development", description: "Creation of modern and responsive websites and web applications.", price: "$1,000.00" },
-      { name: "Graphic Design", description: "Logo design, banners, and visual materials.", price: "$400.00" },
-      { name: "IT Consulting", description: "Customized solutions to optimize your technology processes.", price: "$700.00" },
+      {
+        name: "Web Development",
+        description: "Turn your idea into a results-driven machine. We build custom websites and applications with modern design, exceptional performance, and a laser focus on conversion.",
+        price: "$1,000.00",
+        features: "Responsive & modern design | Search engine optimization (SEO) | Blazing-fast load times | API and tool integrations",
+        cta: "Get a Quote",
+      },
+      {
+        name: "Graphic Design",
+        description: "Your brand deserves an unforgettable visual identity. From logos to marketing materials, we create strategic designs that communicate your value and attract customers.",
+        price: "$400.00",
+        features: "Complete visual identity | Social media materials | Professional presentations | Brand guidelines",
+        cta: "Get a Quote",
+      },
+      {
+        name: "IT Consulting",
+        description: "Maximize your business efficiency with smart technology. We analyze your processes, identify bottlenecks, and implement solutions that reduce costs and accelerate results.",
+        price: "$700.00",
+        features: "Complete tech diagnosis | Process & infrastructure optimization | Information security | Ongoing support",
+        cta: "Get a Quote",
+      },
     ],
   },
 
