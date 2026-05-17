@@ -1,36 +1,41 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { LanguageSwitcher } from "@/components/LanguageSwitcher"
-import { useI18n } from "@/lib/i18n"
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export function Navbar() {
-	const pathname = usePathname()
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const { t } = useI18n()
+	const pathname = usePathname();
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const { t } = useI18n();
 
 	const menuItems = [
 		{ label: t.nav.home, href: "/" },
 		{ label: t.nav.about, href: "/about" },
 		{ label: t.nav.projects, href: "/projetos" },
+		{ label: "Design", href: "/design" },
 		{ label: t.nav.schedule, href: "/agendar" },
 		{ label: t.nav.contracts, href: "/contratos" },
 		{ label: t.nav.feedbacks, href: "/feedbacks" },
 		{ label: t.nav.contact, href: "/contato" },
+		{ label: t.nav.payments, href: "/pagamentos" },
 		{ label: t.nav.papers, href: "/papers" },
 		{ label: t.nav.changelog, href: "/changelog" },
-	]
+	];
 
 	return (
 		<nav className="bg-white text-black dark:bg-black dark:text-white shadow-sm fixed w-full z-10">
 			<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-14 sm:h-16">
 					<div className="flex-shrink-0 flex items-center">
-						<Link href="/" className="text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity">
+						<Link
+							href="/"
+							className="text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity"
+						>
 							IamThiago
 						</Link>
 					</div>
@@ -74,7 +79,9 @@ export function Navbar() {
 			</div>
 
 			{/* Menu móvel */}
-			<div className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-screen" : "max-h-0"}`}>
+			<div
+				className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-screen" : "max-h-0"}`}
+			>
 				<div className="px-3 py-2 space-y-1 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
 					{menuItems.map((item) => (
 						<Link
@@ -97,5 +104,5 @@ export function Navbar() {
 				</div>
 			</div>
 		</nav>
-	)
+	);
 }

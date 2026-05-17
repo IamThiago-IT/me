@@ -13,6 +13,7 @@ import {
   Newspaper,
   Settings,
   Gift,
+  CreditCard,
   Clock,
   UserCircle,
   Code,
@@ -162,6 +163,10 @@ export function CommandDialogDemo() {
             <CommandItem onSelect={() => navigate("/sponsors")}>
               <Gift />
               <span>{t.command.supporters}</span>
+            </CommandItem>
+            <CommandItem onSelect={() => navigate("/pagamentos")}>
+              <CreditCard />
+              <span>{t.command.payments}</span>
             </CommandItem>
             <CommandItem onSelect={() => navigate("/setup")}>
               <Settings />

@@ -2,13 +2,17 @@ import { CommandDialogDemo } from "@/components/CommandDialogDemo";
 import { Navbar } from "@/components/Navbar";
 import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "next-themes";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import type React from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-geist-sans" });
+const jetbrainsMono = JetBrains_Mono({
+	subsets: ["latin"],
+	variable: "--font-geist-mono",
+});
 
 export const metadata = {
 	title: "IamThiago",
@@ -22,7 +26,9 @@ export default function Layout({
 }) {
 	return (
 		<html lang="pt-BR" suppressHydrationWarning className="custom-scrollbar">
-			<body className={`${inter.className} custom-scrollbar`}>
+			<body
+				className={`${inter.className} ${jetbrainsMono.variable} custom-scrollbar`}
+			>
 				<I18nProvider>
 					<ThemeProvider attribute="class" defaultTheme="system">
 						<Navbar />
@@ -35,7 +41,8 @@ export default function Layout({
 							position="top-right"
 							richColors
 							toastOptions={{
-								className: 'text-sm sm:text-base max-w-xs sm:max-w-sm md:max-w-md',
+								className:
+									"text-sm sm:text-base max-w-xs sm:max-w-sm md:max-w-md",
 							}}
 						/>
 					</ThemeProvider>

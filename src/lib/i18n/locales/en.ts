@@ -10,6 +10,7 @@ const en = {
     contact: "Contact",
     papers: "Papers",
     changelog: "Changelog",
+    payments: "Payments",
     openMenu: "Open main menu",
   },
 
@@ -176,6 +177,44 @@ Best regards,
     ],
   },
 
+  // Payments
+  payments: {
+    title: "Payment Methods",
+    subtitle: "We accept several payment methods for your convenience. Choose the one that works best for you.",
+    items: [
+      {
+        name: "Pix",
+        description: "Instant transfers available 24 hours a day, 7 days a week. The fastest and most practical payment method in Brazil.",
+        benefits: "Instant payment | Available 24/7 | No additional fees | Real-time confirmation",
+      },
+      {
+        name: "Credit/Debit Card",
+        description: "Installments up to 12x with major card brands. Secure and fast processing.",
+        benefits: "Up to 12 installments | Visa, Mastercard, Elo, Amex | Secure environment | Quick approval",
+      },
+      {
+        name: "Boleto Bancário",
+        description: "Secure traditional payment with up to 3 business days maturity. We process your order after confirmation.",
+        benefits: "Up to 3 business days to pay | No registration needed | Pay at any bank | Traditional security",
+      },
+      {
+        name: "Bank Transfer",
+        description: "Direct transfer to our account. Fast processing for TED and interbank transfers.",
+        benefits: "Direct transfer | Fast processing | Ideal for large amounts | Instant receipt",
+      },
+      {
+        name: "PayPal",
+        description: "Secure international payment with buyer protection. Accepted in over 200 countries.",
+        benefits: "Buyer protection | Accepted worldwide | Multi-currency payments | Enhanced security",
+      },
+      {
+        name: "Cryptocurrencies",
+        description: "Decentralized and secure payment. We accept Bitcoin, Ethereum, and USDT.",
+        benefits: "Decentralized & secure | Bitcoin, Ethereum, USDT | International transactions | Low fees",
+      },
+    ],
+  },
+
   // Sponsors
   sponsors: {
     title: "Sponsors",
@@ -327,6 +366,7 @@ Best regards,
     supporters: "Supporters",
     setup: "Setup",
     papers: "Papers",
+    payments: "Payments",
   },
 
   // Timeline

@@ -10,6 +10,7 @@ const ptBR = {
     contact: "Contato",
     papers: "Papers",
     changelog: "Changelog",
+    payments: "Pagamentos",
     openMenu: "Abrir menu principal",
   },
 
@@ -176,6 +177,44 @@ Atenciosamente,
     ],
   },
 
+  // Payments
+  payments: {
+    title: "Métodos de Pagamento",
+    subtitle: "Aceitamos diversas formas de pagamento para sua comodidade. Escolha a que melhor se encaixa para você.",
+    items: [
+      {
+        name: "Pix",
+        description: "Transferências instantâneas disponíveis 24 horas por dia, 7 dias por semana. O método mais rápido e prático do Brasil.",
+        benefits: "Pagamento instantâneo | Disponível 24/7 | Sem taxas adicionais | Confirmação na hora",
+      },
+      {
+        name: "Cartão de Crédito/Débito",
+        description: "Parcelamento em até 12x com as principais bandeiras. Processamento seguro e rápido.",
+        benefits: "Parcelamento em até 12x | Bandeiras: Visa, Mastercard, Elo, Amex | Ambiente seguro | Aprovação rápida",
+      },
+      {
+        name: "Boleto Bancário",
+        description: "Pagamento seguro e tradicional com vencimento em até 3 dias úteis. Processamos seu pedido após a confirmação.",
+        benefits: "Vencimento em até 3 dias úteis | Sem necessidade de cadastro | Pagamento em qualquer banco | Segurança tradicional",
+      },
+      {
+        name: "Transferência Bancária",
+        description: "Transferência direta para nossa conta. Processamento rápido para TED e transferências entre contas.",
+        benefits: "Transferência direta | Processamento ágil | Ideal para grandes valores | Comprovante imediato",
+      },
+      {
+        name: "PayPal",
+        description: "Pagamento internacional seguro com proteção ao comprador. Aceito em mais de 200 países.",
+        benefits: "Proteção ao comprador | Aceito mundialmente | Pagamento em diversas moedas | Segurança reforçada",
+      },
+      {
+        name: "Criptomoedas",
+        description: "Pagamento descentralizado e seguro. Aceitamos Bitcoin, Ethereum e USDT.",
+        benefits: "Descentralizado e seguro | Bitcoin, Ethereum e USDT | Transações internacionais | Taxas reduzidas",
+      },
+    ],
+  },
+
   // Sponsors
   sponsors: {
     title: "Patrocinadores",
@@ -327,6 +366,7 @@ Atenciosamente,
     supporters: "Apoiadores",
     setup: "Setup",
     papers: "Artigos Científicos",
+    payments: "Pagamentos",
   },
 
   // Timeline
