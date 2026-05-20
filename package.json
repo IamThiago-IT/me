@@ -18,8 +18,14 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "pages:deploy": "wrangler pages deploy .next",
-    "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "postinstall": "prisma generate --schema=./prisma/schema/schema.prisma && prisma generate --schema=./prisma/schema/services.prisma",
+    "vercel-build": "prisma generate --schema=./prisma/schema/schema.prisma && prisma generate --schema=./prisma/schema/services.prisma && prisma migrate deploy --schema=./prisma/schema/schema.prisma && prisma migrate deploy --schema=./prisma/schema/services.prisma && next build",
+    "db:generate": "prisma generate --schema=./prisma/schema/schema.prisma && prisma generate --schema=./prisma/schema/services.prisma",
+    "db:migrate": "prisma migrate dev --schema=./prisma/schema/schema.prisma",
+    "db:migrate:services": "prisma migrate dev --schema=./prisma/schema/services.prisma",
+    "db:deploy": "prisma migrate deploy --schema=./prisma/schema/schema.prisma && prisma migrate deploy --schema=./prisma/schema/services.prisma",
+    "db:studio": "prisma studio --schema=./prisma/schema/schema.prisma",
+    "db:studio:services": "prisma studio --schema=./prisma/schema/services.prisma"
   },
   "dependencies": {
     "@polar-sh/nextjs": "^0.4.4",

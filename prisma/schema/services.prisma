@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/services"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["public", "services"]
+}
+
+// ─── Services ───────────────────────────────────────────────
+
+model Service {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  iconKey   String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Translations
+  namePt     String
+  nameEn     String
+  descPt     String @db.Text
+  descEn     String @db.Text
+  ctaPt      String
+  ctaEn      String
+  deliveryPt String
+  deliveryEn String
+
+  // Preços por moeda
+  priceFromBrl String
+  priceToBrl   String?
+  priceFromUsd String
+  priceToUsd   String?
+
+  features ServiceFeature[]
+
+  @@schema("services")
+}
+
+model ServiceFeature {
+  id        Int     @id @default(autoincrement())
+  serviceId Int
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  order     Int
+
+  textPt String
+  textEn String
+
+  @@schema("services")
+}
+
+// ─── Process Steps ──────────────────────────────────────────
+
+model ProcessStep {
+  id      Int    @id @default(autoincrement())
+  order   Int    @unique
+  iconKey String
+  titlePt String
+  titleEn String
+  descPt  String @db.Text
+  descEn  String @db.Text
+
+  @@schema("services")
+}
+
+// ─── FAQ ────────────────────────────────────────────────────
+
+model FaqItem {
+  id         Int    @id @default(autoincrement())
+  order      Int    @default(0)
+  questionPt String @db.Text
+  questionEn String @db.Text
+  answerPt   String @db.Text
+  answerEn   String @db.Text
+
+  @@schema("services")
+}

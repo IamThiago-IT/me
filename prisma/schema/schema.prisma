@@ -5,6 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["public"]
 }
 
 model User {
@@ -12,6 +13,8 @@ model User {
   email String  @unique
   name  String?
   posts Post[]
+
+  @@schema("public")
 }
 
 model Post {
@@ -21,4 +24,6 @@ model Post {
   published Boolean @default(false)
   author    User    @relation(fields: [authorId], references: [id])
   authorId  Int
+
+  @@schema("public")
 }
