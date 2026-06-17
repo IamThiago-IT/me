@@ -27,3 +27,20 @@ model Post {
 
   @@schema("public")
 }
+
+model Certificate {
+  id            Int       @id @default(autoincrement())
+  title         String
+  issuer        String
+  issuerUrl     String?
+  description   String?
+  credentialUrl String?
+  imageUrl      String?
+  issuedAt      DateTime?
+  expiresAt     DateTime?
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@schema("public")
+}

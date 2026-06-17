@@ -32,6 +32,7 @@ const en = {
 			"I'm a full-stack developer with experience in React, Node.js, and TypeScript. My passion is building high-performance, scalable web applications.",
 		skills: "Skills",
 		languages: "Languages",
+		certificates: "Certificates",
 		portuguese: "Portuguese",
 		english: "English",
 		spanish: "Spanish",
@@ -41,6 +42,9 @@ const en = {
 		myJourney: "My Journey",
 		journeyDescription:
 			"Learn more about my professional and academic journey in detail.",
+		certificatesDescription:
+			"See the courses, training, and certifications that complement my journey.",
+		viewCertificates: "View Certificates",
 		viewTimeline: "View Timeline",
 		backToAbout: "Back to About Me",
 	},

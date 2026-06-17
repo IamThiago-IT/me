@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Post = Prisma.PostModel
+/**
+ * Model Certificate
+ * 
+ */
+export type Certificate = Prisma.CertificateModel

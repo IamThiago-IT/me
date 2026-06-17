@@ -32,6 +32,7 @@ const ptBR = {
 			"Sou um desenvolvedor full-stack com experiência em React, Node.js e TypeScript. Minha paixão é criar aplicações web performáticas e escaláveis.",
 		skills: "Habilidades",
 		languages: "Idiomas",
+		certificates: "Certificados",
 		portuguese: "Português",
 		english: "Inglês",
 		spanish: "Espanhol",
@@ -41,6 +42,9 @@ const ptBR = {
 		myJourney: "Minha Trajetória",
 		journeyDescription:
 			"Conheça mais sobre minha jornada profissional e acadêmica em detalhes.",
+		certificatesDescription:
+			"Veja cursos, formações e certificações que complementam minha trajetória.",
+		viewCertificates: "Ver Certificados",
 		viewTimeline: "Ver Linha do Tempo",
 		backToAbout: "Voltar para Sobre Mim",
 	},

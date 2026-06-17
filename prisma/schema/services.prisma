@@ -1,3 +1,13 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/services"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["services"]
+}
+
 model Service {
   id        Int      @id @default(autoincrement())
   slug      String   @unique

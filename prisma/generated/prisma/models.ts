@@ -10,4 +10,5 @@
  */
 export type * from './models/User'
 export type * from './models/Post'
+export type * from './models/Certificate'
 export type * from './commonInputTypes'
