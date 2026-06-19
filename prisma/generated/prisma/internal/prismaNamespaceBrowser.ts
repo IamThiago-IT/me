@@ -53,7 +53,19 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Post: 'Post',
-  Certificate: 'Certificate'
+  Certificate: 'Certificate',
+  TimelineEntry: 'TimelineEntry',
+  TimelineProject: 'TimelineProject',
+  Feedback: 'Feedback',
+  Event: 'Event',
+  Sponsor: 'Sponsor',
+  DiscountCode: 'DiscountCode',
+  ContractTemplate: 'ContractTemplate',
+  Contract: 'Contract',
+  PaymentMethod: 'PaymentMethod',
+  Skill: 'Skill',
+  Language: 'Language',
+  CoverLetter: 'CoverLetter'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -108,6 +120,175 @@ export const CertificateScalarFieldEnum = {
 } as const
 
 export type CertificateScalarFieldEnum = (typeof CertificateScalarFieldEnum)[keyof typeof CertificateScalarFieldEnum]
+
+
+export const TimelineEntryScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  title: 'title',
+  company: 'company',
+  companyUrl: 'companyUrl',
+  period: 'period',
+  description: 'description',
+  skills: 'skills',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type TimelineEntryScalarFieldEnum = (typeof TimelineEntryScalarFieldEnum)[keyof typeof TimelineEntryScalarFieldEnum]
+
+
+export const TimelineProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  link: 'link',
+  timelineEntryId: 'timelineEntryId',
+  createdAt: 'createdAt'
+} as const
+
+export type TimelineProjectScalarFieldEnum = (typeof TimelineProjectScalarFieldEnum)[keyof typeof TimelineProjectScalarFieldEnum]
+
+
+export const FeedbackScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  company: 'company',
+  project: 'project',
+  category: 'category',
+  rating: 'rating',
+  comment: 'comment',
+  image: 'image',
+  date: 'date',
+  createdAt: 'createdAt'
+} as const
+
+export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  date: 'date',
+  time: 'time',
+  location: 'location',
+  type: 'type',
+  tags: 'tags',
+  url: 'url',
+  isUpcoming: 'isUpcoming',
+  createdAt: 'createdAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const SponsorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  logo: 'logo',
+  tag: 'tag',
+  link: 'link',
+  createdAt: 'createdAt'
+} as const
+
+export type SponsorScalarFieldEnum = (typeof SponsorScalarFieldEnum)[keyof typeof SponsorScalarFieldEnum]
+
+
+export const DiscountCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  description: 'description',
+  sponsorId: 'sponsorId'
+} as const
+
+export type DiscountCodeScalarFieldEnum = (typeof DiscountCodeScalarFieldEnum)[keyof typeof DiscountCodeScalarFieldEnum]
+
+
+export const ContractTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  projectName: 'projectName',
+  projectDescription: 'projectDescription',
+  value: 'value',
+  paymentTerms: 'paymentTerms',
+  warranty: 'warranty',
+  supportMonths: 'supportMonths',
+  createdAt: 'createdAt'
+} as const
+
+export type ContractTemplateScalarFieldEnum = (typeof ContractTemplateScalarFieldEnum)[keyof typeof ContractTemplateScalarFieldEnum]
+
+
+export const ContractScalarFieldEnum = {
+  id: 'id',
+  clientName: 'clientName',
+  clientDocument: 'clientDocument',
+  clientEmail: 'clientEmail',
+  clientPhone: 'clientPhone',
+  projectName: 'projectName',
+  projectDescription: 'projectDescription',
+  value: 'value',
+  paymentTerms: 'paymentTerms',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  warranty: 'warranty',
+  supportMonths: 'supportMonths',
+  status: 'status',
+  signedDate: 'signedDate',
+  contractNumber: 'contractNumber',
+  createdAt: 'createdAt'
+} as const
+
+export type ContractScalarFieldEnum = (typeof ContractScalarFieldEnum)[keyof typeof ContractScalarFieldEnum]
+
+
+export const PaymentMethodScalarFieldEnum = {
+  id: 'id',
+  namePt: 'namePt',
+  nameEn: 'nameEn',
+  descriptionPt: 'descriptionPt',
+  descriptionEn: 'descriptionEn',
+  benefitsPt: 'benefitsPt',
+  benefitsEn: 'benefitsEn',
+  order: 'order'
+} as const
+
+export type PaymentMethodScalarFieldEnum = (typeof PaymentMethodScalarFieldEnum)[keyof typeof PaymentMethodScalarFieldEnum]
+
+
+export const SkillScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon',
+  order: 'order'
+} as const
+
+export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof SkillScalarFieldEnum]
+
+
+export const LanguageScalarFieldEnum = {
+  id: 'id',
+  namePt: 'namePt',
+  nameEn: 'nameEn',
+  levelPt: 'levelPt',
+  levelEn: 'levelEn',
+  cefr: 'cefr',
+  order: 'order'
+} as const
+
+export type LanguageScalarFieldEnum = (typeof LanguageScalarFieldEnum)[keyof typeof LanguageScalarFieldEnum]
+
+
+export const CoverLetterScalarFieldEnum = {
+  id: 'id',
+  contentPt: 'contentPt',
+  contentEn: 'contentEn',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CoverLetterScalarFieldEnum = (typeof CoverLetterScalarFieldEnum)[keyof typeof CoverLetterScalarFieldEnum]
 
 
 export const SortOrder = {

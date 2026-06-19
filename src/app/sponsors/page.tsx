@@ -1,23 +1,20 @@
 "use client";
 import { MetadataSetter } from "@/components/MetadataSetter";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Copy } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { toast } from "sonner";
-
-const sponsors = [
-  { id: 1, name: "Empresa X", description: "Líder em soluções tecnológicas para empresas de todos os portes.", logo: "/public/globe.svg", tag: "Tecnologia", link: "https://empresax.com" },
-  { id: 2, name: "Empresa Y", description: "Especialista em marketing digital e estratégias de crescimento.", logo: "/public/next.svg", tag: "Marketing", link: "https://empresay.com" },
-  { id: 3, name: "Empresa Z", description: "Inovação em produtos sustentáveis para um futuro melhor.", logo: null, tag: "Sustentabilidade", link: "https://empresaz.com" },
-];
-
-const discountCodes = [
-  { id: 1, code: "DESCONTO10", description: "10% off em compras acima de R$100" },
-  { id: 2, code: "FRETEGRATIS", description: "Frete grátis no primeiro pedido" },
-];
+import { fetchSponsors, fetchDiscountCodes } from "@/lib/db/actions";
 
 export default function Sponsors() {
   const { t } = useI18n();
+  const [sponsors, setSponsors] = useState<any[]>([]);
+  const [discountCodes, setDiscountCodes] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchSponsors().then(setSponsors);
+    fetchDiscountCodes().then(setDiscountCodes);
+  }, []);
 
   const copyCode = (code: string) => {
     navigator.clipboard.writeText(code);

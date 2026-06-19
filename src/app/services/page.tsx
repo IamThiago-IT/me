@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { MetadataSetter } from "@/components/MetadataSetter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,7 +30,7 @@ import {
 	ShoppingCart,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { fetchServicesFromDb, fetchProcessStepsFromDb, fetchFaqItemsFromDb } from "@/lib/db/actions";
 
 const serviceIcons = [
 	Laptop,
@@ -43,8 +44,31 @@ const serviceIcons = [
 const processIcons = [Search, PencilRuler, Code2, Rocket, Headphones];
 
 export default function Services() {
-	const { t } = useI18n();
+	const { t, locale } = useI18n();
 	const [openFaq, setOpenFaq] = useState<number | null>(null);
+	const [services, setServices] = useState<any[]>([]);
+	const [processSteps, setProcessSteps] = useState<any[]>([]);
+	const [faqItems, setFaqItems] = useState<any[]>([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		Promise.all([
+			fetchServicesFromDb(),
+			fetchProcessStepsFromDb(),
+			fetchFaqItemsFromDb(),
+		]).then(([svcs, steps, faq]) => {
+			setServices(svcs);
+			setProcessSteps(steps);
+			setFaqItems(faq);
+			setLoading(false);
+		});
+	}, []);
+
+	const isPt = locale === "pt-BR";
+
+	if (loading) {
+		return <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600"></div></div>;
+	}
 
 	return (
 		<div className="flex flex-col">
@@ -62,13 +86,17 @@ export default function Services() {
 
 			{/* Services Grid */}
 			<div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16 sm:mb-24">
-				{t.services.items.map((service, index) => {
+				{services.map((service, index) => {
 					const Icon = serviceIcons[index];
-					const features = service.features.split(" | ");
+					const name = isPt ? service.namePt : service.nameEn;
+					const description = isPt ? service.descriptionPt : service.descriptionEn;
+					const features = (isPt ? service.featuresPt : service.featuresEn).split(" | ");
+					const cta = isPt ? service.ctaPt : service.ctaEn;
+					const delivery = isPt ? service.deliveryPt : service.deliveryEn;
 
 					return (
 						<Card
-							key={service.name}
+							key={service.id}
 							className="group flex flex-col hover:shadow-lg hover:border-indigo-300 dark:hover:border-indigo-500 transition-all duration-300"
 						>
 							<CardHeader className="pb-3">
@@ -76,15 +104,15 @@ export default function Services() {
 									<Icon className="w-6 h-6 text-indigo-500" />
 								</div>
 								<CardTitle className="text-lg sm:text-xl">
-									{service.name}
+									{name}
 								</CardTitle>
 								<CardDescription className="text-sm leading-relaxed mt-2">
-									{service.description}
+									{description}
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="flex flex-col flex-1">
 								<div className="space-y-2 mb-6">
-									{features.map((feature) => (
+									{features.map((feature: string) => (
 										<div
 											key={feature}
 											className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
@@ -98,37 +126,33 @@ export default function Services() {
 								<div className="mt-auto pt-4 border-t">
 									<div className="flex items-center justify-between mb-4">
 										<div>
-											{service.priceTo ? (
+											{service.priceToBrl ? (
 												<div className="flex items-baseline gap-1">
-													<span className="text-xs text-muted-foreground">
-														a partir de
-													</span>
+													<span className="text-xs text-muted-foreground">a partir de</span>
 													<span className="text-xl font-bold text-green-600 dark:text-green-400">
-														{service.priceFrom}
+														{isPt ? service.priceFromBrl : service.priceFromUsd}
 													</span>
-													<span className="text-xs text-muted-foreground">
-														até
-													</span>
+													<span className="text-xs text-muted-foreground">até</span>
 													<span className="text-xl font-bold text-green-600 dark:text-green-400">
-														{service.priceTo}
+														{isPt ? service.priceToBrl : service.priceToUsd}
 													</span>
 												</div>
 											) : (
 												<div className="flex items-baseline gap-1">
 													<span className="text-xl font-bold text-green-600 dark:text-green-400">
-														{service.priceFrom}
+														{isPt ? service.priceFromBrl : service.priceFromUsd}
 													</span>
 												</div>
 											)}
 										</div>
 										<Badge variant="secondary" className="text-xs">
 											<Clock className="w-3 h-3 mr-1" />
-											{service.delivery}
+											{delivery}
 										</Badge>
 									</div>
 									<Button asChild className="w-full font-medium">
 										<Link href="/contato">
-											{service.cta}
+											{cta}
 											<ArrowRight className="ml-2 h-4 w-4" />
 										</Link>
 									</Button>
@@ -147,11 +171,13 @@ export default function Services() {
 				<div className="relative">
 					<div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-border" />
 					<div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8">
-					{t.services.process.steps.map((step, index) => {
+					{processSteps.map((step, index) => {
 						const Icon = processIcons[index];
+						const title = isPt ? step.titlePt : step.titleEn;
+						const desc = isPt ? step.descPt : step.descEn;
 							return (
 								<div
-									key={step.title}
+									key={step.id}
 									className="relative flex md:flex-col items-start md:items-center gap-4 md:gap-0"
 								>
 									<div className="relative z-10 w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0 shadow-lg">
@@ -162,10 +188,10 @@ export default function Services() {
 											<span className="text-xs font-mono text-muted-foreground">
 												{String(index + 1).padStart(2, "0")}
 											</span>
-											<h3 className="font-semibold">{step.title}</h3>
+											<h3 className="font-semibold">{title}</h3>
 										</div>
 										<p className="text-sm text-muted-foreground">
-											{step.description}
+											{desc}
 										</p>
 									</div>
 								</div>
@@ -181,36 +207,40 @@ export default function Services() {
 					{t.services.faq.title}
 				</h2>
 				<div className="space-y-3">
-					{t.services.faq.items.map((item, index) => (
-						<div
-							key={item.question}
-							className="border rounded-lg overflow-hidden transition-all"
-						>
-							<button
-								type="button"
-								onClick={() => setOpenFaq(openFaq === index ? null : index)}
-								className="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-muted/50 transition-colors"
-							>
-								<span className="font-medium text-sm sm:text-base pr-4">
-									{item.question}
-								</span>
-								<ChevronDown
-									className={`w-5 h-5 shrink-0 text-muted-foreground transition-transform duration-200 ${
-										openFaq === index ? "rotate-180" : ""
-									}`}
-								/>
-							</button>
+					{faqItems.map((item, index) => {
+						const question = isPt ? item.questionPt : item.questionEn;
+						const answer = isPt ? item.answerPt : item.answerEn;
+						return (
 							<div
-								className={`overflow-hidden transition-all duration-300 ${
-									openFaq === index ? "max-h-96" : "max-h-0"
-								}`}
+								key={item.id}
+								className="border rounded-lg overflow-hidden transition-all"
 							>
-								<p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-muted-foreground leading-relaxed">
-									{item.answer}
-								</p>
+								<button
+									type="button"
+									onClick={() => setOpenFaq(openFaq === index ? null : index)}
+									className="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-muted/50 transition-colors"
+								>
+									<span className="font-medium text-sm sm:text-base pr-4">
+										{question}
+									</span>
+									<ChevronDown
+										className={`w-5 h-5 shrink-0 text-muted-foreground transition-transform duration-200 ${
+											openFaq === index ? "rotate-180" : ""
+										}`}
+									/>
+								</button>
+								<div
+									className={`overflow-hidden transition-all duration-300 ${
+										openFaq === index ? "max-h-96" : "max-h-0"
+									}`}
+								>
+									<p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-muted-foreground leading-relaxed">
+										{answer}
+									</p>
+								</div>
 							</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</div>
 

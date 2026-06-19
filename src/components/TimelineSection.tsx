@@ -1,125 +1,19 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Briefcase, GraduationCap, Calendar, ArrowUpDown } from "lucide-react"
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
-
-const timelineEntries: TimelineEntryProps["entry"][] = [
-  {
-    id: 6,
-    type: "education",
-    title: "Técnico em Informática para Internet",
-    company: "SENAI",
-    companyUrl: "https://www.portaldaindustria.com.br/senai/",
-    period: "2019 - 2020",
-    description: "Curso técnico focado em desenvolvimento de aplicações web e manutenção de sistemas.",
-    skills: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
-    projects: [
-      {
-        name: "Cella - Sistema de Gerenciamento de Almoxarifado",
-        description: "Desenvolvimento de um sistema completo para gerenciamento de almoxarifado, incluindo cadastro de produtos, controle de estoque e geração de relatórios.",
-        link: "https://github.com/IamThiago-IT/cella",
-      },
-    ],
-  },
-  {
-    id: 3,
-    type: "education",
-    title: "Análise e Desenvolvimento de Sistemas",
-    company: "Universidade Federal do Paraná (UFPR)",
-    companyUrl: "https://universidadetech.edu",
-    period: "2021 - 2024",
-    description: "Foco em desenvolvimento de software, algoritmos e estruturas de dados.",
-    skills: ["Algoritmos", "Java", "Estruturas de Dados", "Banco de Dados"],
-    projects: [
-      {
-        name: "Sistema de Recomendação de Filmes",
-        description:
-          "Projeto de conclusão de curso utilizando aprendizado de máquina para recomendações personalizadas.",
-        link: "https://github.com/IamThiago-IT/movie-recommender",
-      },
-    ],
-  },
-  {
-    id: 2,
-    type: "experience",
-    title: "Desenvolvedor Front-end",
-    company: "WebSolutions",
-    companyUrl: "https://websolutions.com",
-    period: "Mar 2020 - Dez 2021",
-    description: "Criação de interfaces responsivas e acessíveis para aplicações web de alto tráfego.",
-    skills: ["JavaScript", "React", "CSS", "Acessibilidade Web"],
-    projects: [
-      {
-        name: "Redesign do Portal de Notícias",
-        description: "Liderou o redesign completo do portal, melhorando o tempo de carregamento em 60%.",
-        link: "https://github.com/IamThiago-IT/news-portal-redesign",
-      },
-    ],
-  },
-  {
-    id: 1,
-    type: "experience",
-    title: "Desenvolvedor Full Stack Senior",
-    company: "TechCorp",
-    companyUrl: "https://techcorp.com",
-    period: "Jan 2022 - Presente",
-    description:
-      "Liderando o desenvolvimento de aplicações web escaláveis, implementando arquiteturas modernas e mentorando desenvolvedores juniores.",
-    skills: ["React", "Node.js", "AWS", "GraphQL", "Liderança Técnica"],
-    projects: [
-      {
-        name: "Sistema de Gerenciamento de Clientes",
-        description: "Desenvolveu um sistema completo para gerenciamento de clientes, aumentando a eficiência em 40%.",
-        link: "https://github.com/IamThiago-IT/customer-management",
-      },
-    ],
-  },
-  {
-    id: 4,
-    type: "education",
-    title: "Mestrado em Computação Aplicada",
-    company: "Universidade Tecnológica Federal do Paraná (UTFPR)",
-    companyUrl: "https://utfpr.edu.br",
-    period: "2024 - 2026",
-    description: "Pesquisa em inteligência artificial e aprendizado de máquina.",
-    skills: ["Inteligência Artificial", "Aprendizado de Máquina", "Python", "Pesquisa"],
-    projects: [
-      {
-        name: "Sistema de Diagnóstico Médico",
-        description: "Desenvolvimento de um sistema de diagnóstico médico utilizando redes neurais.",
-        link: "https://github.com/IamThiago-IT/medical-diagnosis-system",
-      },
-    ],
-  },
-  {
-    id: 5,
-    type: "education",
-    title: "Doutorado em Ciência da Computação",
-    company: "Universidade Federal do Paraná (UFPR)",
-    companyUrl: "https://universidadetech.edu",
-    period: "2026 - 2030",
-    description: "Pesquisa avançada em inteligência artificial e aprendizado profundo.",
-    skills: ["Inteligência Artificial", "Aprendizado Profundo", "Python", "Pesquisa Avançada"],
-    projects: [
-      {
-        name: "Sistema de Previsão de Doenças",
-        description: "Desenvolvimento de um sistema de previsão de doenças utilizando aprendizado profundo.",
-        link: "https://github.com/IamThiago-IT/disease-prediction-system",
-      },
-    ],
-  },
-]
+import { fetchTimelineEntries } from "@/lib/db/actions"
 
 interface TimelineEntryProps {
   entry: {
     id: number
-    type: "experience" | "education"
+    type: string
     title: string
     company: string
     companyUrl: string
@@ -127,10 +21,15 @@ interface TimelineEntryProps {
     description: string
     skills: string[]
     projects: {
+      id: number
       name: string
       description: string
       link: string
+      timelineEntryId: number
+      createdAt: Date
     }[]
+    order: number
+    createdAt: Date
   }
   index: number
 }
@@ -138,7 +37,7 @@ interface TimelineEntryProps {
 const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry, index }) => {
   const IconComponent = entry.type === "experience" ? Briefcase : GraduationCap
   const isExperience = entry.type === "experience"
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   // Alternância: par à esquerda, ímpar à direita (em desktop)
   const isLeft = index % 2 === 0
@@ -201,7 +100,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ entry, index }) => {
 const TimelineEntryMobile: React.FC<TimelineEntryProps> = ({ entry, index }) => {
   const IconComponent = entry.type === "experience" ? Briefcase : GraduationCap
   const isExperience = entry.type === "experience"
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   return (
     <motion.div
@@ -321,9 +220,18 @@ const EntryContent: React.FC<EntryContentProps> = ({ entry, t }) => {
 export default function TimelineSection() {
   const [isReversed, setIsReversed] = useState(false)
   const [filterType, setFilterType] = useState<"all" | "education" | "experience">("all")
+  const [entries, setEntries] = useState<TimelineEntryProps["entry"][]>([])
+  const [loading, setLoading] = useState(true)
   const { t } = useI18n()
 
-  const sortedEntries = [...timelineEntries].sort((a, b) => {
+  useEffect(() => {
+    fetchTimelineEntries().then((data) => {
+      setEntries(data);
+      setLoading(false);
+    });
+  }, []);
+
+  const sortedEntries = [...entries].sort((a, b) => {
     const parseDate = (period: string): number => {
       const [start, end] = period.split(" - ").map((date: string) => date.trim())
       const dateStr = end || start
@@ -340,6 +248,17 @@ export default function TimelineSection() {
     { key: "education", label: t.timeline.education, color: "bg-secondary text-secondary-foreground hover:bg-secondary/80", activeColor: "bg-emerald-600 text-white shadow-sm" },
     { key: "experience", label: t.timeline.work, color: "bg-secondary text-secondary-foreground hover:bg-secondary/80", activeColor: "bg-blue-600 text-white shadow-sm" },
   ]
+
+  if (loading) {
+    return (
+      <section>
+        <h2 className="text-3xl font-bold mb-2 text-center">{t.timeline.title}</h2>
+        <div className="flex items-center justify-center h-48">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section>

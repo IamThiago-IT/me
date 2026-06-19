@@ -8,70 +8,20 @@ import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MetadataSetter } from "@/components/MetadataSetter"
 import { useI18n } from "@/lib/i18n"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { fetchFeedbacks } from "@/lib/db/actions"
 
-const feedbacks = [
-	{
-		id: 1,
-		name: "João Silva",
-		company: "Tech Solutions",
-		project: "E-commerce Platform",
-		category: "Web Development",
-		rating: 5,
-		comment:
-			"Excelente trabalho! Entregou o projeto antes do prazo e com qualidade excepcional. A comunicação foi clara durante todo o processo.",
-		image: "/placeholder.svg?height=80&width=80",
-		date: "Março 2026",
-	},
-	{
-		id: 2,
-		name: "Maria Santos",
-		company: "Digital Agency",
-		project: "Website Redesign",
-		category: "Design",
-		rating: 5,
-		comment:
-			"Muito profissional e atencioso. Compreendeu perfeitamente nossas necessidades e superou as expectativas.",
-		image: "/placeholder.svg?height=80&width=80",
-		date: "Fevereiro 2026",
-	},
-	{
-		id: 3,
-		name: "Carlos Oliveira",
-		company: "StartUp XY",
-		project: "Mobile App",
-		category: "Mobile",
-		rating: 5,
-		comment:
-			"Desenvolvimento impecável. O aplicativo ficou exatamente como imaginávamos, com performance excelente.",
-		image: "/placeholder.svg?height=80&width=80",
-		date: "Janeiro 2026",
-	},
-	{
-		id: 4,
-		name: "Ana Costa",
-		company: "E-commerce Hub",
-		project: "API Integration",
-		category: "Backend",
-		rating: 5,
-		comment:
-			"Resolveu nosso problema de integração em tempo recorde. Muito competente e dedicado ao projeto.",
-		image: "/placeholder.svg?height=80&width=80",
-		date: "Dezembro 2025",
-	},
-	{
-		id: 5,
-		name: "Roberto Martins",
-		company: "Corporate Finance",
-		project: "Dashboard Analytics",
-		category: "Data Visualization",
-		rating: 4,
-		comment:
-			"Ótimo dashboard interativo. Atendeu bem aos requisitos, com bom design e funcionalidade.",
-		image: "/placeholder.svg?height=80&width=80",
-		date: "Novembro 2025",
-	},
-]
+type Feedback = {
+  id: number;
+  name: string;
+  company: string;
+  project: string;
+  category: string;
+  rating: number;
+  comment: string;
+  image: string | null;
+  date: string;
+}
 
 const categories = ["Todos", "Web Development", "Mobile", "Design", "Backend", "Data Visualization"]
 
@@ -79,6 +29,15 @@ export default function Feedbacks() {
 	const { t } = useI18n()
 	const [selectedCategory, setSelectedCategory] = useState("Todos")
 	const [selectedRating, setSelectedRating] = useState(0)
+	const [feedbacks, setFeedbacks] = useState<Feedback[]>([])
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		fetchFeedbacks().then((data) => {
+			setFeedbacks(data);
+			setLoading(false);
+		});
+	}, []);
 
 	const filteredFeedbacks = feedbacks.filter((feedback) => {
 		const categoryMatch = selectedCategory === "Todos" || feedback.category === selectedCategory
@@ -86,9 +45,8 @@ export default function Feedbacks() {
 		return categoryMatch && ratingMatch
 	})
 
-	const averageRating = (feedbacks.reduce((sum, f) => sum + f.rating, 0) / feedbacks.length).toFixed(1)
+	const averageRating = feedbacks.length > 0 ? (feedbacks.reduce((sum, f) => sum + f.rating, 0) / feedbacks.length).toFixed(1) : "0"
 	const fiveStarCount = feedbacks.filter((f) => f.rating === 5).length
-	const fourStarCount = feedbacks.filter((f) => f.rating === 4).length
 
 	return (
 		<div className="container mx-auto px-3 sm:px-4 md:px-6">
@@ -184,7 +142,7 @@ export default function Feedbacks() {
 										{/* Avatar */}
 										<div className="flex-shrink-0">
 											<Avatar className="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 ring-2 ring-yellow-200 dark:ring-yellow-800">
-												<AvatarImage src={feedback.image} alt={feedback.name} />
+												<AvatarImage src={feedback.image ?? undefined} alt={feedback.name} />
 												<AvatarFallback className="text-lg sm:text-xl md:text-2xl bg-gradient-to-br from-blue-400 to-purple-500 text-white">
 													{feedback.name
 														.split(" ")

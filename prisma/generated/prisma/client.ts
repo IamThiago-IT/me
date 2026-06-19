@@ -56,3 +56,63 @@ export type Post = Prisma.PostModel
  * 
  */
 export type Certificate = Prisma.CertificateModel
+/**
+ * Model TimelineEntry
+ * 
+ */
+export type TimelineEntry = Prisma.TimelineEntryModel
+/**
+ * Model TimelineProject
+ * 
+ */
+export type TimelineProject = Prisma.TimelineProjectModel
+/**
+ * Model Feedback
+ * 
+ */
+export type Feedback = Prisma.FeedbackModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model Sponsor
+ * 
+ */
+export type Sponsor = Prisma.SponsorModel
+/**
+ * Model DiscountCode
+ * 
+ */
+export type DiscountCode = Prisma.DiscountCodeModel
+/**
+ * Model ContractTemplate
+ * 
+ */
+export type ContractTemplate = Prisma.ContractTemplateModel
+/**
+ * Model Contract
+ * 
+ */
+export type Contract = Prisma.ContractModel
+/**
+ * Model PaymentMethod
+ * 
+ */
+export type PaymentMethod = Prisma.PaymentMethodModel
+/**
+ * Model Skill
+ * 
+ */
+export type Skill = Prisma.SkillModel
+/**
+ * Model Language
+ * 
+ */
+export type Language = Prisma.LanguageModel
+/**
+ * Model CoverLetter
+ * 
+ */
+export type CoverLetter = Prisma.CoverLetterModel

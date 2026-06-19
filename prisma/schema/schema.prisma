@@ -44,3 +44,164 @@ model Certificate {
 
   @@schema("public")
 }
+
+model TimelineEntry {
+  id          Int               @id @default(autoincrement())
+  type        String
+  title       String
+  company     String
+  companyUrl  String
+  period      String
+  description String
+  skills      String
+  order       Int               @default(0)
+  projects    TimelineProject[]
+  createdAt   DateTime          @default(now())
+
+  @@schema("public")
+}
+
+model TimelineProject {
+  id              Int           @id @default(autoincrement())
+  name            String
+  description     String
+  link            String
+  timelineEntry   TimelineEntry @relation(fields: [timelineEntryId], references: [id], onDelete: Cascade)
+  timelineEntryId Int
+  createdAt       DateTime      @default(now())
+
+  @@schema("public")
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  name      String
+  company   String
+  project   String
+  category  String
+  rating    Int
+  comment   String
+  image     String?
+  date      String
+  createdAt DateTime @default(now())
+
+  @@schema("public")
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        String
+  time        String?
+  location    String
+  type        String
+  tags        String?
+  url         String?
+  isUpcoming  Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@schema("public")
+}
+
+model Sponsor {
+  id          Int            @id @default(autoincrement())
+  name        String
+  description String
+  logo        String?
+  tag         String
+  link        String
+  createdAt   DateTime       @default(now())
+  codes       DiscountCode[]
+
+  @@schema("public")
+}
+
+model DiscountCode {
+  id          Int      @id @default(autoincrement())
+  code        String
+  description String
+  sponsorId   Int?
+  sponsor     Sponsor? @relation(fields: [sponsorId], references: [id], onDelete: Cascade)
+
+  @@schema("public")
+}
+
+model ContractTemplate {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  projectName        String
+  projectDescription String
+  value              String
+  paymentTerms       String
+  warranty           String
+  supportMonths      String
+  createdAt          DateTime @default(now())
+
+  @@schema("public")
+}
+
+model Contract {
+  id                 Int      @id @default(autoincrement())
+  clientName         String
+  clientDocument     String
+  clientEmail        String
+  clientPhone        String?
+  projectName        String
+  projectDescription String
+  value              String
+  paymentTerms       String
+  startDate          String
+  endDate            String
+  warranty           String
+  supportMonths      String
+  status             String
+  signedDate         String?
+  contractNumber     String   @unique
+  createdAt          DateTime @default(now())
+
+  @@schema("public")
+}
+
+model PaymentMethod {
+  id            Int      @id @default(autoincrement())
+  namePt        String
+  nameEn        String
+  descriptionPt String
+  descriptionEn String
+  benefitsPt    String
+  benefitsEn    String
+  order         Int      @default(0)
+
+  @@schema("public")
+}
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String
+  icon  String
+  order Int    @default(0)
+
+  @@schema("public")
+}
+
+model Language {
+  id      Int    @id @default(autoincrement())
+  namePt  String
+  nameEn  String
+  levelPt String
+  levelEn String
+  cefr    String
+  order   Int    @default(0)
+
+  @@schema("public")
+}
+
+model CoverLetter {
+  id        Int      @id @default(autoincrement())
+  contentPt String
+  contentEn String
+  updatedAt DateTime @updatedAt
+
+  @@schema("public")
+}

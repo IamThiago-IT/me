@@ -55,15 +55,6 @@ const en = {
 		copyText: "Copy text",
 		copied: "Text copied!",
 		copyError: "Error copying text:",
-		content: `Dear Recruiter,
-
-I am writing to express my interest in the advertised position and to present my resume. I have experience in software development, with a strong emphasis on code quality and delivery deadlines.
-
-I am available to discuss how my skills can contribute to the company's success.
-
-Best regards,
-[Your Name]
-`,
 	},
 
 	// Contact
@@ -163,68 +154,9 @@ Best regards,
 			"Tailored solutions to transform ideas into high-impact digital products. From concept to launch, with a focus on performance, scalability, and real results.",
 		process: {
 			title: "How I Work",
-			steps: [
-				{
-					title: "Discovery",
-					description:
-						"I understand your business, goals, and target audience to define the best strategy.",
-				},
-				{
-					title: "Design & Prototyping",
-					description:
-						"I create wireframes and interactive prototypes to validate the experience before development.",
-				},
-				{
-					title: "Development",
-					description:
-						"I build the solution with clean code, best practices, and modern technologies.",
-				},
-				{
-					title: "Launch",
-					description:
-						"Deployment, final testing, and performance optimization to ensure a flawless delivery.",
-				},
-				{
-					title: "Ongoing Support",
-					description:
-						"Post-launch monitoring, maintenance, and iterative improvements.",
-				},
-			],
 		},
 		faq: {
 			title: "Frequently Asked Questions",
-			items: [
-				{
-					question: "What is the average delivery time?",
-					answer:
-						"It depends on the project complexity. Landing pages take 1-2 weeks. Full web applications can take 4-12 weeks. I always define clear timelines at the start of the project.",
-				},
-				{
-					question: "How does payment work?",
-					answer:
-						"I work with 40% upfront upon project approval and 60% upon final delivery. I accept Pix, bank transfer, credit card (via platform), and cryptocurrencies. For larger projects, installment plans are available.",
-				},
-				{
-					question: "What is included in the quote?",
-					answer:
-						"Responsive design, full development, testing, initial deployment, SEO and performance optimization, and 30 days of post-launch support. Hosting and domains are contracted separately.",
-				},
-				{
-					question: "Do you offer maintenance contracts?",
-					answer:
-						"Yes! I offer monthly maintenance plans that include security updates, backups, uptime monitoring, and dedicated hours for improvements. Plans starting at $100/month.",
-				},
-				{
-					question: "Can I request changes during the project?",
-					answer:
-						"Absolutely! I work with agile methodology and include review rounds at each phase. Changes outside the original scope are quoted separately with full transparency.",
-				},
-				{
-					question: "Do you work with international clients?",
-					answer:
-						"Yes! I serve clients from Brazil and abroad. For international projects, values are quoted in USD and payment can be via PayPal, Wise, or cryptocurrencies.",
-				},
-			],
 		},
 		cta: {
 			title: "Ready to start your project?",
@@ -232,74 +164,6 @@ Best regards,
 				"Let's talk about your idea. The first meeting is free and with no commitment.",
 			button: "Schedule a Free Meeting",
 		},
-		items: [
-			{
-				name: "Landing Pages & Institutional Sites",
-				description:
-					"High-conversion pages that turn visitors into customers. Strategic design, results-driven copywriting, and SEO-optimized performance.",
-				priceFrom: "$300",
-				priceTo: "$800",
-				features:
-					"Responsive & modern design | Advanced SEO optimization | Load time under 2s | Analytics & CRM integration | Smart forms with validation",
-				cta: "Get a Quote",
-				delivery: "1-2 weeks",
-			},
-			{
-				name: "Web Applications (SaaS & Dashboards)",
-				description:
-					"Robust and scalable platforms to manage operations, automate processes, and generate insights. Modern architecture with Next.js, secure authentication, and optimized databases.",
-				priceFrom: "$1,500",
-				priceTo: "$5,000",
-				features:
-					"Scalable & secure architecture | Complete admin panels | External API integrations | Authentication & access control | Real-time reports & dashboards",
-				cta: "Get a Quote",
-				delivery: "4-12 weeks",
-			},
-			{
-				name: "E-commerce & Online Stores",
-				description:
-					"Complete online stores with optimized checkout, inventory management, and payment gateway integration. Focus on conversion and seamless shopping experience.",
-				priceFrom: "$1,000",
-				priceTo: "$3,000",
-				features:
-					"Conversion-optimized checkout | Stripe, PayPal & crypto integration | Product & inventory management | Coupons & discount rules | Intuitive admin dashboard",
-				cta: "Get a Quote",
-				delivery: "3-6 weeks",
-			},
-			{
-				name: "APIs & Backend",
-				description:
-					"Robust RESTful and GraphQL APIs, microservices, and legacy system integrations. Complete documentation, automated testing, and cloud deployment.",
-				priceFrom: "$800",
-				priceTo: "$2,500",
-				features:
-					"RESTful & GraphQL APIs | Swagger/OpenAPI documentation | Automated testing | AWS, Vercel or Cloudflare deployment | Real-time monitoring & logging",
-				cta: "Get a Quote",
-				delivery: "2-6 weeks",
-			},
-			{
-				name: "Automation & Artificial Intelligence",
-				description:
-					"Smart chatbots, workflow automation, LLM integrations, and AI agents. Reduce operational costs and scale your support with cutting-edge technology.",
-				priceFrom: "$600",
-				priceTo: "$2,000",
-				features:
-					"Generative AI chatbots | Workflow automation (n8n, Make) | OpenAI, Claude & Gemini integration | Custom AI agents | Metrics & analytics dashboards",
-				cta: "Get a Quote",
-				delivery: "2-4 weeks",
-			},
-			{
-				name: "Technical Consulting & Mentoring",
-				description:
-					"Code review, software architecture, mentoring for devs, and technical advisory for startups. Accelerate your team and make smarter technical decisions.",
-				priceFrom: "$50/hour",
-				priceTo: "",
-				features:
-					"Detailed code review | Architecture & system design | Individual or group mentoring | Startup advisory | Custom workshops & training",
-				cta: "Book a Session",
-				delivery: "On demand",
-			},
-		],
 	},
 
 	// Payments
@@ -307,50 +171,6 @@ Best regards,
 		title: "Payment Methods",
 		subtitle:
 			"We accept several payment methods for your convenience. Choose the one that works best for you.",
-		items: [
-			{
-				name: "Pix",
-				description:
-					"Instant transfers available 24 hours a day, 7 days a week. The fastest and most practical payment method in Brazil.",
-				benefits:
-					"Instant payment | Available 24/7 | No additional fees | Real-time confirmation",
-			},
-			{
-				name: "Credit/Debit Card",
-				description:
-					"Installments up to 12x with major card brands. Secure and fast processing.",
-				benefits:
-					"Up to 12 installments | Visa, Mastercard, Elo, Amex | Secure environment | Quick approval",
-			},
-			{
-				name: "Boleto Bancário",
-				description:
-					"Secure traditional payment with up to 3 business days maturity. We process your order after confirmation.",
-				benefits:
-					"Up to 3 business days to pay | No registration needed | Pay at any bank | Traditional security",
-			},
-			{
-				name: "Bank Transfer",
-				description:
-					"Direct transfer to our account. Fast processing for TED and interbank transfers.",
-				benefits:
-					"Direct transfer | Fast processing | Ideal for large amounts | Instant receipt",
-			},
-			{
-				name: "PayPal",
-				description:
-					"Secure international payment with buyer protection. Accepted in over 200 countries.",
-				benefits:
-					"Buyer protection | Accepted worldwide | Multi-currency payments | Enhanced security",
-			},
-			{
-				name: "Cryptocurrencies",
-				description:
-					"Decentralized and secure payment. We accept Bitcoin, Ethereum, and USDT.",
-				benefits:
-					"Decentralized & secure | Bitcoin, Ethereum, USDT | International transactions | Low fees",
-			},
-		],
 	},
 
 	// Sponsors

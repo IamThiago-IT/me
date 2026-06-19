@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -17,11 +17,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { MetadataSetter } from '@/components/MetadataSetter'
 import { useI18n } from '@/lib/i18n'
 import { toast } from 'sonner'
+import { fetchContractTemplates, fetchContracts, createContractAction } from '@/lib/db/actions'
 
 export default function Contratos() {
   const { t } = useI18n()
   const [activeTab, setActiveTab] = useState('novo')
   const [currentStep, setCurrentStep] = useState<'form' | 'preview' | 'signature'>('form')
+  const [contractTemplates, setContractTemplates] = useState<any[]>([])
+  const [signedContracts, setSignedContracts] = useState<any[]>([])
+
+  useEffect(() => {
+    fetchContractTemplates().then(setContractTemplates);
+    fetchContracts().then(setSignedContracts);
+  }, []);
 
   const [formData, setFormData] = useState({
     // Dados do Cliente
@@ -87,41 +95,7 @@ export default function Contratos() {
     return value.replace(/\D/g, '')
   }
 
-  const contractTemplates = [
-    {
-      id: 1,
-      name: t.contracts.templateNames?.[0] || 'Desenvolvimento Web',
-      projectName: 'Desenvolvimento de Aplicação Web',
-      projectDescription: 'Desenvolvimento completo de aplicação web com front-end reativo (React/Vue), back-end robusto (Node.js/Python), banco de dados otimizado (PostgreSQL), testes automatizados, documentação técnica e deploy em ambiente de produção.',
-      value: '5000',
-      paymentTerms: '50% entrada, 50% na entrega',
-      warranty: '30',
-      supportMonths: '3'
-    },
-    {
-      id: 2,
-      name: t.contracts.templateNames?.[1] || 'Aplicativo Mobile',
-      projectName: 'Desenvolvimento de Aplicativo Mobile',
-      projectDescription: 'Desenvolvimento de aplicativo mobile nativo para iOS e Android com integração de APIs REST, notificações push, sincronização em tempo real, sistema de autenticação seguro, mapas e geolocalização.',
-      value: '8000',
-      paymentTerms: '30% entrada, 30% meio do projeto, 40% conclusão',
-      warranty: '30',
-      supportMonths: '6'
-    },
-    {
-      id: 3,
-      name: t.contracts.templateNames?.[2] || 'Consultoria Tech',
-      projectName: 'Consultoria de Arquitetura de Software',
-      projectDescription: 'Consultoria especializada em arquitetura de software, otimização de performance, segurança, escalabilidade de sistemas, code review, setup de CI/CD e melhorias de infraestrutura.',
-      value: '3000',
-      paymentTerms: '100% à vista',
-      warranty: '0',
-      supportMonths: '1'
-    },
-  ]
-
-  const useTemplate = (template: typeof contractTemplates[0]) => {
-    // Calcular datas (hoje e 30 dias depois)
+  const useTemplate = (template: any) => {
     const today = new Date().toISOString().split('T')[0]
     const endDate = new Date()
     endDate.setDate(endDate.getDate() + 30)
@@ -144,36 +118,6 @@ export default function Contratos() {
     setActiveTab('novo')
     setCurrentStep('form')
   }
-
-  const [signedContracts, setSignedContracts] = useState([
-    {
-      id: 1,
-      projectName: 'E-commerce Platform',
-      value: '***',
-      status: 'completed',
-      signedDate: '2024-01-15',
-      contractNumber: 'CTR-2024-001',
-      description: 'Desenvolvimento de plataforma de e-commerce completa com integração de pagamentos'
-    },
-    {
-      id: 2,
-      projectName: 'Mobile App Development',
-      value: '***',
-      status: 'in_progress',
-      signedDate: '2024-02-20',
-      contractNumber: 'CTR-2024-002',
-      description: 'Aplicativo mobile para iOS e Android com funcionalidades de geolocalização'
-    },
-    {
-      id: 3,
-      projectName: 'Sistema de Gestão',
-      value: '***',
-      status: 'completed',
-      signedDate: '2024-03-10',
-      contractNumber: 'CTR-2024-003',
-      description: 'Sistema ERP personalizado para gestão de estoque e vendas'
-    }
-  ])
 
   const formatCurrency = (value: number) => {
     if (!value) return ''
@@ -558,20 +502,23 @@ export default function Contratos() {
                       </Button>
                       <Button 
                         className="flex-1"
-                        onClick={() => {
-                          // Adicionar contrato aos assinados
-                          const newContract = {
-                            id: signedContracts.length + 1,
+                        onClick={async () => {
+                          await createContractAction({
+                            clientName: formData.clientName,
+                            clientDocument: formData.clientDocument,
+                            clientEmail: formData.clientEmail,
+                            clientPhone: formData.clientPhone,
                             projectName: formData.projectName,
+                            projectDescription: formData.projectDescription,
                             value: formData.value,
-                            status: 'in_progress' as const,
-                            signedDate: new Date().toISOString().split('T')[0],
-                            contractNumber: `CTR-${new Date().getFullYear()}-${String(signedContracts.length + 1).padStart(3, '0')}`,
-                            description: formData.projectDescription
-                          }
-                          setSignedContracts([...signedContracts, newContract])
-                          
-                          // Ressetar form e ir para abas assinados
+                            paymentTerms: formData.paymentTerms,
+                            startDate: formData.startDate,
+                            endDate: formData.endDate,
+                            warranty: formData.warranty,
+                            supportMonths: formData.supportMonths,
+                          });
+                          const updated = await fetchContracts();
+                          setSignedContracts(updated);
                           setFormData({
                             clientName: '',
                             clientDocument: '',

@@ -1,30 +1,23 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, Award, FolderDown, FileText } from "lucide-react";
+import { ArrowLeft, Award, ExternalLink, Calendar } from "lucide-react";
 import { MetadataSetter } from "@/components/MetadataSetter";
 import { useI18n } from "@/lib/i18n";
-
-const certificateChecklist = [
-  {
-    title: "Arquivos",
-    description: "Coloque PDFs ou imagens em public/certificates para manter tudo organizado.",
-    icon: FolderDown,
-  },
-  {
-    title: "Dados",
-    description: "Registre nome, instituição, data e link de cada certificado nesta página.",
-    icon: FileText,
-  },
-  {
-    title: "Exibição",
-    description: "Use esta rota para mostrar certificados sem misturar com currículo ou serviços.",
-    icon: Award,
-  },
-];
+import { fetchCertificates } from "@/lib/db/actions";
 
 export default function CertificatesPage() {
   const { t } = useI18n();
+  const [certificates, setCertificates] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCertificates().then((data) => {
+      setCertificates(data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col gap-4 sm:gap-6 max-w-5xl mx-auto">
@@ -51,29 +44,46 @@ export default function CertificatesPage() {
           </div>
         </div>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          {certificateChecklist.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-xl border bg-background/70 p-4 shadow-sm transition-shadow hover:shadow-md"
-            >
-              <div className="flex items-center gap-2.5">
-                <item.icon className="w-4.5 h-4.5 text-amber-500" />
-                <h2 className="font-semibold text-sm sm:text-base">{item.title}</h2>
+        {loading ? (
+          <div className="flex items-center justify-center h-32 mt-5">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
+          </div>
+        ) : certificates.length === 0 ? (
+          <div className="mt-5 text-center py-8 text-muted-foreground text-sm">
+            Nenhum certificado cadastrado ainda.
+          </div>
+        ) : (
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {certificates.map((cert) => (
+              <div
+                key={cert.id}
+                className="rounded-xl border bg-background/70 p-4 shadow-sm transition-shadow hover:shadow-md"
+              >
+                <h2 className="font-semibold text-sm sm:text-base">{cert.title}</h2>
+                <p className="text-xs text-muted-foreground mt-1">{cert.issuer}</p>
+                {cert.issuedAt && (
+                  <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                    <Calendar className="w-3 h-3" />
+                    {new Date(cert.issuedAt).toLocaleDateString("pt-BR")}
+                  </div>
+                )}
+                {cert.description && (
+                  <p className="text-xs text-muted-foreground mt-2">{cert.description}</p>
+                )}
+                {cert.credentialUrl && (
+                  <Link
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    className="inline-flex items-center gap-1 text-xs text-amber-600 hover:underline mt-2"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Credencial
+                  </Link>
+                )}
               </div>
-              <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="rounded-2xl border border-dashed p-4 sm:p-6 bg-amber-500/5">
-        <h2 className="text-lg sm:text-xl font-semibold">Próximo passo</h2>
-        <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-          Depois de adicionar seus certificados em <span className="font-medium text-foreground">public/certificates</span>, podemos trocar este guia por uma vitrine com os itens reais.
-        </p>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

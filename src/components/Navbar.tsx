@@ -50,8 +50,7 @@ export function Navbar() {
 		{ label: t.nav.contracts, href: "/contratos", icon: <FileText className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.payments, href: "/pagamentos", icon: <CreditCard className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.contact, href: "/contato", icon: <Mail className="w-4 h-4" />, category: "info" },
-		{/* label: t.nav.papers, href: "/papers", icon: <Book className="w-4 h-4" />, category: "info" },
-		{ label: t.nav.changelog, href: "/changelog", icon: <GitBranch className="w-4 h-4" />, category: "info" */},
+		{ label: t.nav.changelog, href: "/changelog", icon: <GitBranch className="w-4 h-4" />, category: "info" },
 	];
 
 	const isActive = (href: string) =>

@@ -1,132 +1,26 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Calendar, MapPin, Users, ArrowRight, Search, X, ChevronDown } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { MetadataSetter } from "@/components/MetadataSetter"
 import { useI18n } from "@/lib/i18n"
+import { fetchEvents } from "@/lib/db/actions"
 
 interface Event {
-  id: string
+  id: number
   title: string
   description: string
   date: string
-  time?: string
+  time: string | null
   location: string
-  type: "workshop" | "palestra" | "conferência" | "webinar"
-  tags?: string[]
-  url?: string
+  type: string
+  tags: string[] | null
+  url: string | null
   isUpcoming: boolean
 }
-
-const events: Event[] = [
-  {
-    id: "1",
-    title: "React Performance Optimization Workshop",
-    description:
-      "Learn advanced techniques to optimize React applications for production. We'll cover code splitting, lazy loading, memoization, and profiling tools.",
-    date: "2024-04-15",
-    time: "18:00",
-    location: "São Paulo, Brazil",
-    type: "workshop",
-    tags: ["react", "performance", "frontend"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "2",
-    title: "Full-Stack Development Talk",
-    description:
-      "Deep dive into modern full-stack development with Next.js and TypeScript. Discover best practices for building scalable applications.",
-    date: "2024-05-20",
-    time: "19:30",
-    location: "Online",
-    type: "palestra",
-    tags: ["nextjs", "typescript", "fullstack"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "3",
-    title: "Web Performance & Core Web Vitals",
-    description:
-      "Understand Google's Core Web Vitals and learn how to measure and improve your website's performance metrics effectively.",
-    date: "2024-06-10",
-    time: "14:00",
-    location: "Virtual Event",
-    type: "webinar",
-    tags: ["performance", "seo", "web"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "4",
-    title: "TypeScript Advanced Patterns",
-    description:
-      "Master advanced TypeScript patterns including generics, utility types, and type guards. Build more robust and maintainable applications.",
-    date: "2025-02-10",
-    time: "20:00",
-    location: "Online",
-    type: "workshop",
-    tags: ["typescript", "backend", "advanced"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "5",
-    title: "Node.js Security Best Practices",
-    description:
-      "Learn how to secure your Node.js applications against common vulnerabilities. We'll cover authentication, authorization, and data protection.",
-    date: "2025-03-15",
-    time: "19:00",
-    location: "São Paulo, Brazil",
-    type: "palestra",
-    tags: ["nodejs", "security", "backend"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "6",
-    title: "Database Design & Optimization",
-    description:
-      "Learn how to design efficient databases and optimize queries. Cover relational and NoSQL databases with real-world examples.",
-    date: "2025-04-20",
-    time: "18:30",
-    location: "Online",
-    type: "conferência",
-    tags: ["database", "sql", "backend"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "7",
-    title: "React 19 & Server Components Deep Dive",
-    description:
-      "Explore the new features in React 19 and server components. Learn how to build more efficient and interactive applications.",
-    date: "2026-01-25",
-    time: "19:30",
-    location: "São Paulo, Brazil",
-    type: "workshop",
-    tags: ["react", "frontend", "nextjs"],
-    url: "#",
-    isUpcoming: true,
-  },
-  {
-    id: "8",
-    title: "Microservices Architecture",
-    description:
-      "Build scalable applications using microservices architecture. Learn about service discovery, load balancing, and communication patterns.",
-    date: "2026-03-10",
-    time: "20:00",
-    location: "Virtual Event",
-    type: "conferência",
-    tags: ["architecture", "backend", "devops"],
-    url: "#",
-    isUpcoming: true,
-  },
-]
 
 
 interface EventCardProps {
@@ -214,6 +108,15 @@ export default function EventPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedYear, setSelectedYear] = useState<string | null>(null)
   const [itemsToShow, setItemsToShow] = useState(4)
+  const [events, setEvents] = useState<Event[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchEvents().then((data) => {
+      setEvents(data);
+      setLoading(false);
+    });
+  }, []);
 
   // Get all unique tags
   const allTags = useMemo(() => {
@@ -224,7 +127,7 @@ export default function EventPage() {
       }
     }
     return Array.from(tags).sort()
-  }, [])
+  }, [events])
 
   // Get all unique years from events
   const allYears = useMemo(() => {
@@ -234,7 +137,7 @@ export default function EventPage() {
       years.add(year)
     }
     return Array.from(years).sort().reverse()
-  }, [])
+  }, [events])
 
   // Filter events based on search, tags, and year
   const filteredEvents = useMemo(() => {

@@ -15,3 +15,5 @@ CREATE TABLE "Certificate" (
 
     CONSTRAINT "Certificate_pkey" PRIMARY KEY ("id")
 );
+
+CREATE INDEX "Certificate_order_idx" ON "Certificate"("order");

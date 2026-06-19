@@ -1,13 +1,27 @@
 "use client";
+import { useState, useEffect } from "react";
 import { MetadataSetter } from "@/components/MetadataSetter";
-import React from "react";
 import { useI18n } from "@/lib/i18n";
 import { QrCode, CreditCard, Barcode, Building2, Globe, Coins, CheckCircle2 } from "lucide-react";
+import { fetchPaymentMethods } from "@/lib/db/actions";
 
 const paymentIcons = [QrCode, CreditCard, Barcode, Building2, Globe, Coins];
 
 export default function Pagamentos() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const [methods, setMethods] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPaymentMethods().then((data) => {
+      setMethods(data);
+      setLoading(false);
+    });
+  }, []);
+
+  const isPt = locale === "pt-BR";
+
+  if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div></div>;
 
   return (
     <div className="flex flex-col">
@@ -18,13 +32,15 @@ export default function Pagamentos() {
       </p>
 
       <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-        {t.payments.items.map((method, index) => {
+        {methods.map((method, index) => {
           const Icon = paymentIcons[index];
-          const benefits = method.benefits.split(" | ");
+          const name = isPt ? method.namePt : method.nameEn;
+          const description = isPt ? method.descriptionPt : method.descriptionEn;
+          const benefits = ((isPt ? method.benefitsPt : method.benefitsEn) ?? "").split(" | ");
 
           return (
             <div
-              key={index}
+              key={method.id}
               className="group flex flex-col border rounded-lg bg-card text-card-foreground shadow-sm hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-500 dark:hover:bg-indigo-900 transition-all duration-200"
             >
               <div className="p-4 sm:p-6 flex flex-col flex-1">
@@ -32,15 +48,15 @@ export default function Pagamentos() {
                   <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-indigo-500" />
                   </div>
-                  <h2 className="text-base sm:text-lg font-semibold">{method.name}</h2>
+                  <h2 className="text-base sm:text-lg font-semibold">{name}</h2>
                 </div>
 
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  {method.description}
+                  {description}
                 </p>
 
                 <div className="space-y-1.5 mt-auto">
-                  {benefits.map((benefit, i) => (
+                  {benefits.map((benefit: string, i: number) => (
                     <div key={i} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
                       <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 mt-0.5 shrink-0" />
                       <span>{benefit}</span>

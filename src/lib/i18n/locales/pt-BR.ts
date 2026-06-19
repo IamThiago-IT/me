@@ -55,15 +55,6 @@ const ptBR = {
 		copyText: "Copiar texto",
 		copied: "Texto copiado!",
 		copyError: "Erro ao copiar o texto:",
-		content: `Prezado(a) recrutador(a),
-
-Estou escrevendo para expressar meu interesse na vaga anunciada e para apresentar meu currículo. Tenho experiência em desenvolvimento de software, com forte ênfase em qualidade de código e prazos de entrega.
-
-Estou à disposição para discutir como minhas habilidades podem contribuir para o sucesso da empresa.
-
-Atenciosamente,
-[Seu Nome]
-`,
 	},
 
 	// Contact
@@ -165,68 +156,9 @@ Atenciosamente,
 			"Soluções sob medida para transformar ideias em produtos digitais de alto impacto. Do conceito ao lançamento, com foco em performance, escalabilidade e resultados reais.",
 		process: {
 			title: "Como Trabalho",
-			steps: [
-				{
-					title: "Discovery",
-					description:
-						"Entendo seu negócio, objetivos e público-alvo para definir a melhor estratégia.",
-				},
-				{
-					title: "Design & Prototipação",
-					description:
-						"Crio wireframes e protótipos interativos para validar a experiência antes do desenvolvimento.",
-				},
-				{
-					title: "Desenvolvimento",
-					description:
-						"Construo a solução com código limpo, boas práticas e tecnologias modernas.",
-				},
-				{
-					title: "Lançamento",
-					description:
-						"Deploy, testes finais e otimização de performance para garantir uma entrega impecável.",
-				},
-				{
-					title: "Suporte Contínuo",
-					description:
-						"Acompanhamento pós-lançamento, manutenção e melhorias iterativas.",
-				},
-			],
 		},
 		faq: {
 			title: "Perguntas Frequentes",
-			items: [
-				{
-					question: "Qual o prazo médio de entrega?",
-					answer:
-						"Depende da complexidade do projeto. Landing pages levam de 1 a 2 semanas. Aplicações web completas podem levar de 4 a 12 semanas. Sempre defino prazos claros no início do projeto.",
-				},
-				{
-					question: "Como funciona o pagamento?",
-					answer:
-						"Trabalho com 40% na aprovação do projeto e 60% na entrega final. Aceito Pix, transferência bancária, cartão de crédito (via plataforma) e criptomoedas. Para projetos maiores, posso parcelar.",
-				},
-				{
-					question: "O que está incluído no orçamento?",
-					answer:
-						"Design responsivo, desenvolvimento completo, testes, deploy inicial, otimização de SEO e performance, e 30 dias de suporte pós-lançamento. Hospedagem e domínios são contratados separadamente.",
-				},
-				{
-					question: "Vocês trabalham com contratos de manutenção?",
-					answer:
-						"Sim! Ofereço planos mensais de manutenção que incluem atualizações de segurança, backups, monitoramento de uptime e horas dedicadas para melhorias. Valores a partir de R$ 500/mês.",
-				},
-				{
-					question: "Posso solicitar alterações durante o projeto?",
-					answer:
-						"Claro! Trabalho com metodologia ágil e incluo rodadas de revisão em cada fase. Alterações fora do escopo original são orçadas separadamente com transparência.",
-				},
-				{
-					question: "Vocês atendem clientes internacionais?",
-					answer:
-						"Sim! Atendo clientes do Brasil e do exterior. Para projetos internacionais, os valores são cotados em USD e o pagamento pode ser via PayPal, Wise ou criptomoedas.",
-				},
-			],
 		},
 		cta: {
 			title: "Pronto para começar seu projeto?",
@@ -234,74 +166,6 @@ Atenciosamente,
 				"Vamos conversar sobre sua ideia. A primeira reunião é gratuita e sem compromisso.",
 			button: "Agendar Reunião Gratuita",
 		},
-		items: [
-			{
-				name: "Landing Pages & Sites Institucionais",
-				description:
-					"Páginas de alta conversão que transformam visitantes em clientes. Design estratégico, copywriting orientado a resultados e performance otimizada para SEO.",
-				priceFrom: "R$ 1.500",
-				priceTo: "R$ 4.000",
-				features:
-					"Design responsivo e moderno | Otimização SEO avançada | Carregamento em menos de 2s | Integração com analytics e CRM | Formulários inteligentes com validação",
-				cta: "Solicitar Orçamento",
-				delivery: "1-2 semanas",
-			},
-			{
-				name: "Aplicações Web (SaaS & Dashboards)",
-				description:
-					"Plataformas robustas e escaláveis para gerenciar operações, automatizar processos e gerar insights. Arquitetura moderna com Next.js, autenticação segura e banco de dados otimizado.",
-				priceFrom: "R$ 8.000",
-				priceTo: "R$ 25.000",
-				features:
-					"Arquitetura escalável e segura | Painéis administrativos completos | Integração com APIs externas | Autenticação e controle de acesso | Relatórios e dashboards em tempo real",
-				cta: "Solicitar Orçamento",
-				delivery: "4-12 semanas",
-			},
-			{
-				name: "E-commerce & Lojas Virtuais",
-				description:
-					"Lojas online completas com checkout otimizado, gestão de estoque e integração com gateways de pagamento. Foco em conversão e experiência de compra fluida.",
-				priceFrom: "R$ 5.000",
-				priceTo: "R$ 15.000",
-				features:
-					"Checkout otimizado para conversão | Integração com Stripe, Mercado Pago e Pix | Gestão de produtos e estoque | Cupons e regras de desconto | Painel administrativo intuitivo",
-				cta: "Solicitar Orçamento",
-				delivery: "3-6 semanas",
-			},
-			{
-				name: "APIs & Backend",
-				description:
-					"APIs RESTful e GraphQL robustas, microsserviços e integrações com sistemas legados. Documentação completa, testes automatizados e deploy em cloud.",
-				priceFrom: "R$ 4.000",
-				priceTo: "R$ 12.000",
-				features:
-					"APIs RESTful e GraphQL | Documentação com Swagger/OpenAPI | Testes automatizados | Deploy em AWS, Vercel ou Cloudflare | Monitoramento e logs em tempo real",
-				cta: "Solicitar Orçamento",
-				delivery: "2-6 semanas",
-			},
-			{
-				name: "Automação & Inteligência Artificial",
-				description:
-					"Chatbots inteligentes, automação de workflows, integração com LLMs e agentes de IA. Reduza custos operacionais e escale seu atendimento com tecnologia de ponta.",
-				priceFrom: "R$ 3.000",
-				priceTo: "R$ 10.000",
-				features:
-					"Chatbots com IA generativa | Automação de workflows (n8n, Make) | Integração com OpenAI, Claude e Gemini | Agentes de IA personalizados | Dashboards de métricas e analytics",
-				cta: "Solicitar Orçamento",
-				delivery: "2-4 semanas",
-			},
-			{
-				name: "Consultoria Técnica & Mentoring",
-				description:
-					"Code review, arquitetura de software, mentoring para devs e assessoria técnica para startups. Acelere seu time e tome decisões técnicas mais inteligentes.",
-				priceFrom: "R$ 250/hora",
-				priceTo: "",
-				features:
-					"Code review detalhado | Arquitetura e design de sistemas | Mentoring individual ou em grupo | Assessoria para startups | Workshops e treinamentos sob medida",
-				cta: "Agendar Sessão",
-				delivery: "Sob demanda",
-			},
-		],
 	},
 
 	// Payments
@@ -309,50 +173,6 @@ Atenciosamente,
 		title: "Métodos de Pagamento",
 		subtitle:
 			"Aceitamos diversas formas de pagamento para sua comodidade. Escolha a que melhor se encaixa para você.",
-		items: [
-			{
-				name: "Pix",
-				description:
-					"Transferências instantâneas disponíveis 24 horas por dia, 7 dias por semana. O método mais rápido e prático do Brasil.",
-				benefits:
-					"Pagamento instantâneo | Disponível 24/7 | Sem taxas adicionais | Confirmação na hora",
-			},
-			{
-				name: "Cartão de Crédito/Débito",
-				description:
-					"Parcelamento em até 12x com as principais bandeiras. Processamento seguro e rápido.",
-				benefits:
-					"Parcelamento em até 12x | Bandeiras: Visa, Mastercard, Elo, Amex | Ambiente seguro | Aprovação rápida",
-			},
-			{
-				name: "Boleto Bancário",
-				description:
-					"Pagamento seguro e tradicional com vencimento em até 3 dias úteis. Processamos seu pedido após a confirmação.",
-				benefits:
-					"Vencimento em até 3 dias úteis | Sem necessidade de cadastro | Pagamento em qualquer banco | Segurança tradicional",
-			},
-			{
-				name: "Transferência Bancária",
-				description:
-					"Transferência direta para nossa conta. Processamento rápido para TED e transferências entre contas.",
-				benefits:
-					"Transferência direta | Processamento ágil | Ideal para grandes valores | Comprovante imediato",
-			},
-			{
-				name: "PayPal",
-				description:
-					"Pagamento internacional seguro com proteção ao comprador. Aceito em mais de 200 países.",
-				benefits:
-					"Proteção ao comprador | Aceito mundialmente | Pagamento em diversas moedas | Segurança reforçada",
-			},
-			{
-				name: "Criptomoedas",
-				description:
-					"Pagamento descentralizado e seguro. Aceitamos Bitcoin, Ethereum e USDT.",
-				benefits:
-					"Descentralizado e seguro | Bitcoin, Ethereum e USDT | Transações internacionais | Taxas reduzidas",
-			},
-		],
 	},
 
 	// Sponsors

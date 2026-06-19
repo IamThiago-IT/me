@@ -1,29 +1,28 @@
 "use client";
 
-import { SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiGraphql, SiMongodb, SiPostgresql } from "react-icons/si";
+import { useState, useEffect } from "react";
 import { Award, Globe2, History } from "lucide-react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { fetchSkills, fetchLanguages } from "@/lib/db/actions";
+import { SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiGraphql, SiMongodb, SiPostgresql } from "react-icons/si";
+
+const iconMap: Record<string, React.ElementType> = {
+  SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiGraphql, SiMongodb, SiPostgresql,
+};
 
 export default function Sobre() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const [skills, setSkills] = useState<{ name: string; icon: string; order: number }[]>([]);
+  const [langs, setLangs] = useState<{ namePt: string; nameEn: string; levelPt: string; levelEn: string; cefr: string }[]>([]);
 
-  const skills = [
-    { name: "React", icon: SiReact },
-    { name: "Next.js", icon: SiNextdotjs },
-    { name: "Node.js", icon: SiNodedotjs },
-    { name: "TypeScript", icon: SiTypescript },
-    { name: "GraphQL", icon: SiGraphql },
-    { name: "MongoDB", icon: SiMongodb },
-    { name: "PostgreSQL", icon: SiPostgresql },
-  ];
+  useEffect(() => {
+    fetchSkills().then(setSkills);
+    fetchLanguages().then(setLangs);
+  }, []);
 
-  const languages = [
-    { name: t.about.portuguese, level: t.about.native, cefr: "C2" },
-    { name: t.about.english, level: t.about.fluent, cefr: "C1" },
-    { name: t.about.spanish, level: t.about.intermediate, cefr: "B1" },
-  ];
+  const isPt = locale === "pt-BR";
 
   return (
     <div className="flex flex-col h-auto md:h-[calc(100vh-7rem)]">
@@ -36,15 +35,18 @@ export default function Sobre() {
         {/* Skills */}
         <h2 className="text-lg sm:text-xl font-semibold">{t.about.skills}</h2>
         <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3 min-h-0">
-          {skills.map((skill) => (
-            <div
-              key={skill.name}
-              className="flex flex-col items-center justify-center gap-1.5 border rounded-lg transition-all duration-200 hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-500 dark:hover:bg-indigo-900"
-            >
-              <skill.icon className="w-6 h-6 transition-transform duration-200 hover:scale-110" />
-              <span className="text-xs font-medium">{skill.name}</span>
-            </div>
-          ))}
+          {skills.map((skill) => {
+            const Icon = iconMap[skill.icon];
+            return (
+              <div
+                key={skill.name}
+                className="flex flex-col items-center justify-center gap-1.5 border rounded-lg transition-all duration-200 hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-500 dark:hover:bg-indigo-900"
+              >
+                {Icon && <Icon className="w-6 h-6 transition-transform duration-200 hover:scale-110" />}
+                <span className="text-xs font-medium">{skill.name}</span>
+              </div>
+            );
+          })}
         </div>
 
         {/* Languages */}
@@ -53,27 +55,31 @@ export default function Sobre() {
           {t.about.languages}
         </h2>
         <div className="grid grid-cols-3 gap-2 min-h-0">
-          {languages.map((language) => (
-            <div
-              key={language.name}
-              className="flex flex-col items-center justify-center border rounded-lg dark:hover:border-indigo-500 dark:hover:bg-indigo-900 transition-all duration-200"
-            >
-              <h3 className="font-semibold text-sm">{language.name}</h3>
-              <div className="flex items-center gap-1.5 mt-1">
-                <span
-                  className={`
-                    px-2 py-0.5 rounded-full text-xs font-bold
-                    ${language.cefr === "C2" ? "bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200" : ""}
-                    ${language.cefr === "C1" ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200" : ""}
-                    ${language.cefr === "B1" ? "bg-yellow-200 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-200" : ""}
-                  `}
-                >
-                  {language.cefr}
-                </span>
-                <span className="text-xs sm:text-xs text-gray-600 dark:text-gray-400">{language.level}</span>
+          {langs.map((language) => {
+            const langName = isPt ? language.namePt : language.nameEn;
+            const level = isPt ? language.levelPt : language.levelEn;
+            return (
+              <div
+                key={langName}
+                className="flex flex-col items-center justify-center border rounded-lg dark:hover:border-indigo-500 dark:hover:bg-indigo-900 transition-all duration-200"
+              >
+                <h3 className="font-semibold text-sm">{langName}</h3>
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span
+                    className={`
+                      px-2 py-0.5 rounded-full text-xs font-bold
+                      ${language.cefr === "C2" ? "bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200" : ""}
+                      ${language.cefr === "C1" ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200" : ""}
+                      ${language.cefr === "B1" ? "bg-yellow-200 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-200" : ""}
+                    `}
+                  >
+                    {language.cefr}
+                  </span>
+                  <span className="text-xs sm:text-xs text-gray-600 dark:text-gray-400">{level}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Journey CTA */}
