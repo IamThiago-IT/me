@@ -81,8 +81,6 @@ export default function Sobre() {
             );
           })}
         </div>
-
-        {/* Journey CTA */}
         <Link
           href="/about/timeline"
           className="group flex items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-dashed border-indigo-400/40 rounded-xl bg-indigo-500/5 hover:bg-indigo-500/10 hover:border-indigo-500 transition-all duration-200"
