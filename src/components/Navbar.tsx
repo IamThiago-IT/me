@@ -44,13 +44,12 @@ export function Navbar() {
 		{ label: t.nav.home, href: "/", icon: <Home className="w-4 h-4" />, category: "main" },
 		{ label: t.nav.about, href: "/about", icon: <User className="w-4 h-4" />, category: "main" },
 		{ label: t.nav.projects, href: "/projetos", icon: <Briefcase className="w-4 h-4" />, category: "portfolio" },
-		{ label: "Design", href: "/design", icon: <Layout className="w-4 h-4" />, category: "portfolio" },
+			
 		{ label: t.nav.feedbacks, href: "/feedbacks", icon: <MessageSquare className="w-4 h-4" />, category: "portfolio" },
 		{ label: t.nav.schedule, href: "/agendar", icon: <Calendar className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.contracts, href: "/contratos", icon: <FileText className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.payments, href: "/pagamentos", icon: <CreditCard className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.contact, href: "/contato", icon: <Mail className="w-4 h-4" />, category: "info" },
-		{ label: t.nav.changelog, href: "/changelog", icon: <GitBranch className="w-4 h-4" />, category: "info" },
 	];
 
 	const isActive = (href: string) =>
