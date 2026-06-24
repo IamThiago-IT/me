@@ -5,15 +5,24 @@ import { Copy } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { toast } from "sonner";
 import { fetchSponsors, fetchDiscountCodes } from "@/lib/db/actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Sponsors() {
   const { t } = useI18n();
   const [sponsors, setSponsors] = useState<any[]>([]);
   const [discountCodes, setDiscountCodes] = useState<any[]>([]);
+  const [loadingSponsors, setLoadingSponsors] = useState(true);
+  const [loadingCodes, setLoadingCodes] = useState(true);
 
   useEffect(() => {
-    fetchSponsors().then(setSponsors);
-    fetchDiscountCodes().then(setDiscountCodes);
+    fetchSponsors().then((data) => {
+      setSponsors(data);
+      setLoadingSponsors(false);
+    });
+    fetchDiscountCodes().then((data) => {
+      setDiscountCodes(data);
+      setLoadingCodes(false);
+    });
   }, []);
 
   const copyCode = (code: string) => {
@@ -25,6 +34,22 @@ export default function Sponsors() {
     <main className="p-3 sm:p-4 md:p-6">
       <MetadataSetter title={t.sponsors.title} />
       <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{t.sponsors.title}</h1>
+      {loadingSponsors ? (
+        <ul className="space-y-3 sm:space-y-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <li key={i} className="p-3 sm:p-4 md:p-5 border rounded shadow">
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                <Skeleton className="w-10 h-10 sm:w-12 sm:h-12 rounded shrink-0" />
+                <div className="flex-1">
+                  <Skeleton className="h-5 w-32 mb-1" />
+                  <Skeleton className="h-4 w-full mb-2" />
+                  <Skeleton className="h-5 w-20 rounded-full" />
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
       <ul className="space-y-3 sm:space-y-4">
         {sponsors.map((sponsor) => (
           <li key={sponsor.id} className="p-3 sm:p-4 md:p-5 border rounded shadow flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow">
@@ -57,8 +82,19 @@ export default function Sponsors() {
           </li>
         ))}
       </ul>
+      )}
       <section className="mt-8 sm:mt-10 md:mt-12">
         <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{t.sponsors.discountCodes}</h2>
+        {loadingCodes ? (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <li key={i} className="p-3 sm:p-4 border rounded shadow">
+                <Skeleton className="h-5 w-32 mb-1" />
+                <Skeleton className="h-4 w-full" />
+              </li>
+            ))}
+          </ul>
+        ) : (
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {discountCodes.map((code) => (
             <li key={code.id} className="p-3 sm:p-4 border rounded shadow hover:shadow-md transition-shadow">
@@ -79,6 +115,7 @@ export default function Sponsors() {
             </li>
           ))}
         </ul>
+        )}
       </section>
     </main>
   );

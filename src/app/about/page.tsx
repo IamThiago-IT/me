@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { fetchSkills, fetchLanguages } from "@/lib/db/actions";
 import { SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiGraphql, SiMongodb, SiPostgresql } from "react-icons/si";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const iconMap: Record<string, React.ElementType> = {
   SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiGraphql, SiMongodb, SiPostgresql,
@@ -16,10 +17,13 @@ export default function Sobre() {
   const { t, locale } = useI18n();
   const [skills, setSkills] = useState<{ name: string; icon: string; order: number }[]>([]);
   const [langs, setLangs] = useState<{ namePt: string; nameEn: string; levelPt: string; levelEn: string; cefr: string }[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchSkills().then(setSkills);
-    fetchLanguages().then(setLangs);
+    Promise.all([
+      fetchSkills().then(setSkills),
+      fetchLanguages().then(setLangs),
+    ]).then(() => setLoading(false));
   }, []);
 
   const isPt = locale === "pt-BR";
@@ -34,53 +38,75 @@ export default function Sobre() {
       <div className="flex-1 grid grid-rows-[auto_1fr_auto_1fr_auto_auto] gap-4 sm:gap-6 min-h-0">
         {/* Skills */}
         <h2 className="text-lg sm:text-xl font-semibold">{t.about.skills}</h2>
-        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3 min-h-0">
-          {skills.map((skill) => {
-            const Icon = iconMap[skill.icon];
-            return (
-              <div
-                key={skill.name}
-                className="flex flex-col items-center justify-center gap-1.5 border rounded-lg transition-all duration-200 hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-500 dark:hover:bg-indigo-900"
-              >
-                {Icon && <Icon className="w-6 h-6 transition-transform duration-200 hover:scale-110" />}
-                <span className="text-xs font-medium">{skill.name}</span>
+        {loading ? (
+          <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3">
+            {Array.from({ length: 7 }).map((_, i) => (
+              <div key={i} className="flex flex-col items-center gap-1.5 border rounded-lg p-3">
+                <Skeleton className="w-6 h-6 rounded" />
+                <Skeleton className="h-3 w-16" />
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3 min-h-0">
+            {skills.map((skill) => {
+              const Icon = iconMap[skill.icon];
+              return (
+                <div
+                  key={skill.name}
+                  className="flex flex-col items-center justify-center gap-1.5 border rounded-lg transition-all duration-200 hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-500 dark:hover:bg-indigo-900"
+                >
+                  {Icon && <Icon className="w-6 h-6 transition-transform duration-200 hover:scale-110" />}
+                  <span className="text-xs font-medium">{skill.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Languages */}
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold flex items-center gap-2">
           <Globe2 className="w-4 h-4 sm:w-5 sm:h-5" />
           {t.about.languages}
         </h2>
-        <div className="grid grid-cols-3 gap-2 min-h-0">
-          {langs.map((language) => {
-            const langName = isPt ? language.namePt : language.nameEn;
-            const level = isPt ? language.levelPt : language.levelEn;
-            return (
-              <div
-                key={langName}
-                className="flex flex-col items-center justify-center border rounded-lg dark:hover:border-indigo-500 dark:hover:bg-indigo-900 transition-all duration-200"
-              >
-                <h3 className="font-semibold text-sm">{langName}</h3>
-                <div className="flex items-center gap-1.5 mt-1">
-                  <span
-                    className={`
-                      px-2 py-0.5 rounded-full text-xs font-bold
-                      ${language.cefr === "C2" ? "bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200" : ""}
-                      ${language.cefr === "C1" ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200" : ""}
-                      ${language.cefr === "B1" ? "bg-yellow-200 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-200" : ""}
-                    `}
-                  >
-                    {language.cefr}
-                  </span>
-                  <span className="text-xs sm:text-xs text-gray-600 dark:text-gray-400">{level}</span>
-                </div>
+        {loading ? (
+          <div className="grid grid-cols-3 gap-2">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="flex flex-col items-center border rounded-lg p-4">
+                <Skeleton className="h-4 w-20 mb-2" />
+                <Skeleton className="h-5 w-16 rounded-full" />
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2 min-h-0">
+            {langs.map((language) => {
+              const langName = isPt ? language.namePt : language.nameEn;
+              const level = isPt ? language.levelPt : language.levelEn;
+              return (
+                <div
+                  key={langName}
+                  className="flex flex-col items-center justify-center border rounded-lg dark:hover:border-indigo-500 dark:hover:bg-indigo-900 transition-all duration-200"
+                >
+                  <h3 className="font-semibold text-sm">{langName}</h3>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <span
+                      className={`
+                        px-2 py-0.5 rounded-full text-xs font-bold
+                        ${language.cefr === "C2" ? "bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200" : ""}
+                        ${language.cefr === "C1" ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200" : ""}
+                        ${language.cefr === "B1" ? "bg-yellow-200 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-200" : ""}
+                      `}
+                    >
+                      {language.cefr}
+                    </span>
+                    <span className="text-xs sm:text-xs text-gray-600 dark:text-gray-400">{level}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
         <Link
           href="/about/timeline"
           className="group flex items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-dashed border-indigo-400/40 rounded-xl bg-indigo-500/5 hover:bg-indigo-500/10 hover:border-indigo-500 transition-all duration-200"

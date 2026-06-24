@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { MetadataSetter } from "@/components/MetadataSetter"
 import { useI18n } from "@/lib/i18n"
 import { fetchEvents } from "@/lib/db/actions"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface Event {
   id: number
@@ -276,14 +277,44 @@ export default function EventPage() {
 
           {/* Events Counter */}
           <section className="mb-4 sm:mb-6">
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Showing {displayedEvents.length} of {filteredEvents.length} events
-              {selectedYear && ` in ${selectedYear}`}
-            </p>
+            {loading ? (
+              <Skeleton className="h-4 w-48" />
+            ) : (
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Showing {displayedEvents.length} of {filteredEvents.length} events
+                {selectedYear && ` in ${selectedYear}`}
+              </p>
+            )}
           </section>
 
           {/* Events Grid */}
-          {displayedEvents.length > 0 ? (
+          {loading ? (
+            <section>
+              <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="border rounded-lg p-6">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className="flex-1">
+                        <Skeleton className="h-6 w-3/4 mb-2" />
+                        <Skeleton className="h-4 w-full mb-1" />
+                        <Skeleton className="h-4 w-5/6" />
+                      </div>
+                      <Skeleton className="h-6 w-20 rounded-full shrink-0" />
+                    </div>
+                    <div className="space-y-2 mb-3">
+                      <Skeleton className="h-4 w-48" />
+                      <Skeleton className="h-4 w-36" />
+                    </div>
+                    <div className="flex gap-2">
+                      <Skeleton className="h-5 w-16 rounded-full" />
+                      <Skeleton className="h-5 w-20 rounded-full" />
+                      <Skeleton className="h-5 w-14 rounded-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : displayedEvents.length > 0 ? (
             <section className="space-y-4 sm:space-y-6">
               <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2">
                 {displayedEvents.map((event) => (

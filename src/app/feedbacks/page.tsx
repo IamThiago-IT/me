@@ -10,6 +10,7 @@ import { MetadataSetter } from "@/components/MetadataSetter"
 import { useI18n } from "@/lib/i18n"
 import { useState, useEffect } from "react"
 import { fetchFeedbacks } from "@/lib/db/actions"
+import { Skeleton } from "@/components/ui/skeleton"
 
 type Feedback = {
   id: number;
@@ -62,24 +63,39 @@ export default function Feedbacks() {
 
 				{/* Stats Section */}
 				<div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-12">
-					<Card className="bg-gradient-to-br from-yellow-50 to-yellow-100/50 dark:from-yellow-950 dark:to-yellow-900 border-yellow-200 dark:border-yellow-800">
-						<CardContent className="p-3 sm:p-4 text-center">
-							<div className="text-2xl sm:text-3xl font-bold text-yellow-600 dark:text-yellow-400">{averageRating}</div>
-							<p className="text-xs sm:text-sm text-yellow-700 dark:text-yellow-300 mt-1">{t.feedbacks.avgRating || "Avaliação Média"}</p>
-						</CardContent>
-					</Card>
-					<Card className="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950 dark:to-blue-900 border-blue-200 dark:border-blue-800">
-						<CardContent className="p-3 sm:p-4 text-center">
-							<div className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{feedbacks.length}</div>
-							<p className="text-xs sm:text-sm text-blue-700 dark:text-blue-300 mt-1">{t.feedbacks.totalFeedbacks || "Total de Clientes"}</p>
-						</CardContent>
-					</Card>
-					<Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950 dark:to-green-900 border-green-200 dark:border-green-800">
-						<CardContent className="p-3 sm:p-4 text-center">
-							<div className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400">{fiveStarCount}</div>
-							<p className="text-xs sm:text-sm text-green-700 dark:text-green-300 mt-1">{t.feedbacks.fiveStars || "Cinco Estrelas"}</p>
-						</CardContent>
-					</Card>
+					{loading ? (
+						<>
+							{Array.from({ length: 3 }).map((_, i) => (
+								<Card key={i}>
+									<CardContent className="p-3 sm:p-4 text-center">
+										<Skeleton className="h-8 w-16 mx-auto mb-1" />
+										<Skeleton className="h-4 w-24 mx-auto" />
+									</CardContent>
+								</Card>
+							))}
+						</>
+					) : (
+						<>
+							<Card className="bg-gradient-to-br from-yellow-50 to-yellow-100/50 dark:from-yellow-950 dark:to-yellow-900 border-yellow-200 dark:border-yellow-800">
+								<CardContent className="p-3 sm:p-4 text-center">
+									<div className="text-2xl sm:text-3xl font-bold text-yellow-600 dark:text-yellow-400">{averageRating}</div>
+									<p className="text-xs sm:text-sm text-yellow-700 dark:text-yellow-300 mt-1">{t.feedbacks.avgRating || "Avaliação Média"}</p>
+								</CardContent>
+							</Card>
+							<Card className="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950 dark:to-blue-900 border-blue-200 dark:border-blue-800">
+								<CardContent className="p-3 sm:p-4 text-center">
+									<div className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{feedbacks.length}</div>
+									<p className="text-xs sm:text-sm text-blue-700 dark:text-blue-300 mt-1">{t.feedbacks.totalFeedbacks || "Total de Clientes"}</p>
+								</CardContent>
+							</Card>
+							<Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950 dark:to-green-900 border-green-200 dark:border-green-800">
+								<CardContent className="p-3 sm:p-4 text-center">
+									<div className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400">{fiveStarCount}</div>
+									<p className="text-xs sm:text-sm text-green-700 dark:text-green-300 mt-1">{t.feedbacks.fiveStars || "Cinco Estrelas"}</p>
+								</CardContent>
+							</Card>
+						</>
+					)}
 				</div>
 
 				{/* Filters */}
@@ -134,7 +150,40 @@ export default function Feedbacks() {
 
 				{/* Feedbacks Grid */}
 				<div className="grid gap-4 sm:gap-5 md:gap-6 mb-12 sm:mb-16">
-					{filteredFeedbacks.length > 0 ? (
+					{loading ? (
+						<>
+							{Array.from({ length: 3 }).map((_, i) => (
+								<Card key={i} className="border-l-4 border-l-yellow-400">
+									<CardContent className="p-4 sm:p-5 md:p-6">
+										<div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
+											<Skeleton className="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 rounded-full shrink-0" />
+											<div className="flex-1">
+												<div className="flex items-start justify-between gap-4 mb-3">
+													<div>
+														<Skeleton className="h-5 w-32 mb-1" />
+														<Skeleton className="h-4 w-48" />
+													</div>
+													<div className="flex gap-1">
+														<Skeleton className="w-4 h-4" />
+														<Skeleton className="w-4 h-4" />
+														<Skeleton className="w-4 h-4" />
+														<Skeleton className="w-4 h-4" />
+														<Skeleton className="w-4 h-4" />
+													</div>
+												</div>
+												<div className="flex gap-2 mb-3">
+													<Skeleton className="h-5 w-24 rounded-full" />
+													<Skeleton className="h-5 w-20 rounded-full" />
+												</div>
+												<Skeleton className="h-4 w-full mb-1" />
+												<Skeleton className="h-4 w-5/6" />
+											</div>
+										</div>
+									</CardContent>
+								</Card>
+							))}
+						</>
+					) : filteredFeedbacks.length > 0 ? (
 						filteredFeedbacks.map((feedback) => (
 							<Card key={feedback.id} className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-yellow-400">
 								<CardContent className="p-4 sm:p-5 md:p-6">

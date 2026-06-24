@@ -18,6 +18,7 @@ import { MetadataSetter } from '@/components/MetadataSetter'
 import { useI18n } from '@/lib/i18n'
 import { toast } from 'sonner'
 import { fetchContractTemplates, fetchContracts, createContractAction } from '@/lib/db/actions'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Contratos() {
   const { t } = useI18n()
@@ -25,10 +26,18 @@ export default function Contratos() {
   const [currentStep, setCurrentStep] = useState<'form' | 'preview' | 'signature'>('form')
   const [contractTemplates, setContractTemplates] = useState<any[]>([])
   const [signedContracts, setSignedContracts] = useState<any[]>([])
+  const [loadingTemplates, setLoadingTemplates] = useState(true)
+  const [loadingContracts, setLoadingContracts] = useState(true)
 
   useEffect(() => {
-    fetchContractTemplates().then(setContractTemplates);
-    fetchContracts().then(setSignedContracts);
+    fetchContractTemplates().then((data) => {
+      setContractTemplates(data);
+      setLoadingTemplates(false);
+    });
+    fetchContracts().then((data) => {
+      setSignedContracts(data);
+      setLoadingContracts(false);
+    });
   }, []);
 
   const [formData, setFormData] = useState({
@@ -554,6 +563,19 @@ export default function Contratos() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
+                {loadingTemplates ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <div key={i} className="border rounded-lg p-6">
+                        <Skeleton className="h-5 w-3/4 mb-2" />
+                        <Skeleton className="h-4 w-24 mb-4" />
+                        <Skeleton className="h-4 w-full mb-1" />
+                        <Skeleton className="h-4 w-5/6 mb-4" />
+                        <Skeleton className="h-10 w-full rounded-md" />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {contractTemplates.map((template) => (
                     <Card key={template.id} className="flex flex-col">
@@ -576,6 +598,7 @@ export default function Contratos() {
                     </Card>
                   ))}
                 </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -589,6 +612,21 @@ export default function Contratos() {
       </CardDescription>
     </CardHeader>
     <CardContent>
+      {loadingContracts ? (
+        <div className="space-y-3 sm:space-y-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="border rounded-md p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <Skeleton className="h-5 w-48" />
+                <Skeleton className="h-5 w-24 rounded-full" />
+              </div>
+              <Skeleton className="h-4 w-64 mb-1" />
+              <Skeleton className="h-4 w-40 mb-1" />
+              <Skeleton className="h-4 w-56" />
+            </div>
+          ))}
+        </div>
+      ) : (
       <div className="space-y-3 sm:space-y-4">
         {(Array.isArray(signedContracts) ? signedContracts : []).map((contract: any) => (
           <div
@@ -633,8 +671,9 @@ export default function Contratos() {
           </div>
         ))}
       </div>
+      )}
       
-      {signedContracts.length === 0 && (
+      {!loadingContracts && signedContracts.length === 0 && (
         <div className="text-center py-6 sm:py-8 text-gray-500">
           <p className="text-sm sm:text-base">{t.contracts.noContracts}</p>
           <p className="text-xs sm:text-sm">{t.contracts.createFirst}</p>
@@ -721,7 +760,17 @@ export default function Contratos() {
                 <CardTitle className="text-lg">{t.contracts.templateNames?.[0]}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {contractTemplates.map((template) => (
+                {loadingTemplates ? (
+                  <div className="space-y-3">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <div key={i} className="border rounded-md p-3">
+                        <Skeleton className="h-4 w-40 mb-1" />
+                        <Skeleton className="h-3 w-24" />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                contractTemplates.map((template) => (
                   <Button
                     key={template.id}
                     variant="outline"
@@ -735,7 +784,7 @@ export default function Contratos() {
                       </div>
                     </div>
                   </Button>
-                ))}
+                )))}
               </CardContent>
             </Card>
           </TabsContent>

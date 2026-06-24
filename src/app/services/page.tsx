@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { fetchServicesFromDb, fetchProcessStepsFromDb, fetchFaqItemsFromDb } from "@/lib/db/actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const serviceIcons = [
 	Laptop,
@@ -67,7 +68,53 @@ export default function Services() {
 	const isPt = locale === "pt-BR";
 
 	if (loading) {
-		return <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600"></div></div>;
+		return (
+			<div className="flex flex-col">
+				<Skeleton className="h-10 w-64 mb-4" />
+				<Skeleton className="h-5 w-full max-w-3xl mb-2" />
+				<Skeleton className="h-5 w-5/6 max-w-3xl mb-16" />
+
+				<div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16 sm:mb-24">
+					{Array.from({ length: 6 }).map((_, i) => (
+						<div key={i} className="border rounded-lg p-6">
+							<Skeleton className="w-12 h-12 rounded-xl mb-4" />
+							<Skeleton className="h-6 w-3/4 mb-2" />
+							<Skeleton className="h-4 w-full mb-1" />
+							<Skeleton className="h-4 w-5/6 mb-4" />
+							<div className="space-y-2 mb-6">
+								<Skeleton className="h-3 w-full" />
+								<Skeleton className="h-3 w-4/5" />
+								<Skeleton className="h-3 w-3/5" />
+							</div>
+							<div className="pt-4 border-t">
+								<Skeleton className="h-5 w-32 mb-4" />
+								<Skeleton className="h-10 w-full rounded-md" />
+							</div>
+						</div>
+					))}
+				</div>
+
+				<Skeleton className="h-8 w-48 mx-auto mb-12" />
+				<div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
+					{Array.from({ length: 5 }).map((_, i) => (
+						<div key={i} className="flex md:flex-col items-start md:items-center gap-4">
+							<Skeleton className="w-16 h-16 rounded-full shrink-0" />
+							<div className="md:text-center flex-1">
+								<Skeleton className="h-5 w-24 mb-1" />
+								<Skeleton className="h-4 w-full" />
+							</div>
+						</div>
+					))}
+				</div>
+
+				<Skeleton className="h-8 w-48 mx-auto mb-12" />
+				<div className="space-y-3 max-w-3xl">
+					{Array.from({ length: 4 }).map((_, i) => (
+						<Skeleton key={i} className="h-14 w-full rounded-lg" />
+					))}
+				</div>
+			</div>
+		);
 	}
 
 	return (

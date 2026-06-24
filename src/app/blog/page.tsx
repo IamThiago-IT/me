@@ -10,6 +10,7 @@ import { Coins, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { MetadataSetter } from "@/components/MetadataSetter"
 import { useI18n } from "@/lib/i18n"
+import { Skeleton } from "@/components/ui/skeleton"
 
 function BlogContent() {
   const { t } = useI18n()
@@ -90,11 +91,28 @@ function BlogContent() {
     return (
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center h-48 sm:h-64">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-indigo-600 mx-auto mb-3 sm:mb-4"></div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t.blog.loading}</p>
-            </div>
+          <Skeleton className="h-9 w-48 mb-2" />
+          <Skeleton className="h-5 w-72 mb-6" />
+          <Skeleton className="h-10 w-full mb-6" />
+          <div className="grid gap-4 sm:gap-6 md:gap-8">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="border rounded-lg p-6">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div className="flex-1">
+                    <Skeleton className="h-7 w-3/4 mb-2" />
+                    <Skeleton className="h-4 w-48" />
+                  </div>
+                  <Skeleton className="h-5 w-16 shrink-0" />
+                </div>
+                <Skeleton className="h-4 w-full mb-1" />
+                <Skeleton className="h-4 w-5/6 mb-3" />
+                <div className="flex gap-2">
+                  <Skeleton className="h-5 w-16 rounded-full" />
+                  <Skeleton className="h-5 w-20 rounded-full" />
+                  <Skeleton className="h-5 w-14 rounded-full" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

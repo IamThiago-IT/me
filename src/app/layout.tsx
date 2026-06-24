@@ -29,7 +29,7 @@ export default function Layout({
 				className={`${inter.className} ${jetbrainsMono.variable} custom-scrollbar`}
 			>
 				<I18nProvider>
-					{/* <ThemeProvider attribute="class" defaultTheme="system"> */}
+					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						<Navbar />
 						<main className="pt-16 min-h-screen">
 							<div className="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
@@ -44,8 +44,8 @@ export default function Layout({
 									"text-sm sm:text-base max-w-xs sm:max-w-sm md:max-w-md",
 							}}
 						/>
-					{/* </ThemeProvider> */}
-					<CommandDialogDemo />
+						<CommandDialogDemo />
+					</ThemeProvider>
 				</I18nProvider>
 			</body>
 		</html>

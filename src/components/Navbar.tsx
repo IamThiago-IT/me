@@ -44,11 +44,8 @@ export function Navbar() {
 		{ label: t.nav.home, href: "/", icon: <Home className="w-4 h-4" />, category: "main" },
 		{ label: t.nav.about, href: "/about", icon: <User className="w-4 h-4" />, category: "main" },
 		{ label: t.nav.projects, href: "/projetos", icon: <Briefcase className="w-4 h-4" />, category: "portfolio" },
-			
-		{ label: t.nav.feedbacks, href: "/feedbacks", icon: <MessageSquare className="w-4 h-4" />, category: "portfolio" },
 		{ label: t.nav.schedule, href: "/agendar", icon: <Calendar className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.contracts, href: "/contratos", icon: <FileText className="w-4 h-4" />, category: "services" },
-		{ label: t.nav.payments, href: "/pagamentos", icon: <CreditCard className="w-4 h-4" />, category: "services" },
 		{ label: t.nav.contact, href: "/contato", icon: <Mail className="w-4 h-4" />, category: "info" },
 	];
 
@@ -70,15 +67,12 @@ export function Navbar() {
 		<nav className="bg-white text-black dark:bg-black dark:text-white shadow-sm fixed w-full z-10">
 			<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-14 sm:h-16">
-					{/* Logo */}
 					<Link
 						href="/"
 						className="flex-shrink-0 text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity duration-200 active:scale-95"
 					>
 						IamThiago
 					</Link>
-
-					{/* Desktop Menu */}
 					<div className="hidden sm:flex sm:gap-1 md:gap-2 lg:gap-6">
 						{menuItems.map((item) => (
 							<Link
@@ -95,13 +89,9 @@ export function Navbar() {
 							</Link>
 						))}
 					</div>
-
-					{/* Desktop Right Side */}
 					<div className="hidden sm:flex items-center gap-2">
 						<LanguageSwitcher />
 					</div>
-
-					{/* Mobile Menu Button */}
 					<div className="flex items-center gap-1.5 sm:hidden">
 						<Button
 							variant="ghost"
@@ -120,15 +110,12 @@ export function Navbar() {
 					</div>
 				</div>
 			</div>
-
-			{/* Mobile Menu */}
 			<div
 				className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200 dark:border-gray-800 ${
 					isMenuOpen ? "max-h-[calc(100vh-3.5rem)]" : "max-h-0"
 				}`}
 			>
 				<div className="bg-white dark:bg-gray-900 overflow-y-auto max-h-[calc(100vh-3.5rem)]">
-					{/* Main Navigation */}
 					<div className="px-4 py-4 space-y-1">
 						{navSections.main.map((item) => (
 							<MobileNavLink

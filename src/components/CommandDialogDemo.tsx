@@ -32,20 +32,17 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 import { useI18n } from "@/lib/i18n"
+import { useTheme } from "next-themes"
 
 export function CommandDialogDemo() {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
   const { t } = useI18n()
+  const { resolvedTheme, setTheme } = useTheme()
 
   // Function to toggle between dark and light theme
   const toggleTheme = () => {
-    const html = document.documentElement
-    if (html.classList.contains("dark")) {
-      html.classList.remove("dark")
-    } else {
-      html.classList.add("dark")
-    }
+    setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
 
   // Navigation helper

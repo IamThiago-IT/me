@@ -2,8 +2,9 @@
 import { useState, useEffect } from "react";
 import { MetadataSetter } from "@/components/MetadataSetter";
 import { useI18n } from "@/lib/i18n";
-import { QrCode, CreditCard, Barcode, Building2, Globe, Coins, CheckCircle2 } from "lucide-react";
+import { QrCode, CreditCard, Barcode, Building2, Globe, Coins, CheckCircle2, Wallet } from "lucide-react";
 import { fetchPaymentMethods } from "@/lib/db/actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const paymentIcons = [QrCode, CreditCard, Barcode, Building2, Globe, Coins];
 
@@ -21,7 +22,31 @@ export default function Pagamentos() {
 
   const isPt = locale === "pt-BR";
 
-  if (loading) return <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div></div>;
+  if (loading) {
+    return (
+      <div className="flex flex-col">
+        <Skeleton className="h-9 w-48 mb-2" />
+        <Skeleton className="h-5 w-96 mb-6" />
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border rounded-lg p-4 sm:p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <Skeleton className="w-10 h-10 rounded-lg" />
+                <Skeleton className="h-6 w-40" />
+              </div>
+              <Skeleton className="h-4 w-full mb-2" />
+              <Skeleton className="h-4 w-3/4 mb-4" />
+              <div className="space-y-1.5">
+                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-3 w-5/6" />
+                <Skeleton className="h-3 w-4/6" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">
@@ -33,7 +58,7 @@ export default function Pagamentos() {
 
       <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
         {methods.map((method, index) => {
-          const Icon = paymentIcons[index];
+          const Icon = paymentIcons[index] ?? Wallet;
           const name = isPt ? method.namePt : method.nameEn;
           const description = isPt ? method.descriptionPt : method.descriptionEn;
           const benefits = ((isPt ? method.benefitsPt : method.benefitsEn) ?? "").split(" | ");

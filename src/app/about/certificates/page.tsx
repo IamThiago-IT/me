@@ -6,6 +6,7 @@ import { ArrowLeft, Award, ExternalLink, Calendar } from "lucide-react";
 import { MetadataSetter } from "@/components/MetadataSetter";
 import { useI18n } from "@/lib/i18n";
 import { fetchCertificates } from "@/lib/db/actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CertificatesPage() {
   const { t } = useI18n();
@@ -45,8 +46,16 @@ export default function CertificatesPage() {
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center h-32 mt-5">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="rounded-xl border p-4">
+                <Skeleton className="h-5 w-3/4 mb-2" />
+                <Skeleton className="h-4 w-1/2 mb-3" />
+                <Skeleton className="h-3 w-1/3" />
+                <Skeleton className="h-3 w-full mt-2" />
+                <Skeleton className="h-3 w-1/4 mt-2" />
+              </div>
+            ))}
           </div>
         ) : certificates.length === 0 ? (
           <div className="mt-5 text-center py-8 text-muted-foreground text-sm">

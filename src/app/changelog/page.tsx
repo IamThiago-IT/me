@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, RefreshCw } from "lucide-react"
 import { formatDate } from "@/lib/utils"
+import { Skeleton } from "@/components/ui/skeleton"
 
 type CommitType = "feat" | "fix" | "docs" | "style" | "refactor" | "perf" | "test" | "chore" | "other"
 
@@ -103,11 +104,17 @@ export default function Changelog() {
       )}
 
       {loading ? (
-        <div className="text-center py-12">
-          <div className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400">
-            <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600 dark:border-gray-600 dark:border-t-gray-200" />
-            <span>{t.changelog.loading}</span>
-          </div>
+        <div className="space-y-4">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="border rounded-lg p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <Skeleton className="h-5 w-16 rounded-full" />
+                <Skeleton className="h-4 w-20" />
+              </div>
+              <Skeleton className="h-6 w-3/4 mb-2" />
+              <Skeleton className="h-4 w-48" />
+            </div>
+          ))}
         </div>
       ) : commits.length === 0 ? (
         <Card>
