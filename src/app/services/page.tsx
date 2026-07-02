@@ -137,7 +137,12 @@ export default function Services() {
 					const Icon = serviceIcons[index];
 					const name = isPt ? service.namePt : service.nameEn;
 					const description = isPt ? service.descriptionPt : service.descriptionEn;
-					const features = (isPt ? service.featuresPt : service.featuresEn).split(" | ");
+					const features = (service.features ?? [])
+						.slice()
+						.sort((a: { order: number }, b: { order: number }) => a.order - b.order)
+						.map((feature: { id: number; textPt: string; textEn: string }) =>
+							isPt ? feature.textPt : feature.textEn,
+						);
 					const cta = isPt ? service.ctaPt : service.ctaEn;
 					const delivery = isPt ? service.deliveryPt : service.deliveryEn;
 

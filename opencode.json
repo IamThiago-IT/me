@@ -10,6 +10,10 @@
       ],
       "enabled": true,
       "environment": {}
+    },
+    "sentry": {
+      "type": "remote",
+      "url": "https://mcp.sentry.dev/mcp"
     }
   }
 }

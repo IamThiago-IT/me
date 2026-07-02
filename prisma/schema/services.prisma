@@ -1,3 +1,13 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/services"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["public", "services"]
+}
+
 model Service {
   id        Int      @id @default(autoincrement())
   slug      String   @unique
@@ -25,7 +35,7 @@ model Service {
 
   features ServiceFeature[]
 
-  @@schema("public")
+  @@schema("services")
 }
 
 model ServiceFeature {
@@ -37,7 +47,7 @@ model ServiceFeature {
   textPt String
   textEn String
 
-  @@schema("public")
+  @@schema("services")
 }
 
 // ─── Process Steps ──────────────────────────────────────────
@@ -51,7 +61,7 @@ model ProcessStep {
   descPt  String @db.Text
   descEn  String @db.Text
 
-  @@schema("public")
+  @@schema("services")
 }
 
 // ─── FAQ ────────────────────────────────────────────────────
@@ -64,5 +74,5 @@ model FaqItem {
   answerPt   String @db.Text
   answerEn   String @db.Text
 
-  @@schema("public")
+  @@schema("services")
 }

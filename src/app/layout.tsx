@@ -1,8 +1,15 @@
 import { CommandDialogDemo } from "@/components/CommandDialogDemo";
 import { Navbar } from "@/components/Navbar";
 import { I18nProvider } from "@/lib/i18n";
+import {
+	buildThemeCss,
+	resolveTheme,
+	THEME_COOKIE_NAME,
+	themeConfig,
+} from "@/lib/themes";
 import { ThemeProvider } from "next-themes";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import type React from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -18,13 +25,33 @@ export const metadata = {
 	description: "Portfólio minimalista de um desenvolvedor",
 };
 
-export default function Layout({
+export default async function Layout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const cookieStore = await cookies();
+	const preferredThemeId = cookieStore.get(THEME_COOKIE_NAME)?.value ?? null;
+	const resolvedTheme = await resolveTheme(
+		{
+			now: new Date(),
+			preferredThemeId,
+			locale: "pt-BR",
+		},
+		themeConfig,
+	);
+	const themeCss = buildThemeCss(resolvedTheme.theme);
+
 	return (
-		<html lang="pt-BR" suppressHydrationWarning className="custom-scrollbar">
+		<html
+			lang="pt-BR"
+			suppressHydrationWarning
+			className="custom-scrollbar"
+			data-theme={resolvedTheme.theme.id}
+		>
+			<head>
+				<style dangerouslySetInnerHTML={{ __html: themeCss }} />
+			</head>
 			<body
 				className={`${inter.className} ${jetbrainsMono.variable} custom-scrollbar`}
 			>

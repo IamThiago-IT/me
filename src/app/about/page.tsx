@@ -15,8 +15,8 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function Sobre() {
   const { t, locale } = useI18n();
-  const [skills, setSkills] = useState<{ name: string; icon: string; order: number }[]>([]);
-  const [langs, setLangs] = useState<{ namePt: string; nameEn: string; levelPt: string; levelEn: string; cefr: string }[]>([]);
+  const [skills, setSkills] = useState<{ id: number; name: string; icon: string; order: number }[]>([]);
+  const [langs, setLangs] = useState<{ id: number; namePt: string; nameEn: string; levelPt: string; levelEn: string; cefr: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Sobre() {
               const Icon = iconMap[skill.icon];
               return (
                 <div
-                  key={skill.name}
+                  key={skill.id}
                   className="flex flex-col items-center justify-center gap-1.5 border rounded-lg transition-all duration-200 hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 dark:hover:border-indigo-500 dark:hover:bg-indigo-900"
                 >
                   {Icon && <Icon className="w-6 h-6 transition-transform duration-200 hover:scale-110" />}
@@ -85,7 +85,7 @@ export default function Sobre() {
               const level = isPt ? language.levelPt : language.levelEn;
               return (
                 <div
-                  key={langName}
+                  key={language.id}
                   className="flex flex-col items-center justify-center border rounded-lg dark:hover:border-indigo-500 dark:hover:bg-indigo-900 transition-all duration-200"
                 >
                   <h3 className="font-semibold text-sm">{langName}</h3>
