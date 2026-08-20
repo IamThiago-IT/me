@@ -111,6 +111,8 @@ const ptBR = {
 	// Projects
 	projects: {
 		title: "Meus Projetos",
+		description:
+			"Explore os projetos que desenvolvi, desde ferramentas e bibliotecas até aplicações completas.",
 		searchPlaceholder: "Buscar projetos...",
 		filters: "Filtros",
 		sortBy: "Ordenar por",
@@ -118,7 +120,7 @@ const ptBR = {
 		nameAZ: "Nome A-Z",
 		mostRecent: "Mais recentes",
 		language: "Linguagem",
-		allLanguages: "Todas as linguagens",
+		allLanguages: "Todas",
 		projectsFound: "projeto(s) encontrado(s)",
 		for: "para",
 		in: "em",
@@ -128,6 +130,18 @@ const ptBR = {
 		showMore: "Mostrar mais",
 		loadError:
 			"Não foi possível carregar os projetos. Por favor, tente novamente mais tarde.",
+		totalProjects: "Projetos",
+		totalStars: "Estrelas",
+		totalLanguages: "Linguagens",
+		clearFilters: "Limpar filtros",
+		noProjectsFound: "Nenhum projeto encontrado com os filtros atuais.",
+		tryAgain: "Tentar novamente",
+		featuredTitle: "Projetos em Destaque",
+		featuredDescription: "Uma seleção de projetos que desenvolvi com mais cuidado.",
+		featured: "Destaque",
+		viewProject: "Ver projeto",
+		previous: "Anterior",
+		next: "Próximo",
 	},
 
 	// Feedbacks
@@ -276,9 +290,10 @@ const ptBR = {
 	// Setup
 	setup: {
 		title: "Meu Setup",
-		asJson: "Como JSON",
 		hardware: "Hardware",
 		software: "Software",
+		techStack: "Stack",
+		notes: "Notas",
 	},
 
 	// Not Found

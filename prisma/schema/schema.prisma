@@ -205,3 +205,18 @@ model CoverLetter {
 
   @@schema("public")
 }
+
+model FeaturedProject {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  link        String
+  imageUrl    String?
+  tags        String
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@schema("public")
+}

@@ -110,6 +110,8 @@ const en = {
 	// Projects
 	projects: {
 		title: "My Projects",
+		description:
+			"Explore the projects I've built, from tools and libraries to complete applications.",
 		searchPlaceholder: "Search projects...",
 		filters: "Filters",
 		sortBy: "Sort by",
@@ -117,7 +119,7 @@ const en = {
 		nameAZ: "Name A-Z",
 		mostRecent: "Most recent",
 		language: "Language",
-		allLanguages: "All languages",
+		allLanguages: "All",
 		projectsFound: "project(s) found",
 		for: "for",
 		in: "in",
@@ -126,6 +128,18 @@ const en = {
 		loading: "Loading...",
 		showMore: "Show more",
 		loadError: "Could not load projects. Please try again later.",
+		totalProjects: "Projects",
+		totalStars: "Stars",
+		totalLanguages: "Languages",
+		clearFilters: "Clear filters",
+		noProjectsFound: "No projects found with the current filters.",
+		tryAgain: "Try again",
+		featuredTitle: "Featured Projects",
+		featuredDescription: "A curated selection of projects I've built.",
+		featured: "Featured",
+		viewProject: "View project",
+		previous: "Previous",
+		next: "Next",
 	},
 
 	// Feedbacks
@@ -273,9 +287,10 @@ const en = {
 	// Setup
 	setup: {
 		title: "My Setup",
-		asJson: "As JSON",
 		hardware: "Hardware",
 		software: "Software",
+		techStack: "Tech Stack",
+		notes: "Notes",
 	},
 
 	// Not Found

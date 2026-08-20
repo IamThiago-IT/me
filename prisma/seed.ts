@@ -253,6 +253,39 @@ Best regards,
     },
   });
 
+  // ─── Featured Projects ───────────────────────────────────────
+  await prisma.featuredProject.createMany({
+    data: [
+      {
+        name: "Cella - Sistema de Almoxarifado",
+        description:
+          "Sistema completo de gerenciamento de almoxarifado com controle de estoque, cadastro de produtos e geração de relatórios.",
+        link: "https://github.com/IamThiago-IT/cella",
+        imageUrl: "/window.svg",
+        tags: JSON.stringify(["Sistema Web", "Estoque", "PHP"]),
+        order: 0,
+      },
+      {
+        name: "Movie Recommender",
+        description:
+          "Sistema de recomendação de filmes com aprendizado de máquina e sugestões personalizadas.",
+        link: "https://github.com/IamThiago-IT/movie-recommender",
+        imageUrl: "/globe.svg",
+        tags: JSON.stringify(["Machine Learning", "Python"]),
+        order: 1,
+      },
+      {
+        name: "News Portal Redesign",
+        description:
+          "Redesign completo de portal de notícias com melhoria de 60% no tempo de carregamento.",
+        link: "https://github.com/IamThiago-IT/news-portal-redesign",
+        imageUrl: "/file.svg",
+        tags: JSON.stringify(["Frontend", "Performance"]),
+        order: 2,
+      },
+    ],
+  });
+
   // ─── Services Schema (services) ──────────────────────────────
   const { PrismaClient: ServicesPrismaClient } = await import("./generated/services/client.js");
   const servicesAdapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });

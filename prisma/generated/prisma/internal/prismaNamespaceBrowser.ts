@@ -65,7 +65,8 @@ export const ModelName = {
   PaymentMethod: 'PaymentMethod',
   Skill: 'Skill',
   Language: 'Language',
-  CoverLetter: 'CoverLetter'
+  CoverLetter: 'CoverLetter',
+  FeaturedProject: 'FeaturedProject'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -289,6 +290,22 @@ export const CoverLetterScalarFieldEnum = {
 } as const
 
 export type CoverLetterScalarFieldEnum = (typeof CoverLetterScalarFieldEnum)[keyof typeof CoverLetterScalarFieldEnum]
+
+
+export const FeaturedProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  link: 'link',
+  imageUrl: 'imageUrl',
+  tags: 'tags',
+  order: 'order',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeaturedProjectScalarFieldEnum = (typeof FeaturedProjectScalarFieldEnum)[keyof typeof FeaturedProjectScalarFieldEnum]
 
 
 export const SortOrder = {

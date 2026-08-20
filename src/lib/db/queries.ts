@@ -118,3 +118,15 @@ export async function getCertificates() {
 export async function getCoverLetter() {
   return prisma.coverLetter.findFirst();
 }
+
+// ─── Featured Projects ─────────────────────────────────────────
+export async function getFeaturedProjects() {
+  const projects = await prisma.featuredProject.findMany({
+    where: { isActive: true },
+    orderBy: { order: "asc" },
+  });
+  return projects.map((p) => ({
+    ...p,
+    tags: JSON.parse(p.tags) as string[],
+  }));
+}

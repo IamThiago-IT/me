@@ -398,7 +398,8 @@ export const ModelName = {
   PaymentMethod: 'PaymentMethod',
   Skill: 'Skill',
   Language: 'Language',
-  CoverLetter: 'CoverLetter'
+  CoverLetter: 'CoverLetter',
+  FeaturedProject: 'FeaturedProject'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "post" | "certificate" | "timelineEntry" | "timelineProject" | "feedback" | "event" | "sponsor" | "discountCode" | "contractTemplate" | "contract" | "paymentMethod" | "skill" | "language" | "coverLetter"
+    modelProps: "user" | "post" | "certificate" | "timelineEntry" | "timelineProject" | "feedback" | "event" | "sponsor" | "discountCode" | "contractTemplate" | "contract" | "paymentMethod" | "skill" | "language" | "coverLetter" | "featuredProject"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1528,6 +1529,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FeaturedProject: {
+      payload: Prisma.$FeaturedProjectPayload<ExtArgs>
+      fields: Prisma.FeaturedProjectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FeaturedProjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FeaturedProjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>
+        }
+        findFirst: {
+          args: Prisma.FeaturedProjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FeaturedProjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>
+        }
+        findMany: {
+          args: Prisma.FeaturedProjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>[]
+        }
+        create: {
+          args: Prisma.FeaturedProjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>
+        }
+        createMany: {
+          args: Prisma.FeaturedProjectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FeaturedProjectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>[]
+        }
+        delete: {
+          args: Prisma.FeaturedProjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>
+        }
+        update: {
+          args: Prisma.FeaturedProjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>
+        }
+        deleteMany: {
+          args: Prisma.FeaturedProjectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FeaturedProjectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FeaturedProjectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>[]
+        }
+        upsert: {
+          args: Prisma.FeaturedProjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeaturedProjectPayload>
+        }
+        aggregate: {
+          args: Prisma.FeaturedProjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFeaturedProject>
+        }
+        groupBy: {
+          args: Prisma.FeaturedProjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeaturedProjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FeaturedProjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeaturedProjectCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1774,6 +1849,22 @@ export const CoverLetterScalarFieldEnum = {
 export type CoverLetterScalarFieldEnum = (typeof CoverLetterScalarFieldEnum)[keyof typeof CoverLetterScalarFieldEnum]
 
 
+export const FeaturedProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  link: 'link',
+  imageUrl: 'imageUrl',
+  tags: 'tags',
+  order: 'order',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeaturedProjectScalarFieldEnum = (typeof FeaturedProjectScalarFieldEnum)[keyof typeof FeaturedProjectScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1991,6 +2082,7 @@ export type GlobalOmitConfig = {
   skill?: Prisma.SkillOmit
   language?: Prisma.LanguageOmit
   coverLetter?: Prisma.CoverLetterOmit
+  featuredProject?: Prisma.FeaturedProjectOmit
 }
 
 /* Types for Logging */

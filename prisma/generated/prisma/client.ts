@@ -116,3 +116,8 @@ export type Language = Prisma.LanguageModel
  * 
  */
 export type CoverLetter = Prisma.CoverLetterModel
+/**
+ * Model FeaturedProject
+ * 
+ */
+export type FeaturedProject = Prisma.FeaturedProjectModel

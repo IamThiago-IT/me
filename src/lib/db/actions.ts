@@ -16,6 +16,7 @@ import {
   getServicesFromDb,
   getProcessStepsFromDb,
   getFaqItemsFromDb,
+  getFeaturedProjects,
 } from "./queries";
 import { createContract as createContractQuery } from "./queries";
 
@@ -34,6 +35,7 @@ export const fetchCoverLetter = async () => getCoverLetter();
 export const fetchServicesFromDb = async () => getServicesFromDb();
 export const fetchProcessStepsFromDb = async () => getProcessStepsFromDb();
 export const fetchFaqItemsFromDb = async () => getFaqItemsFromDb();
+export const fetchFeaturedProjects = async () => getFeaturedProjects();
 
 export const createContractAction = async (data: Parameters<typeof createContractQuery>[0]) => {
   return createContractQuery(data);
