@@ -1,8 +1,8 @@
 "use client";
 
 import { MetadataSetter } from "@/components/MetadataSetter";
-import { Github, Linkedin, Mail, Twitter, Send, FileText } from "lucide-react"
-import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa"
+import { Mail, Send, FileText } from "lucide-react"
+import { FaTiktok, FaInstagram, FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
 import { FaThreads } from "react-icons/fa6";
 import { useI18n } from "@/lib/i18n";
 import Link from "next/link";
@@ -12,9 +12,9 @@ export default function Contato() {
 
   const contactLinks = [
     { icon: Mail, label: "Email", href: "mailto:thiagodossantos315@gmail.com" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/IamThiago-IT" },
-    { icon: Github, label: "GitHub", href: "https://github.com/IamThiago-IT" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com/IamThiago-IT" },
+    { icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com/in/IamThiago-IT" },
+    { icon: FaGithub, label: "GitHub", href: "https://github.com/IamThiago-IT" },
+    { icon: FaTwitter, label: "Twitter", href: "https://twitter.com/IamThiago-IT" },
     { icon: FaTiktok, label: "TikTok", href: "https://www.tiktok.com/@IamThiago-IT" },
     { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/IamThiago-IT" },
     { icon: FaFacebook, label: "Facebook", href: "https://www.facebook.com/IamThiago-IT" },
