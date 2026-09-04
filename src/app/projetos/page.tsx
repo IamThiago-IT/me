@@ -80,6 +80,29 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Lua: "bg-indigo-500",
 };
 
+/**
+ * Normalizes user-provided image URLs.
+ * - Converts `github.com/.../blob/...` (HTML page) to `raw.githubusercontent.com/.../...` (raw image).
+ * - Returns null for empty/invalid URLs.
+ * @see https://nextjs.org/docs/messages/next-image-unconfigured-host — the blob URL also fails
+ *      to render even after whitelisting `github.com` because it serves HTML, not an image.
+ */
+function normalizeImageUrl(url: string | null): string | null {
+  if (!url) return null
+  try {
+    const parsed = new URL(url)
+    if (parsed.hostname === "github.com" && parsed.pathname.includes("/blob/")) {
+      const [repoPart, filePart] = parsed.pathname.split("/blob/")
+      if (repoPart && filePart) {
+        return `https://raw.githubusercontent.com${repoPart}/${filePart}`
+      }
+    }
+    return url
+  } catch {
+    return url
+  }
+}
+
 export default function Projetos() {
   const { t } = useI18n()
 
@@ -95,6 +118,7 @@ export default function Projetos() {
   const [featuredProjects, setFeaturedProjects] = useState<FeaturedProject[]>([])
   const [featuredLoading, setFeaturedLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [failedImageIds, setFailedImageIds] = useState<Set<number>>(new Set())
   const carouselRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -292,19 +316,31 @@ export default function Projetos() {
                     className="group snap-start shrink-0 w-[85%] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
                   >
                     <div className="relative aspect-video overflow-hidden">
-                      {project.imageUrl ? (
-                        <Image
-                          src={project.imageUrl}
-                          alt={project.name}
-                          fill
-                          sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-950">
-                          <FolderGit2 className="w-10 h-10 text-blue-500 dark:text-blue-400" />
-                        </div>
-                      )}
+                      {(() => {
+                        const normalizedUrl = normalizeImageUrl(project.imageUrl)
+                        const hasFailed = failedImageIds.has(project.id)
+                        return normalizedUrl && !hasFailed ? (
+                          <Image
+                            src={normalizedUrl}
+                            alt={project.name}
+                            fill
+                            sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            onError={() =>
+                              setFailedImageIds((prev) => {
+                                const next = new Set(prev)
+                                next.add(project.id)
+                                return next
+                              })
+                            }
+                            unoptimized={false}
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-950">
+                            <FolderGit2 className="w-10 h-10 text-blue-500 dark:text-blue-400" />
+                          </div>
+                        )
+                      })()}
                       <div className="absolute top-2 left-2">
                         <Badge className="bg-primary text-primary-foreground shadow-sm">
                           <Star className="w-3 h-3 fill-current" />
