@@ -15,7 +15,7 @@ import { toast } from "sonner"
 import Link from "next/link"
 import { ArrowLeft, Calendar as CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
-import { ptBR, enUS } from "date-fns/locale"
+import { ptBR, enUS, it as itLocale, ko as koLocale, es, ja, fr, ru } from "date-fns/locale"
 
 export default function InviteMe() {
 	const { t, locale } = useI18n()
@@ -74,7 +74,17 @@ export default function InviteMe() {
 		}
 	}
 
-	const dateLocale = locale === "pt-BR" ? ptBR : enUS
+	const dateLocaleMap: Record<string, typeof ptBR> = {
+		"pt-BR": ptBR,
+		en: enUS,
+		es,
+		ja,
+		fr,
+		ru,
+		it: itLocale,
+		ko: koLocale,
+	}
+	const dateLocale = dateLocaleMap[locale] ?? enUS
 
 	return (
 		<>

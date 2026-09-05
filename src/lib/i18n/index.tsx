@@ -7,6 +7,8 @@ import es from "./locales/es";
 import ja from "./locales/ja";
 import fr from "./locales/fr";
 import ru from "./locales/ru";
+import it from "./locales/it";
+import ko from "./locales/ko";
 
 export const LOCALES = [
   { code: "pt-BR" as const, label: "Português (BR)", nativeName: "Português", flag: "🇧🇷" },
@@ -15,6 +17,8 @@ export const LOCALES = [
   { code: "ja" as const, label: "日本語", nativeName: "日本語", flag: "🇯🇵" },
   { code: "fr" as const, label: "Français", nativeName: "Français", flag: "🇫🇷" },
   { code: "ru" as const, label: "Русский", nativeName: "Русский", flag: "🇷🇺" },
+  { code: "it" as const, label: "Italiano", nativeName: "Italiano", flag: "🇮🇹" },
+  { code: "ko" as const, label: "한국어", nativeName: "한국어", flag: "🇰🇷" },
 ] as const;
 
 export type Locale = (typeof LOCALES)[number]["code"];
@@ -38,6 +42,8 @@ const translations: Record<Locale, Translations> = {
   ja: ja as unknown as Translations,
   fr: fr as unknown as Translations,
   ru: ru as unknown as Translations,
+  it: it as unknown as Translations,
+  ko: ko as unknown as Translations,
 };
 
 interface I18nContextType {
@@ -64,6 +70,8 @@ function detectBrowserLocale(): Locale {
   if (lang.startsWith("ja")) return "ja";
   if (lang.startsWith("fr")) return "fr";
   if (lang.startsWith("ru")) return "ru";
+  if (lang.startsWith("it")) return "it";
+  if (lang.startsWith("ko")) return "ko";
   return "pt-BR";
 }
 

@@ -22,6 +22,8 @@ const searchPlaceholders: Record<Locale, string> = {
   ja: "言語を検索...",
   fr: "Rechercher une langue...",
   ru: "Поиск языка...",
+  it: "Cerca lingua...",
+  ko: "언어 검색...",
 };
 
 const emptyMessages: Record<Locale, string> = {
@@ -31,6 +33,8 @@ const emptyMessages: Record<Locale, string> = {
   ja: "言語が見つかりませんでした。",
   fr: "Aucune langue trouvée.",
   ru: "Язык не найден.",
+  it: "Nessuna lingua trovata.",
+  ko: "언어를 찾을 수 없습니다.",
 };
 
 const searchAliases: Record<Locale, string> = {
@@ -40,6 +44,8 @@ const searchAliases: Record<Locale, string> = {
   ja: "japonês japones japanese nihongo japon ja 日本語",
   fr: "français french fr francês frances",
   ru: "russo russian ru русский россия russia",
+  it: "italiano italian it italia italy",
+  ko: "coreano korean ko 한국어 한국 korea",
 };
 
 export function LanguageSwitcher() {
