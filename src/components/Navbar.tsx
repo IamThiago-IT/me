@@ -64,7 +64,7 @@ export function Navbar() {
 	}
 
 	return (
-		<nav className="bg-white text-black dark:bg-black dark:text-white shadow-sm fixed w-full z-10">
+		<nav className="bg-background text-foreground border-b border-border shadow-sm fixed w-full z-10">
 			<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-14 sm:h-16">
 					<Link
@@ -80,8 +80,8 @@ export function Navbar() {
 								href={item.href}
 								className={`inline-flex items-center gap-1.5 px-2 md:px-1 pt-1 border-b-2 text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${
 									isActive(item.href)
-										? "border-indigo-500 text-gray-900 dark:text-white"
-										: "border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-200"
+										? "border-primary text-foreground"
+										: "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
 								}`}
 							>
 								{item.icon && <span className="hidden lg:inline">{item.icon}</span>}
@@ -97,7 +97,7 @@ export function Navbar() {
 							variant="ghost"
 							size="sm"
 							onClick={() => setIsMenuOpen(!isMenuOpen)}
-							className="p-2 h-10 w-10 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+							className="p-2 h-10 w-10 rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
 							aria-label={t.nav.openMenu}
 							aria-expanded={isMenuOpen}
 						>
@@ -111,11 +111,11 @@ export function Navbar() {
 				</div>
 			</div>
 			<div
-				className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200 dark:border-gray-800 ${
+				className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-border ${
 					isMenuOpen ? "max-h-[calc(100vh-3.5rem)]" : "max-h-0"
 				}`}
 			>
-				<div className="bg-white dark:bg-gray-900 overflow-y-auto max-h-[calc(100vh-3.5rem)]">
+				<div className="bg-background overflow-y-auto max-h-[calc(100vh-3.5rem)]">
 					<div className="px-4 py-4 space-y-1">
 						{navSections.main.map((item) => (
 							<MobileNavLink
@@ -128,12 +128,12 @@ export function Navbar() {
 					</div>
 
 					{/* Divider */}
-					<div className="h-px bg-gray-200 dark:bg-gray-800" />
+					<div className="h-px bg-border" />
 
 					{/* Portfolio Section */}
 					{navSections.portfolio.length > 0 && (
 						<>
-							<div className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+							<div className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
 								Portfólio
 							</div>
 							<div className="px-4 space-y-1 pb-3">
@@ -146,14 +146,14 @@ export function Navbar() {
 									/>
 								))}
 							</div>
-							<div className="h-px bg-gray-200 dark:bg-gray-800" />
+							<div className="h-px bg-border" />
 						</>
 					)}
 
 					{/* Services Section */}
 					{navSections.services.length > 0 && (
 						<>
-							<div className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+							<div className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
 								Serviços
 							</div>
 							<div className="px-4 space-y-1 pb-3">
@@ -166,14 +166,14 @@ export function Navbar() {
 									/>
 								))}
 							</div>
-							<div className="h-px bg-gray-200 dark:bg-gray-800" />
+							<div className="h-px bg-border" />
 						</>
 					)}
 
 					{/* Info Section */}
 					{navSections.info.length > 0 && (
 						<>
-							<div className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+							<div className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
 								Informações
 							</div>
 							<div className="px-4 space-y-1 pb-3">
@@ -186,7 +186,7 @@ export function Navbar() {
 									/>
 								))}
 							</div>
-							<div className="h-px bg-gray-200 dark:bg-gray-800" />
+							<div className="h-px bg-border" />
 						</>
 					)}
 
@@ -195,7 +195,7 @@ export function Navbar() {
 						<Link
 							href="/contato/proposta"
 							onClick={() => setIsMenuOpen(false)}
-							className="flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white rounded-lg font-semibold transition-colors duration-200 active:scale-95"
+							className="flex items-center justify-center gap-2 px-4 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold transition-colors duration-200 active:scale-95"
 						>
 							Enviar Proposta
 							<ArrowRight className="w-4 h-4" />
@@ -223,13 +223,13 @@ function MobileNavLink({ item, isActive, onClick }: MobileNavLinkProps) {
 			onClick={onClick}
 			className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 active:scale-95 ${
 				isActive
-					? "bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-semibold"
-					: "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+					? "bg-accent text-accent-foreground font-semibold"
+					: "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
 			}`}
 		>
 			{item.icon && <span className="flex-shrink-0">{item.icon}</span>}
 			<span className="flex-1">{item.label}</span>
-			{isActive && <span className="h-2 w-2 rounded-full bg-indigo-500" />}
+			{isActive && <span className="h-2 w-2 rounded-full bg-primary" />}
 		</Link>
 	);
 }

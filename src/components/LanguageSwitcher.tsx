@@ -63,7 +63,7 @@ export function LanguageSwitcher() {
           role="combobox"
           aria-expanded={open}
           aria-label="Selecionar idioma"
-          className="flex items-center justify-between gap-1 sm:gap-1.5 text-xs sm:text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors min-w-[110px] sm:min-w-[150px]"
+          className="flex items-center justify-between gap-1 sm:gap-1.5 text-xs sm:text-sm font-medium transition-colors min-w-[110px] sm:min-w-[150px]"
         >
           <span className="flex items-center gap-1.5 truncate">
             <Languages className="h-4 w-4 shrink-0" />
