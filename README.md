@@ -405,39 +405,14 @@ pnpm pages:deploy        # wrangler pages deploy .next
 
 ## 12. Decisões de Arquitetura (ADRs)
 
-### ADR-001 — Next.js App Router com RSC
+As decisões arquiteturais são mantidas como documentos individuais em [`docs/adr/`](docs/adr/):
 
-**Decisão:** Usar App Router e React Server Components como padrão.  
-**Motivo:** Menor bundle client-side, streaming nativo, suporte a Server Actions sem boilerplate de API. Páginas predominantemente leitura (blog, projetos, about) se beneficiam de RSC.  
-**Consequência:** A maioria das páginas usa `"use client"` para interatividade — revisitar e converter para RSC onde possível.
-
-### ADR-002 — i18n customizado (sem next-intl / i18next)
-
-**Decisão:** Context API + arquivos de locales em `src/lib/i18n/`.  
-**Motivo:** Simplicidade. Apenas 2 idiomas (PT-BR, EN), sem necessidade de roteamento por locale ou carregamento lazy de traduções.  
-**Consequência:** Escalabilidade limitada. Se o número de idiomas crescer, migrar para `next-intl`.
-
-### ADR-003 — Remoção da autenticação (Better Auth)
-
-**Decisão:** Autenticação foi removida. `src/lib/auth.ts` lança erro se chamado.  
-**Motivo:** Não há área protegida no momento. O schema SQLite e o stub ficam como preparação para reintrodução futura.  
-**Consequência:** Nenhuma rota é protegida. O SQLite está pronto para ativação quando necessário.
-
-### ADR-004 — Server Actions para mutações
-
-**Decisão:** Mutações (envio de e-mail, contratos, newsletter) usam Server Actions em vez de rotas de API dedicadas.  
-**Motivo:** Menos boilerplate, colocação de lógica junto ao feature, integração nativa com formulários React.  
-**Exceção:** `/api/send-proposal` mantido como REST endpoint para permitir chamadas externas (ex: integrações de terceiros, Postman, Zapier).
-
-### ADR-005 — Sem gerenciador de estado global
-
-**Decisão:** Apenas React hooks locais e Context API para estado compartilhado (tema, i18n, blog language).  
-**Motivo:** Aplicação sem estado complexo entre features. Redux/Zustand seria over-engineering.
-
-### ADR-006 — Biome como formatter principal
-
-**Decisão:** Biome substitui Prettier; ESLint mantido para regras Next.js.  
-**Motivo:** Biome é significativamente mais rápido, consolida formatação e linting em uma ferramenta.
+1. [ADR 001 — Next.js App Router com React Server Components](docs/adr/001-nextjs-app-router-com-rsc.md) — Aceito
+2. [ADR 002 — Internacionalização com Context API customizada](docs/adr/002-i18n-com-context-api.md) — Aceito
+3. [ADR 003 — Autenticação removida da aplicação](docs/adr/003-autenticacao-removida.md) — Em revisão
+4. [ADR 004 — Server Actions para mutações](docs/adr/004-server-actions-para-mutacoes.md) — Aceito
+5. [ADR 005 — Estado compartilhado com hooks e Context API](docs/adr/005-estado-compartilhado-com-hooks-e-context.md) — Aceito
+6. [ADR 006 — Biome e ESLint para qualidade de código](docs/adr/006-biome-e-eslint-para-qualidade-de-codigo.md) — Em revisão
 
 ---
 
